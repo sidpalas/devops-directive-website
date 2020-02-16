@@ -1,0 +1,8 @@
+baseURL = "http://devopsdirective.com/"
+languageCode = "en-us"
+title = "DevOps Directive"
+theme = "ananke"
+googleAnalytics = "UA-24019779-3"
+
+Paginate = 6
+SectionPagesMenu = "main"
