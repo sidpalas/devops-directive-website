@@ -6,3 +6,5 @@ googleAnalytics = "UA-24019779-3"
 
 Paginate = 6
 SectionPagesMenu = "main"
+
+disqusShortname = "devops-directive"

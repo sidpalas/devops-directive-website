@@ -13,7 +13,7 @@ I will be exploring many different types of media, including:
 - Open Source Projects
 - Interviews
 - Live & Recorded Screen Casts
-- Internet Office Hours (whatever that means...)
+- Internet Office Hours
 
 Topics include:
 - Infrastructure as Code
@@ -21,7 +21,8 @@ Topics include:
 - Databases
 - Networking
 - Security
-- Continuous Integration/Continuous Deployment
+- Continuous Integration
+- Continuous Deployment
 - Monitoring
 - Cloud Providers
 - Career Advancement
@@ -32,5 +33,5 @@ Join me!
 
 -Sid
 
-{{< figure src="../static/images/tedx-talk.png" title="Me... pretending to know what I'm talking about">}}
+{{< figure src="../static/images/tedx-talk.png" title="Me, talking about some pretty graphs I made with d3.js">}}
 
