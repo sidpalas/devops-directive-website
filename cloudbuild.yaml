@@ -8,8 +8,8 @@ steps:
   args:
   - '-c'
   - |
-    git config -f .git/config submodule."themes/ananke".url https://source.cloud.google.com/$PROJECT_ID/github_sidpalas-gohugo-theme-ananke
-    git config -f .gitmodules submodule."themes/ananke".url https://source.cloud.google.com/$PROJECT_ID/github_sidpalas-gohugo-theme-ananke
+    git config -f .git/config submodule."themes/ananke".url https://source.developers.google.com/p/devops-directive-project/r/github_sidpalas_gohugo-theme-ananke
+    git config -f .gitmodules submodule."themes/ananke".url https://source.developers.google.com/p/devops-directive-project/r/github_sidpalas_gohugo-theme-ananke
     git submodule init
     git submodule update
 # build hugo site
