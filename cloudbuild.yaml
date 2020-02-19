@@ -2,6 +2,9 @@
 # $ gcloud --project=devops-directive-project builds submit . --config=cloudbuild.yaml --substitutions COMMIT_SHA=manual
 
 steps:
+# get the submodules
+- name: gcr.io/cloud-builders/git
+  args: ['submodule', 'update', '--init', '--recursive']
 # build hugo site
 # See ./hugo-builder/README.md
 - name: 'gcr.io/$PROJECT_ID/hugo-builder'
