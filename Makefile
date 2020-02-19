@@ -83,6 +83,7 @@ cleanup-remote-containers:
 		--zone=$(ZONE) -- \
 		'docker container stop $$(docker container ls -aq) && docker container rm $$(docker container ls -aq)'
 
+# I set up cloud build to automatically build/deploy each commit to the master branch, but this allows for manual deployment
 .PHONY: deploy
 deploy: build-tag-push cleanup-remote-containers
 	gcloud compute ssh $(INSTANCE_NAME) \
