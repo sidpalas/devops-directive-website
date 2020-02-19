@@ -21,7 +21,7 @@ steps:
   args:
   - 'compute'
   - 'ssh'
-  - 'palas@cos-f1-micro'
+  - '$_SSH_STRING'
   - '--project'
   - '$PROJECT_ID'
   - '--zone'
@@ -33,7 +33,7 @@ steps:
   args:
   - 'compute'
   - 'ssh'
-  - 'palas@cos-f1-micro'
+  - '$_SSH_STRING'
   - '--project'
   - '$PROJECT_ID'
   - '--zone'
