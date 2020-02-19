@@ -10,7 +10,7 @@ steps:
   - |
     git config -f .gitmodules submodule.https://github.com/budparr/gohugo-theme-ananke.git https://source.developers.google.com/p/$PROJECT_ID/r/github_sidpalas-gohugo-theme-ananke
     git submodule init
-    git submodule update
+    git submodule update --depth 50
 # build hugo site
 # See ./hugo-builder/README.md
 - name: 'gcr.io/$PROJECT_ID/hugo-builder'
