@@ -1,5 +1,5 @@
 # In this directory, run the following command to build this builder.
-# $ gcloud --project=devops-directive-project builds submit . --config=cloudbuild.yaml --substitutions COMMIT_SHA=manual
+# $ gcloud --project=devops-directive-project builds submit . --config=cloudbuild.yaml --substitutions COMMIT_SHA=manual,_PROJECT_NAME=devops-directive,_ZONE=us-central1-a,_SSH_STRING=palas@cos-f1-micro
 
 steps:
 # Update submodules
@@ -8,7 +8,7 @@ steps:
   args:
   - '-c'
   - |
-    git config -f .gitmodules submodule."themes/ananke".url https://source.developers.google.com/p/$PROJECT_ID/r/github_sidpalas-gohugo-theme-ananke
+    git config -f .gitmodules submodule."themes/ananke".url https://source.developers.google.com/p/$PROJECT_ID/r/github_sidpalas-gohugo-theme-ananke.git
     git submodule init
     git submodule update --depth 50
 # build hugo site
