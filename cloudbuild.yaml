@@ -2,9 +2,15 @@
 # $ gcloud --project=devops-directive-project builds submit . --config=cloudbuild.yaml --substitutions COMMIT_SHA=manual
 
 steps:
-# get the submodules
-- name: gcr.io/cloud-builders/git
-  args: ['submodule', 'update', '--init', '--recursive']
+# Update submodules
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    git config -f .gitmodules submodule.git@github.com:budparr/gohugo-theme-ananke.git https://source.developers.google.com/p/$PROJECT_ID/r/github-gohugo-theme-ananke
+    git submodule init
+    git submodule update
 # build hugo site
 # See ./hugo-builder/README.md
 - name: 'gcr.io/$PROJECT_ID/hugo-builder'
@@ -40,3 +46,6 @@ steps:
   - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /home/palas/.caddy:/root/.caddy gcr.io/$PROJECT_ID/devops-directive-caddy:$COMMIT_SHA'
 images:
  - 'gcr.io/$PROJECT_ID/devops-directive-caddy:$COMMIT_SHA'
+
+
+
