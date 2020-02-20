@@ -39,7 +39,7 @@ Table of Contents:
 With GeoCities no longer an viable option for hosting websites in 2020 (apparently Yahoo Japan shut it down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
 
 [![geocities.jpg](/static/images/geocities.jpg)](https://flickr.com/photos/edkohler/2248645751/)
-*RIP Geocities*
+*RIP GeoCities*
 
 After a brief look at the leading static site generators Jekyll, Hugo, Next.js, Gatsby, etc... I came to the conclusion that almost any of these would work just fine for my needs. I ended up choosing Hugo for a two main reasons:
 
@@ -100,26 +100,26 @@ I also decided to create a new GCP project for this site. Doing this makes it ea
 
 If you are more comfortable working with the GCP web interface, that is perfectly fine, but the following process should do the trick
 
-**NOTE:** for any of the following commands `$(PROJECT_ID)` would need to be replaced with your GCP project id. I also like to explicitly pass the project ID into the commands to ensure they are executed in the correct location (Just in case I happened to have changed my default project configuration)
+**NOTE:** for any of the following commands `$PROJECT_ID` would need to be replaced with your GCP project id. I also like to explicitly pass the project ID into the commands to ensure they are executed in the correct location (Just in case I happened to have changed my default project configuration)
 
 #### 1) Enable billing for the project
 Even though the resources used here are included in the free tier, Google requires having a payment method on file. This is the one step I recommend doing via the console as the command line command is [still in alpha](https://cloud.google.com/sdk/gcloud/reference/alpha/billing):
 
-https://console.cloud.google.com/billing/linkedaccount?project=$(PROJECT_ID) 
+https://console.cloud.google.com/billing/linkedaccount?project=$PROJECT_ID 
 
 #### 2) Enable the Compute Engine and Container Registry APIs
 
 This is necessary to provision the VM and to be able to push container images.
 
-        gcloud services enable compute.googleapis.com --project=$(PROJECT_ID)
-	    gcloud services enable containerregistry.googleapis.com --project=$(PROJECT_ID)
+        gcloud services enable compute.googleapis.com --project=$PROJECT_ID
+	    gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
 
 #### 3) Reserve a static IP address
 
 If the VM needs to restart (or if I wanted to move to a larger machine type), a static IP ensures it won't change unexpectedly and mess up DNS configuration.
 
 	gcloud compute addresses create my-site-external-ip \
-		--project=$(PROJECT_ID) \
+		--project=$PROJECT_ID \
 		--region=us-central1
 
 #### 4) Add firewall rules
@@ -127,11 +127,11 @@ If the VM needs to restart (or if I wanted to move to a larger machine type), a 
 By default Compute Engine VMs do not allow http or https traffic. Adding firewall rules allow those requests to make it to the webserver.
 
     gcloud compute firewall-rules create default-allow-http \
-		--project=$(PROJECT_ID) \
+		--project=$PROJECT_ID \
 		--target-tags=http-server \
         --allow tcp:80
 	gcloud compute firewall-rules create default-allow-https \
-		--project=$(PROJECT_ID) \
+		--project=$PROJECT_ID \
 		--target-tags=https-server \
         --allow tcp:443
 
@@ -142,7 +142,7 @@ The target-tags allow the VM configuration to utilize these rules.
 When creating the VM, the static IP and firewall rule tags are used to configure it:
 
         gcloud compute instances create my-f1-micro-instance \
-            --project=$(PROJECT_ID) \
+            --project=$PROJECT_ID \
             --zone=us-central1-a \
             --machine-type=f1-micro \
             --image=projects/cos-cloud/global/images/cos-69-10895-385-0 \
@@ -160,7 +160,7 @@ In order to configure my local Docker install to push images to google container
 In order for the Docker installed in container optimized OS running on the VM I had to run the following:
 
         gcloud compute ssh my-f1-micro-instance \
-            --project=$(PROJECT_ID) \
+            --project=$PROJECT_ID \
             --zone=us-central1-a -- \
             docker-credential-gcr configure-docker
 
@@ -171,13 +171,13 @@ To deploy the site, I needed to get the container image into the google containe
         export IMAGE_NAME=my-hugo-caddy-docker-image
         export IMAGE_TAG=incrementing-tag-001 # change this with each deploy to ensure latest image is used
         docker build ./ --tag $IMAGE_NAME
-    	docker tag $IMAGE_NAME gcr.io/$(PROJECT_ID)/$IMAGE_NAME:$IMAGE_TAG
-	    docker push gcr.io/$(PROJECT_ID)/$IMAGE_NAME:$IMAGE_TAG
+    	docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+	    docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 
 If the site is already running, it needs to be cleaned up before the new container can be deployed or else it would fail when trying to bind to the same host ports. This can be accomplished using:
 
         gcloud compute ssh my-f1-micro-instance \
-            --project=$(PROJECT_ID) \
+            --project=$PROJECT_ID \
             --zone=us-central1-a -- \
             'docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq)'
 
@@ -186,9 +186,9 @@ Having to do this step is one downside to bundling the entire site into the cont
 Finally, we can issue a `docker run` to run the new container image:
 
         gcloud compute ssh my-f1-micro-instance \
-                --project=$(PROJECT_ID) \
+                --project=$PROJECT_ID \
                 --zone=us-central1-a -- \
-                'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$(PROJECT_ID)/$IMAGE_NAME:$IMAGE_TAG'
+                'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG'
 
 **NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, it will avoid making unnecessary requests to Let's Encrypt which could lead to being rate limited.
 
