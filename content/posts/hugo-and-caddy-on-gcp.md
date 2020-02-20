@@ -6,6 +6,8 @@ Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 
 **TL;DR:** Deploy a hugo site to GCP for free in less time than it will take you to read this article: https://github.com/sidpalas/hugo-gcp-deploy
 
+![logos](/static/images/hugo-caddy-gcp.png)
+
 --- 
 
 Table of Contents:
@@ -25,6 +27,7 @@ Table of Contents:
   - [8) Configuring DNS](#8-configuring-dns)
   - [9) Enabling HTTPs](#9-enabling-https)
 - [Closing thoughts](#closing-thoughts)
+
 
 ---
 

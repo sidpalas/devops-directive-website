@@ -9,7 +9,7 @@ MACHINE_TYPE := f1-micro
 VM_IMAGE := projects/cos-cloud/global/images/cos-69-10895-385-0
 INSTANCE_NAME := cos-$(MACHINE_TYPE)
 ADDRESS_NAME := $(SITE_NAME)-ip
-IMAGE_TAG := 0.18
+IMAGE_TAG := 0.19
 
 # Instructions
 .PHONY: help
