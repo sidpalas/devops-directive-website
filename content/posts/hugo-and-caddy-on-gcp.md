@@ -45,7 +45,7 @@ After a brief look at the leading static site generators Jekyll, Hugo, Next.js, 
 
 **1) Language:** It's written in Go, a language I have wanted to learn. Having this site with Hugo may provide a nudge of motivation to make some contribution to the Hugo project. 
 
-**2) Speed:** Site build times are near instant for this (tiny) site, but that would be true for any generator with so few pages. However, people have performed a number of benchmarks showing [Hugo's performance a site grows](https://forestry.io/blog/hugo-vs-jekyll-benchmark/)
+**2) Speed:** Site build times are near instant for this (tiny) site, but that would be true for any generator with so few pages. However, people have performed a number of [benchmarks](https://forestry.io/blog/hugo-vs-jekyll-benchmark/) showing Hugo's performance as a site grows.
 
 ### Initial Setup
 
