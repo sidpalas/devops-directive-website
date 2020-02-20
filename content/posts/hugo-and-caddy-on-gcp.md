@@ -4,7 +4,7 @@ date: 2020-02-20T09:45:37-08:00
 ---
 Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 
-**TL;DR:** Deploy a Hugo site to GCP for free in less time than it will take you to read this article: https://github.com/sidpalas/hugo-gcp-deploy
+**TL;DR:** Deploy a Hugo site to GCP for free in less time than it will take you to read this article ([Github Repo](https://github.com/sidpalas/hugo-gcp-deploy) with all referenced commands)
 
 
 ![logos](/static/images/hugo-caddy-gcp.png)
