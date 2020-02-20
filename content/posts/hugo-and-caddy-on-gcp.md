@@ -4,7 +4,7 @@ date: 2020-02-20T09:45:37-08:00
 ---
 Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 
-**TL;DR:** Deploy a hugo site to GCP for free in less time than it will take you to read this article: https://github.com/sidpalas/hugo-gcp-deploy
+**TL;DR:** Deploy a Hugo site to GCP for free in less time than it will take you to read this article: https://github.com/sidpalas/hugo-gcp-deploy
 
 ![logos](/static/images/hugo-caddy-gcp.png)
 
@@ -46,7 +46,7 @@ After a brief look at the leading static site generators Jekyll, Hugo, Next.js, 
 
 ### Initial Setup
 
-The hugo documentation is concise and they have an easy to follow quick start guide found here: https://gohugo.io/getting-started/quick-start/
+The Hugo documentation is concise and they have an easy to follow quick start guide found here: https://gohugo.io/getting-started/quick-start/
 
 I'm currently (as of February 2020) still using the suggested [Ananke](https://themes.gohugo.io/gohugo-theme-ananke/) theme with a few minor styling tweaks, but eventually will probably spend some more time customizing the theme.
 
@@ -67,9 +67,9 @@ I then came across [Caddy](https://caddyserver.com/), a webserver with automatic
 
 Since my computer is running MacOS, but ultimately the site would be deployed on a sever running some variant of linux, my default is to use containers to eliminate any configuration headaches with slight differences between the two environments.
 
-This appears to be the defacto standard caddy docker image https://hub.docker.com/r/abiosoft/caddy with over 10M pulls so I used that as the base. 
+This appears to be the defacto standard Caddy docker image https://hub.docker.com/r/abiosoft/caddy with over 10M pulls so I used that as the base. 
 
-There are two options for accessing the files that caddy needs to host within the container. (1) Copy them into the container image OR (2) mount a location the host filesystem into the container with `-v` or `--mount` [docker flags](https://docs.docker.com/storage/bind-mounts/) when running the container. 
+There are two options for accessing the files that Caddy needs to host within the container. (1) Copy them into the container image OR (2) mount a location the host filesystem into the container with `-v` or `--mount` [docker flags](https://docs.docker.com/storage/bind-mounts/) when running the container. 
 
 Either option would be fine, but option 1 is nice for a small site because it ensures the entire site and its dependencies are included within the container image. As the site grows, I may switch to storing the site files outside of the container image.
 
@@ -78,7 +78,7 @@ Bundling the site files into the container can be accomplished with a 2 line doc
         FROM abiosoft/caddy:1.0.3
         COPY ./public /srv
 
-Here `./public` is the local directory where Hugo builds the site, and `/srv` is the directory within the container caddy expects to find the files it is serving. The following 4 commands will build the site, build the container, and run the container:
+Here `./public` is the local directory where Hugo builds the site, and `/srv` is the directory within the container Caddy expects to find the files it is serving. The following 4 commands will build the site, build the container, and run the container:
 
         export IMAGE_NAME=my-hugo-caddy-docker-image
         hugo -D    # -D flag tells Hugo to build drafts 
