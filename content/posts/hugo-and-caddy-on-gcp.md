@@ -206,8 +206,8 @@ At this point I was able to visit the external IP address from step 3 and see th
 The final element of the setup is to point a domain to the IP address which I accomplished with the following settings:
 
         Name      Type   TTL     Data
-        @         A      1h      104.154.89.62
-        www       CNAME  1h      devopsdirective.com.
+        @         A      1h      123.456.78.90
+        www       CNAME  1h      my-awesome-domain.com.
 
 (The CNAME record maps the www subdomain to the primary domain without www)
 
