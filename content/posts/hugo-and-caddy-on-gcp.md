@@ -168,7 +168,26 @@ In order for the Docker installed in container optimized OS running on the VM I 
 
 #### 7) Deploy
 
-To deploy the site, I needed to get the container image into the google container registry by building, tagging, and then pushing it:
+Before deploying the site, I had to add a Caddyfile to the container image to configure the server. The default configuration will serve the site on port 2015 which is inaccessible on our VM (because my firewall rules only allow traffic on ports 80 and 443). The following will tell Caddy to serve on port 80 and accept requests from any domain ([documentation](https://caddyserver.com/v1/docs/http-caddyfile)):
+
+        # This test configuration will be replaced later when setting up HTTPS
+        :80 {
+        browse
+        log stdout
+        errors stdout
+        }
+
+I also updated the Dockerfile to copy this Caddyfile into the container image:
+
+        FROM abiosoft/caddy:1.0.3
+        COPY ./public /srv
+
+        # This environment variable gets used later during the container start up
+        # to accept the Let's Encrypt subscriber agreement (without requiring user input)
+        ENV ACME_AGREE=true 
+        COPY ./Caddyfile /etc/Caddyfile 
+
+With the configuration ready, I needed to get the container image into the google container registry by building, tagging, and then pushing it:
 
         export IMAGE_NAME=my-hugo-caddy-docker-image
         export IMAGE_TAG=incrementing-tag-001 # change this with each deploy to ensure latest image is used
@@ -213,21 +232,14 @@ The final element of the setup is to point a domain to the IP address which I ac
 
 #### 9) Enabling HTTPs
 
-The final element of the setup is to enable https within Caddy. This can be accomplished by creating a `Caddyfile`:
+The final element of the setup is to enable https within Caddy. This can be accomplished by modifying the `Caddyfile` to include the domains and an email address for the TLS configuration:
 
-        my-awesome-domain.com www.my-awesome-domain.com
-        tls my-email-address@domain.com
-        browse
-        log stdout
-        errors stdout
-
-and make some small tweaks to the Dockerfile:
-
-        FROM abiosoft/caddy:1.0.3
-        COPY ./public /srv
-
-        ENV ACME_AGREE=true # This gets used during the container start up to accept the Let's Encrypt subscriber agreement (without requiring user input)
-        COPY ./CADDYFILE /etc/Caddyfile 
+        my-awesome-domain.com www.my-awesome-domain.com {
+                tls my-email-address@domain.com
+                browse
+                log stdout
+                errors stdout
+        }
 
 After redeploying and waiting for the DNS settings to propagate I was able to access my site and bask in the glory of the https connection symbol!
 
