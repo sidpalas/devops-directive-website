@@ -192,7 +192,7 @@ Finally, we can issue a `docker run` to run the new container image:
                 --zone=us-central1-a -- \
                 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG'
 
-**NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, it will avoid making unnecessary requests to Let's Encrypt which could lead to being rate limited.
+**NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, this will allow the certificate files to persist across container redeploys, avoiding extra requests to Let's Encrypt which could lead to being rate limited.
 
 #### 7) We're Live!
 
