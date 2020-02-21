@@ -1,9 +1,30 @@
-devopsdirective.com www.devopsdirective.com
+############################## 
+#
+# Test config
+# Use this before you connect your site to your domain
+# The site will be served over http on port 80 and accept
+# Connections from any domain
+# 
+##############################
 
-tls sid.palas@gmail.com
+:80 {
+    browse
+    log stdout
+    errors stdout
+}
 
-browse
 
-log stdout
+############################## 
+#
+# Actual config
+# Once you have modified your DNS 
+# settings use this config to set up https
+# 
+##############################
 
-errors stdout
+devopsdirective.com www.devopsdirective.com {
+    tls sid.palas@gmail.com
+    browse
+    log stdout
+    errors stdout
+}

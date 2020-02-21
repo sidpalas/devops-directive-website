@@ -9,7 +9,7 @@ MACHINE_TYPE := f1-micro
 VM_IMAGE := projects/cos-cloud/global/images/cos-69-10895-385-0
 INSTANCE_NAME := cos-$(MACHINE_TYPE)
 ADDRESS_NAME := $(SITE_NAME)-ip
-IMAGE_TAG := 0.21
+IMAGE_TAG := 0.22
 
 # Instructions
 .PHONY: help
@@ -50,14 +50,6 @@ run-hugo-server:
 .PHONY: build-container
 build-container: build-site
 	docker build ./ --tag $(IMAGE_NAME)
-
-.PHONY: build-container-local
-build-container-local: build-site
-	docker build --build-arg CADDYFILE='Caddyfile.local' ./ --tag $(IMAGE_NAME)
-
-.PHONY: run-container-local
-run-container-local: build-container-local
-	docker run -p 2015:2015	$(IMAGE_NAME)
 
 ################################################################
 #
@@ -171,4 +163,5 @@ vm-setup:
 	$(MAKE) configure-docker
 	$(MAKE) configure-gcr
 	$(MAKE) list-vms
+
 
