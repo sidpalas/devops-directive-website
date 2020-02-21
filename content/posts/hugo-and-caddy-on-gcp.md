@@ -14,27 +14,27 @@ Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 --- 
 
 Table of Contents:
-- [Choosing a site generator:](#choosing-a-site-generator)
+- [Choosing a Site Generator](#choosing-a-site-generator)
 - [Initial Setup](#initial-setup)
-- [Choosing a hosting solution:](#choosing-a-hosting-solution)
-- [Local configuration (http-only for now)](#local-configuration-http-only-for-now)
+- [Choosing a Hosting Solution](#choosing-a-hosting-solution)
+- [Local Configuration (HTTP-only for Now)](#local-configuration-http-only-for-now)
 - [Deploying to GCP](#deploying-to-gcp)
-  - [1) Enable billing for the project](#1-enable-billing-for-the-project)
+  - [1) Enable Billing for the Project](#1-enable-billing-for-the-project)
   - [2) Enable the Compute Engine and Container Registry APIs](#2-enable-the-compute-engine-and-container-registry-apis)
   - [3) Reserve a static IP address](#3-reserve-a-static-ip-address)
   - [4) Add firewall rules](#4-add-firewall-rules)
-  - [5) Create the VM (finally!)](#5-create-the-vm-finally)
-  - [6) Configure docker(s)](#6-configure-dockers)
+  - [5) Create the Virtual Machine (Finally!)](#5-create-the-virtual-machine-finally)
+  - [6) Configure Docker(s)](#6-configure-dockers)
   - [7) Deploy](#7-deploy)
   - [7) We're Live!](#7-were-live)
   - [8) Configuring DNS](#8-configuring-dns)
   - [9) Enabling HTTPs](#9-enabling-https)
-- [Closing thoughts](#closing-thoughts)
+- [Closing Thoughts](#closing-thoughts)
 
 
 ---
 
-### Choosing a site generator:
+### Choosing a Site Generator
 
 With GeoCities no longer an viable option for hosting websites in 2020 (apparently Yahoo Japan shut it down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
 
@@ -53,7 +53,7 @@ The Hugo documentation is concise and they have an easy to follow quick start gu
 
 I'm currently (as of February 2020) still using the suggested [Ananke](https://themes.gohugo.io/gohugo-theme-ananke/) theme with a few minor styling tweaks, but eventually will probably spend some more time customizing the theme.
 
-### Choosing a hosting solution:  
+### Choosing a Hosting Solution  
 
 With the site generator working, I then needed to decide how to host the site. In the past, I have used Github Pages to host static sites, but I noticed that they explicitly prohibit **"Get-rich-quick schemes"** (which learning & writing about DevOps and Cloud infrastructure clearly is) so that was out of the running.
 
@@ -66,7 +66,7 @@ I then came across [Caddy](https://caddyserver.com/), a webserver with automatic
 
 **NOTE:** If you are following along and setting up your own site, for most people, the best option at this point would be to stop here and go to https://www.netlify.com/. They have a generous free tier plan and offer direct integration with github/gitlab/bitbucket to handle automatic build/deploys triggered by Git commits. I achieved a similar end result with GCP Compute Engine + Cloud Build (a topic for another post) that provides me a bit more control/extensibility, but Netlify covers most use cases with a fantastic user experience!
 
-### Local configuration (http-only for now)
+### Local Configuration (HTTP-only for Now)
 
 Since my computer is running MacOS, but ultimately the site would be deployed on a sever running some variant of linux, my default is to use containers to eliminate any configuration headaches with slight differences between the two environments.
 
@@ -104,7 +104,7 @@ If you are more comfortable working with the GCP web interface, that is perfectl
 
                 export PROJECT_ID=my-awesome-project-1234
 
-#### 1) Enable billing for the project
+#### 1) Enable Billing for the Project
 Even though the resources used here are included in the free tier, Google requires having a payment method on file. This is the one step I recommend doing via the console as the command line command is [still in alpha](https://cloud.google.com/sdk/gcloud/reference/alpha/billing):
 
 https://console.cloud.google.com/billing/linkedaccount?project=$PROJECT_ID 
@@ -139,7 +139,7 @@ By default Compute Engine VMs do not allow http or https traffic. Adding firewal
 
 The target-tags allow the VM configuration to utilize these rules.
 
-#### 5) Create the VM (finally!)
+#### 5) Create the Virtual Machine (Finally!)
 
 When creating the VM, the static IP and firewall rule tags are used to configure it:
 
@@ -153,7 +153,7 @@ When creating the VM, the static IP and firewall rule tags are used to configure
 
 This takes a few minutes to provision.
 
-#### 6) Configure docker(s)
+#### 6) Configure Docker(s)
 
 In order to configure my local Docker install to push images to google container registry I had to run:
 
@@ -203,7 +203,7 @@ At this point I was able to visit the external IP address from step 3 and see th
 
 #### 8) Configuring DNS
 
-The final element of the setup is to point a domain to the IP address which I accomplihed with the following settings:
+The final element of the setup is to point a domain to the IP address which I accomplished with the following settings:
 
         Name      Type   TTL     Data
         @         A      1h      104.154.89.62
@@ -233,7 +233,7 @@ After redeploying and waiting for the DNS settings to propagate I was able to ac
 
 ![https symbol](/static/images/https-success.png)
 
-### Closing thoughts
+### Closing Thoughts
 
 Overall I'm happy with this configuration and am amazed that all of this can be accomplished for free using mostly open source software! It was also useful to continue gaining experience with the tools and platforms. 
 
