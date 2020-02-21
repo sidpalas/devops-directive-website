@@ -100,7 +100,9 @@ I also decided to create a new GCP project for this site. Doing this makes it ea
 
 If you are more comfortable working with the GCP web interface, that is perfectly fine, but the following process should do the trick
 
-**NOTE:** for any of the following commands `$PROJECT_ID` would need to be replaced with your GCP project id. I also like to explicitly pass the project ID into the commands to ensure they are executed in the correct location (Just in case I happened to have changed my default project configuration)
+**NOTE:** for any of the following commands `$PROJECT_ID` would need to be replaced with your GCP project id. I also like to explicitly pass the project ID into the commands to ensure they are executed in the correct location (Just in case I happened to have changed my default project configuration). 
+
+                export PROJECT_ID=my-awesome-project-1234
 
 #### 1) Enable billing for the project
 Even though the resources used here are included in the free tier, Google requires having a payment method on file. This is the one step I recommend doing via the console as the command line command is [still in alpha](https://cloud.google.com/sdk/gcloud/reference/alpha/billing):
