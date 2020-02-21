@@ -39,7 +39,7 @@ steps:
   - '--zone'
   - '$_ZONE'
   - '--'
-  - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
+  - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
 images:
  - 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
 
