@@ -1,12 +1,12 @@
 steps:
-# Update submodules
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    git submodule init
-    git submodule update
+# # Update submodules
+# - name: 'gcr.io/cloud-builders/git'
+#   entrypoint: 'bash'
+#   args:
+#   - '-c'
+#   - |
+#     git submodule init
+#     git submodule update
 # build hugo site
 # See ./hugo-builder/README.md
 - name: 'sidpalas/cloud-builder-hugo:0.64.1'
