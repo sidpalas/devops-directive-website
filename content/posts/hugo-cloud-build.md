@@ -3,7 +3,7 @@ title: "Hugo + Cloud Build (CI/CD for this site)"
 date: 2020-02-21T11:09:35-08:00
 ---
 
-**TL;DR:** Configuring cloud build to auto-build and deploy this site based on git trigger ended up being a bit trickier than I would have expected.
+**TL;DR:** Configuring Cloud Build to automatically build and deploy this site based on Git triggers ended up being a bit trickier than I would have expected.
 
 ![logos](/static/images/hugo-cloud-build.png)
 
@@ -45,7 +45,7 @@ Thinking this would be a 30 minute task, I eagerly installed the Cloud Build Git
 
 ![missing-hugo-theme](/static/images/missing-hugo-theme.png)
 
-The previous post was there, but I realized that It wasn't being rendered properly because the build failed to get the theme files. After doing more research I concluded that it has to do with the fact that the theme is not stored within the website repo, but is a Git submodule. 
+The content files were there, but I realized that It wasn't being rendered properly because the build failed to get the theme files. After doing more research I concluded that it has to do with the fact that the theme is not stored within the website Git repo, but is a Git submodule. 
 
 In an attempt to solve this, I adding a step to the build pipeline to grab the submodule files using:
 
