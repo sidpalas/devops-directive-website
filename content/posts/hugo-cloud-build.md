@@ -1,5 +1,5 @@
 ---
-title: "Hugo + Cloud Build (CI/CD for this site)"
+title: "CI/CD for this site (Hugo + Cloud Build)"
 date: 2020-02-21T11:09:35-08:00
 ---
 
