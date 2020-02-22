@@ -37,7 +37,9 @@ All of the commands for creating the site, as well as setting up this automation
 
 Initially I was going to use [Circle CI](https://circleci.com/) to automate the process of building and deploying the site. Circle CI has direct integration with Github and posted to their blog in 2018 explaining how to [Automate Your Static Site Deployment with CircleCI](https://circleci.com/blog/automate-your-static-site-deployment-with-circleci/) using Hugo as the example site generator. 
 
-That being said, since everything in the site set up was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
+That being said, since everything in the site set up was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud Build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
+
+Also, just like with the server set up, Cloud Build is also included in GCP free tier (up to 120 build minutes/day) so this shouldn't cost me anything. 
 
 ### Attempting to Use the Cloud Build GitHub App
 
@@ -56,7 +58,7 @@ but Cloud Builds triggered from GitHub don't have access to the `/.git` director
 
 ### GCP Set Up
 
-At this point I had arrived what I thought was a viable approach and just needed to implement.
+At this point I had arrived what I thought was a viable plan that I just needed to execute on.
 
 **NOTE:** The commands that follow use $PROJECT_ID and other template variables that should reflect the relevant project and values.
 
@@ -74,7 +76,7 @@ In order to use Cloud Build I had to enable the cloud build api using:
 
 #### 3) Add IAM Roles for Cloud Build Service Account
 
-When the Cloud Build API is enable, a service account of the format `projectNumber@cloudbuild.gserviceaccount.com` is granted some IAM roles, but for this purpose that service account also needs the following two roles:
+When the Cloud Build API is enabled, a service account of the format `projectNumber@cloudbuild.gserviceaccount.com` is granted some IAM roles, but for this build pipeline the service account also needs the following two roles:
 
     Compute Instance Admin (v1)
     Service Account User
@@ -90,7 +92,7 @@ which I accomplished with the following commands:
 
 #### 4) Creating Cloud Build Trigger
 
-With all of the prerequisite configurations in place, it was then time to create the cloud build trigger:
+With all of the prerequisite configurations in place, it was then time to create the Cloud Build trigger:
 
     export IMAGE_NAME=my-hugo-caddy-docker-image
     export INSTANCE_NAME=my-f1-micro-instance
@@ -106,17 +108,17 @@ The `--substitutions` represent template variables that get used in the pipeline
 
 ### Creating the Cloud Build Pipeline (cloudbuild.yaml)
 
-At this point, Cloud Build was primed and ready to go... but I hadn't told it what to do yet. The actual build pipeline is defined within a `cloudbuild.yaml file at the root of the repository.
+At this point, Cloud Build was primed and ready to go... but I hadn't told it what to do yet. The actual build pipeline is defined within a `cloudbuild.yaml` file at the root of the repository.
 
 [Build Configuration Documentation](https://cloud.google.com/cloud-build/docs/build-config)
 
-Each step in this pipeline takes in come container image as its "name" and can also take optional arguments which executed inside that container.
+Each step in this pipeline takes in a container image as its "name" and can also take optional arguments which are executed inside that container.
 
 Below I have broken down this pipeline into its 6 steps:
 
 #### 1) Initialize and Update the Submodules
 
-As mentioned above, one of the initial challenges using cloud build was it failing to get the files associated with the Hugo theme because they are located in a git submodule. The following uses the git cloud-builders image to initialize and update the git submodules, resulting in the theme files being available for future steps:
+As mentioned above, one of the initial challenges using Cloud Build was it failing to get the files associated with the Hugo theme because they are located in a git submodule. The following uses the git cloud-builders image to initialize and update the git submodules, resulting in the theme files being available for future steps:
 
     steps:
     - name: 'gcr.io/cloud-builders/git'
@@ -129,7 +131,7 @@ As mentioned above, one of the initial challenges using cloud build was it faili
 
 #### 2) Build the Hugo Site
 
-The whole reason for needing a build step is that only the content source files are version controlled (not the generated site files). This step runs the Hugo generator. I couldn't find a publicly available container image which was compatible with Cloud build, so I created my own (based on [this example](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/hugo)) and posted it to DockerHub: https://hub.docker.com/r/sidpalas/cloud-builder-hugo.
+The whole reason for needing a build step is that only the content source files are version controlled (not the generated site files). This step runs the Hugo generator. I couldn't find a publicly available container image which was compatible with Cloud Build, so I created my own (based on [this example](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/hugo)) and posted it to DockerHub: https://hub.docker.com/r/sidpalas/cloud-builder-hugo.
 
     # build hugo site
     - name: 'sidpalas/cloud-builder-hugo:0.64.1'
@@ -145,7 +147,7 @@ This step builds the website container image and pushes it to Google Container R
 
 #### 4) Stop Running Containers 
 
-With the new container available in GCR, the pipeline stops any existing running containers using a gcloud container image to execute a `gcloud ssh` command on the VM.
+With the new container available in GCR, the pipeline stops any running containers using a gcloud container image to execute a `gcloud ssh` command on the VM.
 
     - name: 'gcr.io/cloud-builders/gcloud'
       args:
@@ -184,8 +186,8 @@ Normally, the build configuration would have an `images` section specifying whic
 
 ### Closing Thoughts
 
-This process ended up being much more complex than I had initially hoped. The issues with Git submodules, and having to create my own Hugo builder image made it take way longer than I expected. It was quite satisfying when I got the configuration dialed in and the long stretch of red builds finally turned green.
+This process ended up being much more complex than I had initially hoped. The issues with Git submodules, and having to create my own Hugo builder image made it take much longer than I expected. That being said, it was quite satisfying when I got the configuration dialed in and the long stretch of red builds finally turned green.
 
 ![cloud build dashboard](/static/images/cloud-build-dashboard.png)
 
-Just like with the server set up, Cloud Build is also included in GCP free tier (up to 120 build minutes/day) so this shouldn't cost me anything. That being said, I can't help but think using circle CI might have been a smoother process. Perhaps sometime down the to road I'll attempt setting up an equivalent pipeline there and see how that goes!
+While I am happy with the end result, I can't help but think using Circle CI might have been a smoother process. Perhaps sometime down the to road I'll attempt setting up an equivalent pipeline there and see how that goes!
