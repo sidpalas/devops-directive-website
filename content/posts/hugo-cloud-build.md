@@ -3,7 +3,7 @@ title: "CI/CD for this site (Hugo + Cloud Build)"
 date: 2020-02-21T11:09:35-08:00
 ---
 
-**TL;DR:** Configuring Cloud Build to automatically build and deploy this site based on Git triggers ended up being a bit trickier than I would have expected.
+**TL;DR:** Configuring Cloud Build to automatically handle Continuous Integration and Continuous Deployment for this site based on Git triggers ended up being a bit trickier than I would have expected.
 
 ![logos](/static/images/hugo-cloud-build.png)
 
