@@ -4,16 +4,15 @@ description: "Hi. I'm Sid."
 featured_image: ""
 ---
 
-This is the website for the DevOps Directive [Youtube Channel](https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA).
-
 My goal with DevOps Directive is to provide educational and entertaining (hopefully?...) content to enable engineers to level up their skills and keep up with the continuously evolving DevOps and Cloud Infrastructure landscape.
 
 I will be exploring many different types of media, including:
-- Video Tutorials
-- Open Source Projects
+- [Video Tutorials](https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA)
+- [Open Source Projects](https://github.com/sidpalas)
 - Interviews
 - Live & Recorded Screen Casts
 - Internet Office Hours
+- [Interpretive Song and Dance](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 Topics include:
 - Infrastructure as Code
