@@ -8,9 +8,8 @@
 ##############################
 
 #:80 {
-#    browse
 #    log stdout
-#    errors stdout
+#    errors stderr
 #}
 
 
@@ -24,7 +23,6 @@
 
 devopsdirective.com www.devopsdirective.com {
     tls sid.palas@gmail.com
-    browse
     log stdout
-    errors stdout
+    errors stderr
 }
