@@ -7,11 +7,11 @@
 # 
 ##############################
 
-:80 {
-    browse
-    log stdout
-    errors stdout
-}
+#:80 {
+#    browse
+#    log stdout
+#    errors stdout
+#}
 
 
 ############################## 

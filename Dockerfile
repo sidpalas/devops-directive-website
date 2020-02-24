@@ -3,6 +3,5 @@ COPY ./public /srv
 
 ENV ACME_AGREE=true
 
-ARG CADDYFILE=Caddyfile
-COPY ./${CADDYFILE} /etc/Caddyfile
+COPY ./Caddyfile /etc/Caddyfile
 
