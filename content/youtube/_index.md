@@ -12,10 +12,14 @@ featured_image: ""
 
 [![Webserver Workshop](/static/images/webserver-setup-workshop.png)](https://www.youtube.com/watch?v=xo_4n2Reh58)
 
+---
+
 - **2020-02-22:** [Creating and Deploying a Website on GCP in 5 MINUTES for FREE! (Hugo Website + Caddy Webserver)
 ](https://www.youtube.com/watch?v=hxTnB_FZpw8)
 
 [![Five Minute Website](/static/images/five-minute-website.png)](https://www.youtube.com/watch?v=xo_4n2Reh58)
+
+---
 
 - **2020-02-16:** [Hello Youtube! (AUDIO & VIDEO generated and uploaded with python)](https://www.youtube.com/watch?v=7CIakJ8PMZs)
 
