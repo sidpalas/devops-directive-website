@@ -29,7 +29,7 @@ date: 2020-02-21T11:09:35-08:00
 
 ---
 
-This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/posts/hugo-and-caddy-on-gcp.md" >}})) in which I walked through the set up of this site. In this post I add automated builds/deploys to the site.
+This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/articles/2020/02/hugo-and-caddy-on-gcp/index.md" >}})) in which I walked through the set up of this site. In this post I add automated builds/deploys to the site.
 
 All of the commands for creating the site, as well as setting up this automation can be found in this [GitHub Repo](https://github.com/sidpalas/hugo-gcp-deploy).
 
@@ -45,7 +45,8 @@ Also, just like with the server set up, Cloud Build is also included in GCP free
 
 Thinking this would be a 30 minute task, I eagerly installed the Cloud Build Github app and added a build trigger based on pushes to the master branch. When the build succeeded I was not greeted with the website, but instead with the Default Caddy home page. After manually navigating to the `/posts` endpoint I saw the following:
 
-![missing-hugo-theme](/static/images/missing-hugo-theme.png)
+{{< img "images/*missing-hugo-theme*" >}}
+
 
 The content files were there, but I realized that It wasn't being rendered properly because the build failed to get the theme files. After doing more research I concluded that it has to do with the fact that the theme is not stored within the website Git repo, but is a Git submodule. 
 
@@ -188,6 +189,6 @@ Normally, the build configuration would have an `images` section specifying whic
 
 This process ended up being much more complex than I had initially hoped. The issues with Git submodules, and having to create my own Hugo builder image made it take much longer than I expected. That being said, it was quite satisfying when I got the configuration dialed in and the long stretch of red builds finally turned green.
 
-![cloud build dashboard](/static/images/cloud-build-dashboard.png)
+{{< img "images/*cloud-build-dashboard*" "Success!">}}
 
 While I am happy with the end result, I can't help but think using Circle CI might have been a smoother process. Perhaps sometime down the to road I'll attempt setting up an equivalent pipeline there and see how that goes!

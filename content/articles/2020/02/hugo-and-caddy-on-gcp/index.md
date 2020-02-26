@@ -38,8 +38,7 @@ Table of Contents:
 
 With GeoCities no longer an viable option for hosting websites in 2020 (apparently Yahoo Japan shut it down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
 
-[![geocities.jpg](/static/images/geocities.jpg)](https://flickr.com/photos/edkohler/2248645751/)
-*RIP GeoCities*
+{{< img "images/*geocities*" "RIP GeoCities" >}}
 
 After a brief look at the leading static site generators Jekyll, Hugo, Next.js, Gatsby, etc... I came to the conclusion that almost any of these would work just fine for my needs. I ended up choosing Hugo for a two main reasons:
 
@@ -61,8 +60,8 @@ I also looked at hosting within a [AWS](https://aws.amazon.com/s3/) / [GCP](http
 
 I then came across [Caddy](https://caddyserver.com/), a webserver with automatic HTTPS configuring using [Let's Encrypt](https://letsencrypt.org/) which seemed ideal for this use case!
 
-![caddy](/static/images/caddy.png)
-*With a lock for a logo, it must be secure!*
+{{< img "images/*caddy*" "With a lock for a logo, it must be secure!" >}}
+
 
 **NOTE:** If you are following along and setting up your own site, for most people, the best option at this point would be to stop here and go to https://www.netlify.com/. They have a generous free tier plan and offer direct integration with github/gitlab/bitbucket to handle automatic build/deploys triggered by Git commits. I achieved a similar end result with GCP Compute Engine + Cloud Build (a topic for another post) that provides me a bit more control/extensibility, but Netlify covers most use cases with a fantastic user experience!
 
@@ -217,7 +216,7 @@ Finally, we can issue a `docker run` to run the new container image:
 
 At this point I was able to visit the external IP address from step 3 and see the website:
 
-[![speed run](/static/images/website-speedrun.png)](https://www.youtube.com/watch?v=hxTnB_FZpw8)
+[![speed run](./images/website-speedrun.png)](https://www.youtube.com/watch?v=hxTnB_FZpw8)
 *It seems complex, but it takes <5 min... Seriously, [I timed it!](https://www.youtube.com/watch?v=hxTnB_FZpw8)*
 
 #### 8) Configuring DNS
@@ -243,7 +242,7 @@ The final element of the setup is to enable https within Caddy. This can be acco
 
 After redeploying and waiting for the DNS settings to propagate I was able to access my site and bask in the glory of the https connection symbol!
 
-![https symbol](/static/images/https-success.png)
+{{< img "images/*https-success*" >}}
 
 ### Closing Thoughts
 
