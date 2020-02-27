@@ -22,8 +22,7 @@ date: 2020-02-21T11:09:35-08:00
   - [1) Initialize and Update the Submodules](#1-initialize-and-update-the-submodules)
   - [2) Build the Hugo Site](#2-build-the-hugo-site)
   - [3) Build + Push the Caddy Container Image](#3-build--push-the-caddy-container-image)
-  - [4) Stop Running Containers](#4-stop-running-containers)
-  - [5) Start New Container](#5-start-new-container)
+  - [4) Stop Running Containers & Start New Container](#4-stop-running-containers--start-new-container)
   - [NOTE: Pushing Images](#note-pushing-images)
 - [Closing Thoughts](#closing-thoughts)
 
@@ -142,29 +141,17 @@ The whole reason for needing a build step is that only the content source files 
 This step builds the website container image and pushes it to Google Container Registry. It uses the COMMIT_SHA (which is populated automatically by Cloud Build based on the triggering commit) to tag the image.
 
     - name: 'gcr.io/cloud-builders/docker'
-      args: ['build', '-t', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA', '.']
-    - name: 'gcr.io/cloud-builders/docker'
-      args: ['push', 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA']
+      # Overriding entrypoint to allow for running two docker commands
+      entrypoint: 'bash'
+      args: 
+        - '-c'
+        - |
+          docker build -t gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA . &&
+          docker push gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
 
-#### 4) Stop Running Containers 
+#### 4) Stop Running Containers & Start New Container
 
-With the new container available in GCR, the pipeline stops any running containers using a gcloud container image to execute a `gcloud ssh` command on the VM.
-
-    - name: 'gcr.io/cloud-builders/gcloud'
-      args:
-      - 'compute'
-      - 'ssh'
-      - '$_SSH_STRING'
-      - '--project'
-      - '$PROJECT_ID'
-      - '--zone'
-      - '$_ZONE'
-      - '--'
-      - 'docker container stop $$(docker container ls -aq) && docker container rm $$(docker container ls -aq)'
-  
-#### 5) Start New Container 
-
-Finally, the pipeline executes a `gcloud ssh` command on the VM to start the new container.
+With the new container available in GCR, the pipeline stops any running containers and then starts the new container using a gcloud container image to execute a `gcloud ssh` command on the VM.
 
     - name: 'gcr.io/cloud-builders/gcloud'
       args:
@@ -176,8 +163,9 @@ Finally, the pipeline executes a `gcloud ssh` command on the VM to start the new
       - '--zone'
       - '$_ZONE'
       - '--'
+      - 'docker container stop $$(docker container ls -aq) && docker container rm $$(docker container ls -aq) &&'
       - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
-
+  
 #### NOTE: Pushing Images 
 
 Normally, the build configuration would have an `images:` section specifying which container images should be pushed to GCR. Because step #3 already tagged and pushed the container image, it is **not** necessary to include an images section:
