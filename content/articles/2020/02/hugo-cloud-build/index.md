@@ -158,10 +158,8 @@ With the new container available in GCR, the pipeline stops any running containe
       - compute
       - ssh
       - $_SSH_STRING
-      - --project
-      - $PROJECT_ID
-      - --zone
-      - $_ZONE
+      - --project=$PROJECT_ID
+      - --zone=$_ZONE
       - --
       - docker container stop $$(docker container ls -aq) && 
       - docker container rm $$(docker container ls -aq) &&
