@@ -7,7 +7,13 @@ featured_image: ""
 
 ### Videos:
 
-- **2020-02-44:** [[1 HOUR WORKSHOP] Webserver Set-Up Progression (From Localhost to GCP With Caddy Webserver + Docker)
+- **2020-02-27:** [[Full Workshop] Build a Multi-Step Google Cloud Build Pipeline from Scratch!](https://www.youtube.com/watch?v=MF2gMZ5aDBQ)
+
+[![Cloud Build Workshop](./images/cloud-build-workshop.png)](https://www.youtube.com/watch?v=MF2gMZ5aDBQ)
+
+---
+
+- **2020-02-24:** [[1 HOUR WORKSHOP] Webserver Set-Up Progression (From Localhost to GCP With Caddy Webserver + Docker)
 ](https://www.youtube.com/watch?v=xo_4n2Reh58)
 
 [![Webserver Workshop](./images/webserver-setup-workshop.png)](https://www.youtube.com/watch?v=xo_4n2Reh58)

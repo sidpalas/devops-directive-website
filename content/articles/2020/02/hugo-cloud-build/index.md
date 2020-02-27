@@ -124,7 +124,7 @@ As mentioned above, one of the initial challenges using Cloud Build was it faili
     - name: 'gcr.io/cloud-builders/git'
       entrypoint: 'bash'
       args:
-      - '-c'
+      - -c
       - |
         git submodule init
         git submodule update
@@ -163,8 +163,9 @@ With the new container available in GCR, the pipeline stops any running containe
       - --zone
       - $_ZONE
       - --
-      - 'docker container stop $$(docker container ls -aq) && docker container rm $$(docker container ls -aq) &&'
-      - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
+      - docker container stop $$(docker container ls -aq) && 
+      - docker container rm $$(docker container ls -aq) &&
+      - docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
   
 #### NOTE: Pushing Images 
 
