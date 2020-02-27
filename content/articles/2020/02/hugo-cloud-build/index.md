@@ -35,15 +35,15 @@ All of the commands for creating the site, as well as setting up this automation
 
 ### Picking a CI/CD Tool
 
-Initially I was going to use [Circle CI](https://circleci.com/) to automate the process of building and deploying the site. Circle CI has direct integration with Github and posted to their blog in 2018 explaining how to [Automate Your Static Site Deployment with CircleCI](https://circleci.com/blog/automate-your-static-site-deployment-with-circleci/) using Hugo as the example site generator. 
+Initially, I was going to use [Circle CI](https://circleci.com/) to automate the process of building and deploying the site. Circle CI has direct integration with Github and posted to their blog in 2018 explaining how to [Automate Your Static Site Deployment with CircleCI](https://circleci.com/blog/automate-your-static-site-deployment-with-circleci/) using Hugo as the example site generator. 
 
-That being said, since everything in the site set up was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud Build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
+That being said, since everything in the site setup was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud Build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
 
 Also, just like with the server set up, Cloud Build is also included in GCP free tier (up to 120 build minutes/day) so this shouldn't cost me anything. 
 
 ### Attempting to Use the Cloud Build GitHub App
 
-Thinking this would be a 30 minute task, I eagerly installed the Cloud Build Github app and added a build trigger based on pushes to the master branch. When the build succeeded I was not greeted with the website, but instead with the Default Caddy home page. After manually navigating to the `/posts` endpoint I saw the following:
+Thinking this would be a 30 minute task, I eagerly installed the Cloud Build Github app and added a build trigger based on pushes to the master branch. When the build succeeded I was not greeted with the website, but instead with the Default Caddy home page. After manually navigating to the `/articles` endpoint I saw the following:
 
 {{< img "images/*missing-hugo-theme*" >}}
 
@@ -55,7 +55,7 @@ In an attempt to solve this, I adding a step to the build pipeline to grab the s
     git submodule init
     git submodule update
 
-but Cloud Builds triggered from GitHub don't have access to the `/.git` directory and these commands will fail. The best workaround I could find was to mirror the GitHub repo into a Cloud Source Repository. This is already getting more complicated than I had hoped, but the show must go on!
+but Cloud Builds triggered from GitHub don't have access to the `.git` directory within the repo and these commands will fail. The best workaround I could find was to mirror the GitHub repo into a Cloud Source Repository. This is already getting more complicated than I had hoped, but the show must go on!
 
 ### GCP Set Up
 
@@ -180,7 +180,7 @@ Finally, the pipeline executes a `gcloud ssh` command on the VM to start the new
 
 #### NOTE: Pushing Images 
 
-Normally, the build configuration would have an `images` section specifying which container images should be pushed to GCR. Because step #3 already tagged and pushed the container image, it is **not** necessary to include an images section:
+Normally, the build configuration would have an `images:` section specifying which container images should be pushed to GCR. Because step #3 already tagged and pushed the container image, it is **not** necessary to include an images section:
 
     images:
     - 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
