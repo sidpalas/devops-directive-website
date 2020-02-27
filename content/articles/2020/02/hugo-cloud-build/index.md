@@ -144,7 +144,7 @@ This step builds the website container image and pushes it to Google Container R
       # Overriding entrypoint to allow for running two docker commands
       entrypoint: 'bash'
       args: 
-        - '-c'
+        - -c
         - |
           docker build -t gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA . &&
           docker push gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
@@ -155,14 +155,14 @@ With the new container available in GCR, the pipeline stops any running containe
 
     - name: 'gcr.io/cloud-builders/gcloud'
       args:
-      - 'compute'
-      - 'ssh'
-      - '$_SSH_STRING'
-      - '--project'
-      - '$PROJECT_ID'
-      - '--zone'
-      - '$_ZONE'
-      - '--'
+      - compute
+      - ssh
+      - $_SSH_STRING
+      - --project
+      - $PROJECT_ID
+      - --zone
+      - $_ZONE
+      - --
       - 'docker container stop $$(docker container ls -aq) && docker container rm $$(docker container ls -aq) &&'
       - 'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
   
