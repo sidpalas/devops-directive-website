@@ -20,6 +20,7 @@ Topics include:
 - Databases
 - Networking
 - Security
+- Testing
 - Continuous Integration
 - Continuous Deployment
 - Monitoring
