@@ -12,7 +12,7 @@ I will be exploring many different types of media, including:
 - Interviews
 - Live & Recorded Screen Casts
 - Internet Office Hours
-- [Interpretive Song and Dance](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+- [Interpretive Song and Dance](https://www.youtube.com/watch?v=oHg5SJYRHA0)
 
 Topics include:
 - Infrastructure as Code
