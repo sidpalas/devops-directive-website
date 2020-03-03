@@ -2,6 +2,17 @@
 title: "CI/CD for this site (Hugo + Cloud Build)"
 date: 2020-02-21T11:09:35-08:00
 bookToC: false
+tags: [
+  "Hugo",
+  "Cloud Build",
+  "GCP",
+  "Containers",
+  "CI",
+  "CD"
+]
+categories: [
+  "Tutorial"
+]
 ---
 
 **TL;DR:** Configuring Cloud Build to automatically handle Continuous Integration and Continuous Deployment for this site based on Git triggers ended up being a bit trickier than I would have expected.

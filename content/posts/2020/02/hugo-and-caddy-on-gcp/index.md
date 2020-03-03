@@ -2,6 +2,18 @@
 title: "The Making of This Site (Hugo, Caddy, + GCP)"
 date: 2020-02-20T09:45:37-08:00
 bookToc: false
+tags: [
+  "Web Servers",
+  "Hugo",
+  "Caddy",
+  "Compute Engine",
+  "GCP",
+  "Containers",
+]
+categories: [
+  "Tutorial",
+]
+
 ---
 Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 

@@ -1,5 +1,5 @@
 ---
-title: "Index"
+title: "Home"
 type: docs
 bookToc: false
 bookComments: false
@@ -7,8 +7,8 @@ bookComments: false
 
 # DevOps Directive
 
-## The place for DevOps and Cloud Infrastructure content.
-
 ---
+
+## A place for DevOps and Cloud infrastructure content.
 
 ### Recent Posts:

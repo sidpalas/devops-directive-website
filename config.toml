@@ -9,6 +9,10 @@ theme = "book"
 Paginate = 6
 SectionPagesMenu = "main"
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 [params]
   youtube = "https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA"
   linkedin = "https://www.linkedin.com/in/sid-palas-971b2329/"
@@ -21,3 +25,8 @@ SectionPagesMenu = "main"
   # specify section of content to render as menu
   # if bookMenuBundle is not set, 'docs' is value by default
   BookSection= "docs"
+
+  # (Optional, default true) Enables search function with flexsearch,
+  # Index is built on fly, therefore it might slowdown your website.
+  # Configuration for indexing can be adjusted in i18n folder per language.
+  BookSearch = false
