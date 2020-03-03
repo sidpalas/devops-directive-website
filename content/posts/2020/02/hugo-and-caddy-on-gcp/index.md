@@ -1,6 +1,7 @@
 ---
 title: "The Making of This Site (Hugo, Caddy, + GCP)"
 date: 2020-02-20T09:45:37-08:00
+bookToc: false
 ---
 Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 
@@ -26,15 +27,15 @@ Table of Contents:
   - [5) Create the Virtual Machine (Finally!)](#5-create-the-virtual-machine-finally)
   - [6) Configure Docker(s)](#6-configure-dockers)
   - [7) Deploy](#7-deploy)
-  - [7) We're Live!](#7-were-live)
-  - [8) Configuring DNS](#8-configuring-dns)
-  - [9) Enabling HTTPs](#9-enabling-https)
+  - [8) We're Live!](#8-were-live)
+  - [9) Configuring DNS](#9-configuring-dns)
+  - [10) Enabling HTTPs](#10-enabling-https)
 - [Closing Thoughts](#closing-thoughts)
 
 
 ---
 
-### Choosing a Site Generator
+## Choosing a Site Generator
 
 With GeoCities no longer an viable option for hosting websites in 2020 (apparently Yahoo Japan shut it down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
 
@@ -46,13 +47,13 @@ After a brief look at the leading static site generators Jekyll, Hugo, Next.js, 
 
 **2) Speed:** Site build times are near instant for this (tiny) site, but that would be true for any generator with so few pages. However, people have performed a number of [benchmarks](https://forestry.io/blog/hugo-vs-jekyll-benchmark/) showing Hugo's performance as a site grows.
 
-### Initial Setup
+## Initial Setup
 
 The Hugo documentation is concise and they have an easy to follow quick start guide found here: https://gohugo.io/getting-started/quick-start/
 
 I'm currently (as of February 2020) still using the suggested [Ananke](https://themes.gohugo.io/gohugo-theme-ananke/) theme with a few minor styling tweaks, but eventually will probably spend some more time customizing the theme.
 
-### Choosing a Hosting Solution  
+## Choosing a Hosting Solution  
 
 With the site generator working, I then needed to decide how to host the site. In the past, I have used Github Pages to host static sites, but I noticed that they explicitly prohibit **"Get-rich-quick schemes"** (which learning & writing about DevOps and Cloud infrastructure clearly is) so that was out of the running.
 
@@ -65,7 +66,7 @@ I then came across [Caddy](https://caddyserver.com/), a webserver with automatic
 
 **NOTE:** If you are following along and setting up your own site, for most people, the best option at this point would be to stop here and go to https://www.netlify.com/. They have a generous free tier plan and offer direct integration with github/gitlab/bitbucket to handle automatic build/deploys triggered by Git commits. I achieved a similar end result with GCP Compute Engine + Cloud Build (a topic for another post) that provides me a bit more control/extensibility, but Netlify covers most use cases with a fantastic user experience!
 
-### Local Configuration (HTTP-only for Now)
+## Local Configuration (HTTP-only for Now)
 
 Since my computer is running MacOS, but ultimately the site would be deployed on a sever running some variant of linux, my default is to use containers to eliminate any configuration headaches with slight differences between the two environments.
 
@@ -89,7 +90,7 @@ Here `./public` is the local directory where Hugo builds the site, and `/srv` is
 
 The `-p` forwards the port from host system into container allowing us to connect to http://localhost:2015/ and that request will be forwarded into the container on port 2015 where Caddy is listening. 
 
-### Deploying to GCP
+## Deploying to GCP
 
 With the container image working, I was then ready to deploy it somewhere. There are a variety of options to do this, but I chose to use a GCP Compute Engine `f1-micro` virtual machine instance running Google's [Container-Optimized OS](https://cloud.google.com/container-optimized-os/docs). Container-Optimized OS provides nice [security features](https://cloud.google.com/container-optimized-os/docs) configured by default making it a good OS options for containerized applications. While the `f1-micro` instance is small (0.2 vCPUs + 600MB Memory), running one is included in the GCP's [always free usage limits](https://cloud.google.com/free/docs/gcp-free-tier#always-free-usage-limits) making this deployment cost me a *grand total of $0!*
 
@@ -103,19 +104,19 @@ If you are more comfortable working with the GCP web interface, that is perfectl
 
                 export PROJECT_ID=my-awesome-project-1234
 
-#### 1) Enable Billing for the Project
+### 1) Enable Billing for the Project
 Even though the resources used here are included in the free tier, Google requires having a payment method on file. This is the one step I recommend doing via the console as the command line command is [still in alpha](https://cloud.google.com/sdk/gcloud/reference/alpha/billing):
 
 https://console.cloud.google.com/billing/linkedaccount?project=$PROJECT_ID 
 
-#### 2) Enable the Compute Engine and Container Registry APIs
+### 2) Enable the Compute Engine and Container Registry APIs
 
 This is necessary to provision the VM and to be able to push container images.
 
         gcloud services enable compute.googleapis.com --project=$PROJECT_ID
 	    gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
 
-#### 3) Reserve a static IP address
+### 3) Reserve a static IP address
 
 If the VM needs to restart (or if I wanted to move to a larger machine type), a static IP ensures it won't change unexpectedly and mess up DNS configuration.
 
@@ -123,7 +124,7 @@ If the VM needs to restart (or if I wanted to move to a larger machine type), a 
 		--project=$PROJECT_ID \
 		--region=us-central1
 
-#### 4) Add firewall rules
+### 4) Add firewall rules
 
 By default Compute Engine VMs do not allow http or https traffic. Adding firewall rules allow those requests to make it to the webserver.
 
@@ -138,7 +139,7 @@ By default Compute Engine VMs do not allow http or https traffic. Adding firewal
 
 The target-tags allow the VM configuration to utilize these rules.
 
-#### 5) Create the Virtual Machine (Finally!)
+### 5) Create the Virtual Machine (Finally!)
 
 When creating the VM, the static IP and firewall rule tags are used to configure it:
 
@@ -152,7 +153,7 @@ When creating the VM, the static IP and firewall rule tags are used to configure
 
 This takes a few minutes to provision.
 
-#### 6) Configure Docker(s)
+### 6) Configure Docker(s)
 
 In order to configure my local Docker install to push images to google container registry I had to run:
 
@@ -165,7 +166,7 @@ In order for the Docker installed in container optimized OS running on the VM I 
             --zone=us-central1-a -- \
             docker-credential-gcr configure-docker
 
-#### 7) Deploy
+### 7) Deploy
 
 Before deploying the site, I had to add a Caddyfile to the container image to configure the server. The default configuration will serve the site on port 2015 which is inaccessible on our VM (because my firewall rules only allow traffic on ports 80 and 443). The following will tell Caddy to serve on port 80 and accept requests from any domain ([documentation](https://caddyserver.com/v1/docs/http-caddyfile)):
 
@@ -212,14 +213,14 @@ Finally, we can issue a `docker run` to run the new container image:
 
 **NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, this will allow the certificate files to persist across container redeploys, avoiding extra requests to Let's Encrypt which could lead to being rate limited.
 
-#### 7) We're Live!
+### 8) We're Live!
 
 At this point I was able to visit the external IP address from step 3 and see the website:
 
 [![speed run](./images/website-speedrun.png)](https://www.youtube.com/watch?v=hxTnB_FZpw8)
 *It seems complex, but it takes <5 min... Seriously, [I timed it!](https://www.youtube.com/watch?v=hxTnB_FZpw8)*
 
-#### 8) Configuring DNS
+### 9) Configuring DNS
 
 The final element of the setup is to point a domain to the IP address which I accomplished with the following settings:
 
@@ -229,7 +230,7 @@ The final element of the setup is to point a domain to the IP address which I ac
 
 (The CNAME record maps the www subdomain to the primary domain without www)
 
-#### 9) Enabling HTTPs
+### 10) Enabling HTTPs
 
 The final element of the setup is to enable https within Caddy. This can be accomplished by modifying the `Caddyfile` to include the domains and an email address for the TLS configuration:
 
@@ -244,7 +245,7 @@ After redeploying and waiting for the DNS settings to propagate I was able to ac
 
 {{< img "images/*https-success*" >}}
 
-### Closing Thoughts
+## Closing Thoughts
 
 Overall I'm happy with this configuration and am amazed that all of this can be accomplished for free using mostly open source software! It was also useful to continue gaining experience with the tools and platforms. 
 

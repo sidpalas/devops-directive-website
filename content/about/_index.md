@@ -1,8 +1,16 @@
 ---
 title: "About"
-description: "Hi. I'm Sid." 
-featured_image: ""
+bookToc: false
+bookComments: false
 ---
+
+# About
+
+---
+
+Hi, I'm Sid. 
+
+I am a technologist, engineer, athlete, beard grower, and tiny living enthusiast.
 
 My goal with DevOps Directive is to provide educational and entertaining (hopefully?...) content to enable engineers to level up their skills and keep up with the continuously evolving DevOps and Cloud Infrastructure landscape.
 
@@ -27,7 +35,7 @@ Topics include:
 - Cloud Providers
 - Career Advancement
 
-I am not an expert in all of these topics. I'm actually not an expert in ANY of these topics. That being said, I am good at [Reading the Docs](https://en.wikipedia.org/wiki/RTFM), asking the right questions, and explaining what I learn along the way.
+I am not an expert in all of these topics. In fact I'm not an expert in ANY of these topics. That being said, I am good at [Reading the Docs](https://en.wikipedia.org/wiki/RTFM), asking the right questions, and explaining what I learn along the way.
 
 Join me!
 

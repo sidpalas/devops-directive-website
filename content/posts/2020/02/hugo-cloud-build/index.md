@@ -1,6 +1,7 @@
 ---
 title: "CI/CD for this site (Hugo + Cloud Build)"
 date: 2020-02-21T11:09:35-08:00
+bookToC: false
 ---
 
 **TL;DR:** Configuring Cloud Build to automatically handle Continuous Integration and Continuous Deployment for this site based on Git triggers ended up being a bit trickier than I would have expected.
@@ -28,7 +29,7 @@ date: 2020-02-21T11:09:35-08:00
 
 ---
 
-This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/articles/2020/02/hugo-and-caddy-on-gcp/index.md" >}})) in which I walked through the set up of this site. In this post I add automated builds/deploys to the site.
+This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}})) in which I walked through the set up of this site. In this post I add automated builds/deploys to the site.
 
 All of the commands for creating the site, as well as setting up this automation can be found in this [GitHub Repo](https://github.com/sidpalas/hugo-gcp-deploy).
 

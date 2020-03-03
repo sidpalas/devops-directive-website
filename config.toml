@@ -1,10 +1,23 @@
+googleAnalytics = "UA-24019779-3"
+disqusShortname = "devops-directive"
+
 baseURL = "https://devopsdirective.com/"
 languageCode = "en-us"
 title = "DevOps Directive"
-theme = "ananke"
-googleAnalytics = "UA-24019779-3"
+theme = "book"
 
 Paginate = 6
 SectionPagesMenu = "main"
 
-disqusShortname = "devops-directive"
+[params]
+  youtube = "https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA"
+  linkedin = "https://www.linkedin.com/in/sid-palas-971b2329/"
+  github = "https://github.com/sidpalas"
+
+  # Set bundle to render side menu
+  # if not specified file structure and weights will be used
+  bookMenuBundle= "/menu" 
+
+  # specify section of content to render as menu
+  # if bookMenuBundle is not set, 'docs' is value by default
+  BookSection= "docs"
