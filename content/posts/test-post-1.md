@@ -1,5 +1,5 @@
 ---
-title: "Test Post with a much longer name"
+title: "Test Post 1"
 date: 2020-02-14T08:55:56-08:00
 draft: true
 ---

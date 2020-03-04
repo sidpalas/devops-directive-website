@@ -1,0 +1,7 @@
+{{ $img := $.Page.Resources.GetMatch (.Get 0)}}
+{{ $href := (.Get 1)}}
+{{ $caption := ( .Get 2 )}}
+<figure>
+	<a href="{{ $href }}" target="_blank"><img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}" /></a>
+	<figcaption style="font-style: italic">{{ $caption }}</figcaption>
+</figure>
