@@ -85,7 +85,7 @@ If any of my calculations or pricing constants look incorrect, please let me kno
 
 There are too many variables to give much of a recommendation beyond my TL;DR up top, but here are some takeaways:
 
-- With the recent GKE change, AKS and DO is now the only (of these 3) that doesn't charge for the control plane resources. If your architecture incorporates many small clusters (e.g. 1 cluster *per developer* or *per customer*) AKS has an advantage.
+- AKS and Digital Ocean do not charge for the control plane resources while GKE and EKS do. If your architecture incorporates many small clusters (e.g. 1 cluster *per developer* or *per customer*) AKS and DO can have an cost advantage.
 - Google's slightly cheaper compute resources result in lower cost as cluster sizes scale*.
 - Taking advantage of preemptible and/or committed use discounts can reduce costs by >50% (*NOTE:* Digital Ocean does not offer these types of discounts).
 - While Google's data egress fees are higher, the compute resources dominated the cost calculation (unless you are sending a significant amount of data out of the cluster).
