@@ -16,7 +16,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** Azure doesn't charge for the compute resources used for the control plane, making AKS the cheapest for running many, smaller clusters. For running more, larger clusters GKE is the most affordable option. Also, running on spot/preemptible/low-priority nodes or long-term committed nodes makes a massive impact across all of the platforms.
+**TL;DR:** Azure doesn't charge for the compute resources used for the control plane, making AKS the cheapest for running many, smaller clusters. For running fewer, larger clusters GKE is the most affordable option. Also, running on spot/preemptible/low-priority nodes or long-term committed nodes makes a massive impact across all of the platforms.
 
 ![Price Graph](/static/images/k8s-price-graph.png)
 
