@@ -90,7 +90,7 @@ There are too many variables to give much of a recommendation beyond my TL;DR up
 
 **NOTE:* I used general-purpose compute node types for all 3 clouds (n1 GCP Compute Engine instances, m5 AWS ec2 instances, and Dv3 Azure virtual machines). Further exploration could be done across the burstable and entry-level VM types. Also, it appeared that pricing for VMs scaled linearly with # of vCPU and GB of memory, but I am not sure that assumption holds as you move towards some of the less standard memory/cpu ratios.
 
-This article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digital Ocean"](https://www.replex.io/blog/the-ultimate-kubernetes-cost-guide-aws-vs-gce-vs-azure-vs-digital-ocean) published in 2018 used a single reference cluster with 100 vCPU cores and 400 GB of memory. As a point of comparison, here is how much my calculation shows that cluster would cost on each of these platforms. 
+This article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digital Ocean"](https://www.replex.io/blog/the-ultimate-kubernetes-cost-guide-aws-vs-gce-vs-azure-vs-digital-ocean) published in 2018 used a single reference cluster with 100 vCPU cores and 400 GB of memory. As a point of comparison, here is how much my calculation shows that cluster would cost (using on-demand prices) on each of these platforms. 
 
 - AKS: $51,465/year
 - EKS: $43,138/year
