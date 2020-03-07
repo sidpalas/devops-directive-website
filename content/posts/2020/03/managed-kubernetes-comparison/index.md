@@ -1,6 +1,7 @@
 ---
 title: "Managed Kubernetes Price Comparison (2020)"
 date: 2020-03-05T07:45:43-08:00
+bookToc: false
 tags: [
   "Kubernetes",
   "AWS",
