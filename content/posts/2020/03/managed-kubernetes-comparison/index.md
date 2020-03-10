@@ -66,7 +66,7 @@ It is important to point out that while cost is a useful dimension to examine wh
 - k8s Version Availability
 - Documentation/Tooling Quality
 
-Those factors are beyond the scope of this article/exploratory analysis.
+Those factors are beyond the scope of this article/exploratory analysis. This [blog post from StackRox (Feb. 2020)](https://www.stackrox.com/post/2020/02/eks-vs-gke-vs-aks/) provides a detailed look at the non-price factors for EKS, AKS, and GKE.
 
 ---
 
@@ -91,7 +91,7 @@ There are too many variables to give much of a recommendation beyond my TL;DR up
 - While Google's data egress fees are higher, the compute resources dominated the cost calculation (unless you are sending a significant amount of data out of the cluster).
 - Choosing machine types that match your workloads CPU and Memory needs will avoid paying for wasted capacity.
 - Digital Ocean charges relatively less for vCPUs and more for memory which could be an important consideration depending on the nature of the compute workloads.
-  
+
 **NOTE:* I used general-purpose compute node types for all 4 clouds (n1 GCP Compute Engine instances, m5 AWS ec2 instances, D2v3 Azure virtual machines, and dedicated CPU DO droplets). Further exploration could be done across the burstable and entry-level VM types. Also, it appeared that pricing for VMs scaled linearly with # of vCPU and GB of memory, but I am not sure that assumption holds as you move towards some of the less standard memory/cpu ratios.
 
 This article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digital Ocean"](https://www.replex.io/blog/the-ultimate-kubernetes-cost-guide-aws-vs-gce-vs-azure-vs-digital-ocean) published in 2018 used a single reference cluster with 100 vCPU cores and 400 GB of memory. As a point of comparison, here is how much my calculation shows that cluster would cost (using on-demand prices) on each of these platforms. 
