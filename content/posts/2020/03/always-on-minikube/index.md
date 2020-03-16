@@ -87,7 +87,7 @@ In order for `kubectl` commands to make their way to the Minikube cluster, it is
 
 ### 4) Update the `.kube/config` on the Client to Point to the Server
 
-When executing the `minikube start` command on the server system, a kubectl context called 'minikube' is added to the kubectl configuration file @ `./kube/config`:
+When executing the `minikube start` command on the server system, a kubectl context called 'minikube' is added to the kubectl configuration file @ `~/.kube/config`:
 
     apiVersion: v1
     clusters:
