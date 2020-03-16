@@ -92,7 +92,7 @@ When executing the `minikube start` command on the server system, a kubectl cont
     apiVersion: v1
     clusters:
     - cluster:
-        certificate-authority: /Users/palas/.minikube/ca.crt
+        certificate-authority: <PATH-TO-CONFIG>/.minikube/ca.crt
         server: https://192.168.99.100:8443
       name: minikube
     contexts:
@@ -106,12 +106,12 @@ When executing the `minikube start` command on the server system, a kubectl cont
     users:
     - name: minikube
       user:
-        client-certificate: /Users/palas/.minikube/client.crt
-        client-key: /Users/palas/.minikube/client.key
+        client-certificate: <PATH-TO-CONFIG>/.minikube/client.crt
+        client-key: <PATH-TO-CONFIG>/.minikube/client.key
 
 This configuration needs to be copied onto the client machine (along with the `client.crt` and `client.key` files).
 
-I copied those files to `/Users/palas/.minikube-macbook-air` on the client system and updated the kubectl configuration as follows:
+I copied those files to `<PATH-TO-CONFIG>/.minikube-macbook-air` on the client system and updated the kubectl configuration as follows:
 
     apiVersion: v1
     clusters:
@@ -130,8 +130,8 @@ I copied those files to `/Users/palas/.minikube-macbook-air` on the client syste
     users:
     - name: minikube-macbook-air
       user:
-        client-certificate: /Users/palas/.minikube-macbook-air/client.crt
-        client-key: /Users/palas/.minikube-macbook-air/client.key
+        client-certificate: <PATH-TO-CONFIG>/.minikube-macbook-air/client.crt
+        client-key: <PATH-TO-CONFIG>/.minikube-macbook-air/client.key
 
 This can either be inserted as a context within the primary `.kube/config` file or stored as a separate configuration and used by setting the `KUBECONFIG` environment variable ([documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable))
 
