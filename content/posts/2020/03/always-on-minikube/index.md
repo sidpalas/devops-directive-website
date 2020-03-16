@@ -1,5 +1,5 @@
 ---
-title: "Running Kubernetes at Home on an Old Computer"
+title: "Converting an Old MacBook Into an Always-On Personal Kubernetes Cluster"
 date: 2020-03-16T09:05:24-07:00
 bookToc: false
 tags: [
