@@ -11,7 +11,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** I set up Minikube on an old (2012) MacBook air so I would have an always-on Kubernetes cluster at home to experiment with.
+**TL;DR:** I set up Minikube on an old (2012) MacBook Air and configured it to be able to connect from outside my home network so I would have an always-on Kubernetes cluster at home to experiment with.
 
 ![macbook air](/static/images/macbook-air.jpg)
 
