@@ -23,6 +23,7 @@ categories: [
 
 --- 
 
+Table of Contents:
 - [Picking a CI/CD Tool](#picking-a-cicd-tool)
 - [Attempting to Use the Cloud Build GitHub App](#attempting-to-use-the-cloud-build-github-app)
 - [GCP Set Up](#gcp-set-up)
