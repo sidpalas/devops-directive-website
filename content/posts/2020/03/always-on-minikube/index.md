@@ -144,7 +144,7 @@ At this point, I was able to connect to the cluster, but only when the Client an
 Two additional things needed to be configured in order to connect from outside of my home network:
 
   1) I set up a free dynamic DNS using https://www.dynu.com/. After doing this I replaced `<INTERNAL-NETWORK-IP>` with `<MY-DDNS-DOMAIN-NAME>` 
-  2) Configure my router to port forward requests on port `51928` to the MacBook Air and reserve the IP address to the MAC Address of the machine to ensure it doesn't change.
+  2) I configured my router to port forward incoming requests on port `51928` to the MacBook Air and reserve the IP address for the MAC Address of the machine to ensure it doesn't change.
    
 At this point I was able to successfully connect to the cluster from an external network!
 
