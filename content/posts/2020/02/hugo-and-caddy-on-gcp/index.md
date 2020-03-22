@@ -229,8 +229,7 @@ Finally, we can issue a `docker run` to run the new container image:
 
 At this point I was able to visit the external IP address from step 3 and see the website:
 
-[![speed run](./images/website-speedrun.png)](https://www.youtube.com/watch?v=hxTnB_FZpw8)
-*It seems complex, but it takes <5 min... Seriously, [I timed it!](https://www.youtube.com/watch?v=hxTnB_FZpw8)*
+{{< img-link "images/website-speedrun.png" "https://www.youtube.com/watch?v=hxTnB_FZpw8" "It seems complex, but it takes <5 min... Seriously, I timed it!" >}}
 
 ### 9) Configuring DNS
 
