@@ -27,6 +27,7 @@ Table of Contents:
 - [Picking a CI/CD Tool](#picking-a-cicd-tool)
 - [Attempting to Use the Cloud Build GitHub App](#attempting-to-use-the-cloud-build-github-app)
 - [GCP Set Up](#gcp-set-up)
+  - [Video Walkthrough](#video-walkthrough)
   - [1) Mirroring GitHub Repo to Cloud Source](#1-mirroring-github-repo-to-cloud-source)
   - [2) Enable the Cloud Build API](#2-enable-the-cloud-build-api)
   - [3) Add IAM Roles for Cloud Build Service Account](#3-add-iam-roles-for-cloud-build-service-account)
@@ -76,6 +77,12 @@ At this point I had arrived what I thought was a viable plan that I just needed 
 **NOTE:** The commands that follow use $PROJECT_ID and other template variables that should reflect the relevant project and values.
 
     export PROJECT_ID=my-awesome-project-1234
+
+#### Video Walkthrough
+
+To accompany this article, I also created a full video walkthrough of setting up the pipeline. Feel free to follow along or skip it depending if you prefer the video or written format!
+
+{{< youtube MF2gMZ5aDBQ >}}
 
 #### 1) Mirroring GitHub Repo to Cloud Source
 
