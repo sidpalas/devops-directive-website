@@ -1,6 +1,6 @@
 ---
 title: "Converting an Old MacBook Into an Always-On Personal Kubernetes Cluster"
-date: 2020-03-16T09:05:24-07:00
+date: 2020-03-10T09:05:24-07:00
 bookToc: false
 tags: [
   "Kubernetes",
