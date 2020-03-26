@@ -1,40 +1,41 @@
 ---
-title: "Kubernetes the Hard Way Deep Dive -- (01 & 02).01"
-date: 2020-03-03T15:38:41-08:00
+title: "Kubernetes the Hard Way Deep Dive -- 04 (Certificate Authorities)"
+date: 2020-03-14T16:39:41-08:00
 bookToc: false
 tags: [
   "Kubernetes"
 ]
 categories: [
-  "Deep Dive"
+  "Deep Dive",
+  "Tutorial"
 ]
 draft: true
 ---
 
-**TL;DR:** Setting up GCP account, and installing various software prerequisites (`gcloud`, `tmux`, `cfssl` and `kubectl`)
+**TL;DR:** Lorem Ipsum
 
 **KTHW Lessons:**
-- [01-prerequisites.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/01-prerequisites.md)
-- [02-client-tools.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/02-client-tools.md)
+- [04-certificate-authority.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/04-certificate-authority.md)
 
-*INSERT IMAGE (tmux matrix joke)*
+![tmux 4 pane](/static/images/tmux-4pane.png)
+*Is this the Matrix?*
 
 <!--more--> 
 
 ---
-
+**Table of Contents:**
 - [GCP + gcloud](#gcp--gcloud)
 - [tmux](#tmux)
 - [CFSSL & cfssljson](#cfssl--cfssljson)
 - [kubectl](#kubectl)
 
-### GCP + gcloud
+## GCP + gcloud
 
 I don't have anything to add for this step. The instructions are complete and will get your account/system set up to proceed.
 
 A GCP project needs to be configured with the necessary APIs enabled, and gcloud will allow us to interact with GCP via the command line.
 
-### tmux
+## tmux
 
 Embarrassingly, I had never used tmux prior to this. 😳😳😳
 
@@ -53,9 +54,9 @@ To do this we can use the following workflow:
 7) Execute the tutorial commands
 8) After finishing, shut down all running tmux sessions using `$ tmux kill-server`
 
-This is just one very specific workflow using tmux. For more information about getting started with some of the other tmux functionality (and lots of other useful tools/skills adjacent to programming), check out [The MIT Missing Semester Course](https://missing.csail.mit.edu/2020/command-line/#terminal-multiplexers)
+This is just one very specific workflow using tmux. For more information about getting started with some of the other tmux functionality (and lots of other useful tools/skills adjacent to programming), check out [The MIT Missing Semester Course](https://missing.csail.mit.edu/2020/command-line/#terminal-multiplexers).
 
-### CFSSL & cfssljson
+## CFSSL & cfssljson
 
 CFSSL (of which cfssljson is a sub-project) is an open source project from [Cloudflare](https://www.cloudflare.com/) that is "both a command line tool and an HTTP API server for signing, verifying, and bundling TLS certificates".
 
@@ -63,7 +64,14 @@ These will be used during [04-certificate-authority.md](https://github.com/kelse
 
 I will go into more detail about what that actually means in the post corresponding to that step in the tutorial. For now, simply installing the software and verifying the versions are correct is sufficient.
 
-### kubectl
+## kubectl
 
+`Kubectl` (It's okay... nobody else knoews [how to pronounce it](https://www.youtube.com/watch?v=2wgAIvXpJqU) either) is a command line tool for interacting with Kubernetes clusters. Once the cluster is up and running, `kubectl` will be the primary mechanism for getting information about the cluster (and things running within it), as well deploying and modifying software running within the cluster.
 
+Kelsey's instructions for installation are sufficient, but if on MacOS, it can also be installed with Homebrew using:
 
+    $ brew install kubectl
+
+At this point your computer should have all the necessary prerequisite software and we can start setting up the cloud resources needed for the cluster.
+
+See you in the next post!

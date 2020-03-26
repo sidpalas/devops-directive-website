@@ -15,10 +15,10 @@ categories: [
 draft: true
 ---
 
-**TL;DR:** I used the [k6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy webserver](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median page load time of `<500ms`), but started dropping requests when increasing the load further.
-
+**TL;DR:** I used the [k6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy webserver](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
 
 ![this is fine](/static/images/this-is-fine.png)
+
 *{{< link "https://www.theverge.com/2016/5/5/11592622/this-is-fine-meme-comic" "This is fine." >}}*
 
 <!--more--> 
@@ -33,7 +33,7 @@ draft: true
   - [Replicating Current Peak](#replicating-current-peak)
     - [Key takeaways:](#key-takeaways)
   - [Ramping it up!](#ramping-it-up)
-    - [Virtual Users and Server Load](#virtual-users-and-server-load)
+    - [virtual users and Server Load](#virtual-users-and-server-load)
   - [Snags along the way:](#snags-along-the-way)
 - [(Aside) Total Costs](#aside-total-costs)
 - [Conclusions](#conclusions)
@@ -65,7 +65,7 @@ As a reminder, here is a summary of the configuration:
 
 ### K6 Performance Testing Framework
 
-To perform the load test I used [k6.io](https://k6.io/), an open source performance testing framework designed for building automated tests with a straightforward javascript config file. It uses the concept of "Virtual Users" (In [their words](https://k6.io/docs/getting-started/running-k6#adding-more-vus): `glorified, parallel while(true) loops`) to load test a site. 
+To perform the load test I used [k6.io](https://k6.io/), an open source performance testing framework designed for building automated tests with a straightforward javascript config file. It uses the concept of "virtual users" (VUs) which in [their words](https://k6.io/docs/getting-started/running-k6#adding-more-vus) are "glorified, parallel `while(true)` loops" to load test a site. 
 
 ### Replicating Current Peak
 
@@ -101,21 +101,21 @@ K6 has the ability to use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_f
 
 ### Ramping it up!
 
-With that test as a baseline, I then ran a series of test, each 60 seconds long, starting with 6 Virtual Users and increasing the number of VUs with each test. The most important of the metrics statistics is `http_req_duration` which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`).
+With that test as a baseline, I then ran a series of test, each 60 seconds long, starting with 6 virtual users and increasing the number of VUs with each test. The most important of the metrics is `http_req_duration` which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`).
 
-{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsuprisingly... caching makes a big difference">}}
+{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsuprisingly... a CDN with caching makes a big difference">}}
 
 {{< img-link "images/http_req_duration_zoomed_thumbnail.png" "images/http_req_duration_zoomed.png" "Click for full size image">}}
 
 Up until around 50 VUs, the response time remains flat, with an uncached median of 68ms and a cached median of 31ms.
 
-After 50 VUs, the response rates begin to climb in a linear fashion. At 800 VUs the uncached median was 349ms and the cached median was 67ms. As would be expected at these higher loads, most (90+%) of the of `http_req_duration` is spent in the `http_req_waiting` stage.
+After 50 VUs, the response times begin to climb in a linear fashion. At 800 VUs the uncached median was 349ms and the cached median was 67ms. As would be expected at these higher loads, most (90+%) of the of `http_req_duration` is spent in the `http_req_waiting` stage.
 
-The uncached configuration finally gave out during the 1600 virtual user test, with only 414 successfully responses, indicating that ~74% of the Virtual Users never received a response.
+The uncached configuration finally gave out during the 1600 virtual user test, with only 414 successfully responses, indicating that ~74% of the virtual users never received a response.
 
-#### Virtual Users and Server Load
+#### virtual users and Server Load
 
-It is important to note here that while the Virtual Users run in parallel with each other, they run in serial with themselves. By this I mean that any individual VU waits until its current pageload is complete before making a new set of requests. As the server slows down under load, this causes the total rate of requests to drop in the more demanding tests. This can be clearly seen in the total amount of data received during the tests plotted below.
+It is important to note here that while the virtual users run in parallel with each other, they run in serial with themselves. By this I mean that any individual VU waits until its current pageload is complete before making a new set of requests. As the server slows down under load, this causes the total rate of requests to drop in the more demanding tests. This can be clearly seen in the total amount of data received during the tests plotted below.
 
 {{< img-link "images/data_received.png" "images/data_received.png" "Data recieved (and pageloads/s) peaks before the more demanding tests">}}
 
