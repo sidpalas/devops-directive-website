@@ -71,30 +71,9 @@ To perform the load test I used [k6.io](https://k6.io/), an open source performa
 
 First, I wanted to create a script to approximate the load that the two HN posts brought. The peak hour had 1443 page views, or 0.4 pageviews/second. To account for the load not being constant across the entire hour I rounded this up to 1 pageview/second.
 
-
-K6 has the ability to use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). The full k6 script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
+K6 has the ability to use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests requests for things like the Google Analytics script. The full k6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
 
 ```
-          /\      |‾‾|  /‾‾/  /‾/   
-     /\  /  \     |  |_/  /  / /    
-    /  \/    \    |      |  /  ‾‾\  
-   /          \   |  |‾\  \ | (_) | 
-  / __________ \  |__|  \__\ \___/ .io
-
-  execution: local--------------------------------------------------]   servertor
-     output: -
-     script: har-test-script.js
-
-    duration: -, iterations: -
-         vus: 1, max: 1
-
-    init [----------------------------------------------------------] starting
-    █ page_1 - https://test.devopsdirective.com/posts/2020/03/always-on-minikube/
-
-      ✓ http2 is used
-      ✓ status is 200
-      ✓ content is present
-
     check_failure_rate.........: 0.00%   ✓ 0   ✗ 138
     checks.....................: 100.00% ✓ 414 ✗ 0  
     data_received..............: 66 MB   549 kB/s
@@ -122,21 +101,23 @@ K6 has the ability to use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_f
 
 ### Ramping it up!
 
-With that test as a baseline, I then ran a series of test, each 20 seconds long, starting with a single VU and increasing the number of VUs with each test. The most important of the metrics statistics is `http_req_duration` which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`).
+With that test as a baseline, I then ran a series of test, each 60 seconds long, starting with 6 Virtual Users and increasing the number of VUs with each test. The most important of the metrics statistics is `http_req_duration` which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`).
 
-{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "The plot you all came here for!">}}
+{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsuprisingly... caching makes a big difference">}}
 
-Up until around 20 VUs, the response time remains flat, with an uncached median of 35ms and a cached median of 21ms.
+{{< img-link "images/http_req_duration_zoomed_thumbnail.png" "images/http_req_duration_zoomed.png" "Click for full size image">}}
 
-After 50 VUs, the response rates begin to climb in a mostly linear fashion and at 800 VUs, at which point the uncached median was 451ms and the cached median was 182ms. As would be expected at these higher loads, most (~75%) of the of `http_req_duration` is spent in the `http_req_waiting` stage.
+Up until around 50 VUs, the response time remains flat, with an uncached median of 68ms and a cached median of 31ms.
 
-The uncached configuration finally gave in during the 1536 virtual user test, and 29% of the pageloads included a response other than `200 OK`.
+After 50 VUs, the response rates begin to climb in a linear fashion. At 800 VUs the uncached median was 349ms and the cached median was 67ms. As would be expected at these higher loads, most (90+%) of the of `http_req_duration` is spent in the `http_req_waiting` stage.
+
+The uncached configuration finally gave out during the 1600 virtual user test, with only 414 successfully responses, indicating that ~74% of the Virtual Users never received a response.
 
 #### Virtual Users and Server Load
 
-It is important to note here that while the Virtual Users run in parallel with each other, they run in serial with themselves. By this I mean that any individual VU waits until its current pageload is complete before making a new request. As the server slows down under load, this causes the total rate of requests to drop in the tests with more than 200 VUs. This can be clearly seen in the total amount of data received during the tests plotted below. Data received scales linearly with the number of pageloads (except for the final uncached data point where the failed requests would cause it to be lower by ~30% relative to the number of requests made).
+It is important to note here that while the Virtual Users run in parallel with each other, they run in serial with themselves. By this I mean that any individual VU waits until its current pageload is complete before making a new set of requests. As the server slows down under load, this causes the total rate of requests to drop in the more demanding tests. This can be clearly seen in the total amount of data received during the tests plotted below.
 
-{{< img-link "images/data_received.png" "images/data_received.png" "Data recieved (and pageloads/s) peaks around 200 Virtual Users">}}
+{{< img-link "images/data_received.png" "images/data_received.png" "Data recieved (and pageloads/s) peaks before the more demanding tests">}}
 
 These were the two most informative plots, but all of the data and code to generate plots can be found in a notebook in this [GitHub repo](https://github.com/sidpalas/f1-micro-caddy-benchmark). You can load an interactive copy of the notebook using the following binder link:
 
@@ -145,31 +126,33 @@ These were the two most informative plots, but all of the data and code to gener
 
 ### Snags along the way:
 
- 1) **Bandwidth limitations:** As noted above, my home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured it @ 900+ Mbps) solved this.
+I did run into some technical limitations when configuring and executing these tests. Here are the main issues and how I overcame them:
 
- 2) **Out of memory:** After moving to a n1-standard1 instance, the more demanding tests caused k6 to run out of memory. (`fatal error: runtime: out of memory`). Moving to an n1-standard-4 (15GB memory) solved this.
+ 1) **Bandwidth Limitations:** As noted above, my home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured @ 900+ Mbps) as the test client running k6 solved this. For the later tests in the cached configuration this was actually still the limiting factor.
 
- 3) **Unix resource limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to managed at once. Testing on two VMs in parallel solved this (and allowed me add the "Distributed" D to the title of this article 🤓...), but increasing the limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
+ 2) **Memory Limitations:** After moving from my laptop to an n1-standard-1 instance as the testing client, the more demanding tests caused k6 to run out of memory (`fatal error: runtime: out of memory`). Moving to an n1-standard-8 (30GB memory) solved this.
+
+ 3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to managed at once. Testing on two VMs in parallel solved this (and allowed me add the "Distributed" D to the title of this article 🤓...), but increasing the limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
 
 ## (Aside) Total Costs
 
 The total cost to run this experiment was $__:
-- $__ for __ GB of network egress
-- $__ for running the server f1-micro instance for a few days
-- $__ for running the testing instances for a few hours
+- $0.51 for 12.81 GB of network egress
+- $0.36 for running the server f1-micro instance for a ~2 days
+- $0.38 for running the testing n1-standard-8 instances for a ~2 hrs
 
 ## Conclusions
 
 I am continuously amazed at the level of load that even such a tiny virtual machine can handle when serving static content!
 
-Also, utilizing a service like Cloudflare to help cache and serve content reduces the load on the server significantly and cut the response times in half under heavy load and by a third under light load.
+Utilizing a service like Cloudflare to help cache and serve content reduces the load on the server significantly and cut the response times in half under light load and prevented the server from being overwhelmed under heavy load.
 
-I would have like to have recorded realtime resource (CPU + Memory usage on the server VM) but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1min averaged view in the GCP console:
+I would have like to have recorded realtime resource (CPU + Memory usage on the server VM) but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1 min averaged view in the GCP console:
 
 {{< img "images/peak-cpu.png" "Now we're cooking with gas! (bursting above the 0.2 vCPU limit for a short period)">}}
 
 This test gives me confidence that my current server configuration should be able to handle quite a bit of growth before needing any major overhaul. 
 
-In the future I would love to do similar benchmarking across other hosting options. If someone has a contact at [@github](https://twitter.com/github) or [@netlify](https://twitter.com/Netlify) that could grant me permission to run a test against a Github Pages or Netlify Starter site let me know! Or maybe at [@bluehost](https://twitter.com/bluehost) so I can benchmark a Wordpress install...
+In the future I would love to do similar benchmarking across other hosting options. If someone has a contact at [@github](https://twitter.com/github) or [@netlify](https://twitter.com/Netlify) that could grant me permission to run a test against a Github Pages or Netlify Starter site let me know! Or maybe at [@bluehost](https://twitter.com/bluehost) so I can benchmark some Wordpress installs...
 
 <!-- -- Shout out YouTube + call to action -->
