@@ -21,7 +21,7 @@
 # 
 ##############################
 
-devopsdirective.com www.devopsdirective.com test.devopsdirective.com {
+devopsdirective.com www.devopsdirective.com {
     tls sid.palas@gmail.com
     log stdout
     errors stderr
