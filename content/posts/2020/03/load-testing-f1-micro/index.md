@@ -128,11 +128,11 @@ These were the two most informative plots, but all of the data and code to gener
 
 I did run into some technical limitations when configuring and executing these tests. Here are the main issues and how I overcame them:
 
- 1) **Bandwidth Limitations:** As noted above, my home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured @ 900+ Mbps) as the test client running k6 solved this. For the later tests in the cached configuration this was actually still the limiting factor.
+ 1) **Bandwidth Limitations:** My home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured @ 900+ Mbps) as the test client running k6 solved this. For the later tests in the cached configuration this was actually still started to be a limiting factor.
 
  2) **Memory Limitations:** After moving from my laptop to an n1-standard-1 instance as the testing client, the more demanding tests caused k6 to run out of memory (`fatal error: runtime: out of memory`). Moving to an n1-standard-8 (30GB memory) solved this.
 
- 3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to managed at once. Testing on two VMs in parallel solved this (and allowed me add the "Distributed" D to the title of this article 🤓...), but increasing the limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
+ 3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to managed at once. Testing on multiple VMs in parallel solved this (and allowed me add the "Distributed" D to the title of this article 🤓...), but increasing the open file limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
 
 ## (Aside) Total Costs
 
@@ -145,9 +145,9 @@ The total cost to run this experiment was $__:
 
 I am continuously amazed at the level of load that even such a tiny virtual machine can handle when serving static content!
 
-Utilizing a service like Cloudflare to help cache and serve content reduces the load on the server significantly and cut the response times in half under light load and prevented the server from being overwhelmed under heavy load.
+Utilizing a service like Cloudflare to help cache and serve content reduces the load on the server significantly. It cut the response times in half under light load and prevented the server from being overwhelmed under heavy load.
 
-I would have like to have recorded realtime resource (CPU + Memory usage on the server VM) but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1 min averaged view in the GCP console:
+I would have like to have recorded realtime resource (CPU + Memory usage) on the server VM but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1 min averaged view in the GCP console:
 
 {{< img "images/peak-cpu.png" "Now we're cooking with gas! (bursting above the 0.2 vCPU limit for a short period)">}}
 
