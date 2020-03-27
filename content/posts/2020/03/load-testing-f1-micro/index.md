@@ -40,7 +40,7 @@ categories: [
 
 ## Background
 
-DevOps Directive is a static website generated with Hugo and hosted using [Caddy](https://caddyserver.com/v1/) running on an f1-micro GCP Compute Engine instance with Cloudflare in front of it (see [The Making of This Site]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}}) for details). On a normal day, the site gets between 1 (*thanks Dad!*) and 50 visitors, but recently, two articles made it to the front page of Hacker News ({{< link "https://news.ycombinator.com/item?id=22512149" "Link-1" >}} and {{< link "https://news.ycombinator.com/item?id=22661029" "Link-2" >}}) bringing outsized swells in traffic.
+DevOps Directive is a static website generated with [Hugo](https://gohugo.io/) and hosted using [Caddy](https://caddyserver.com/v1/) running on an [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) GCP Compute Engine instance with [Cloudflare](https://www.cloudflare.com/) in front of it (see [The Making of This Site]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}}) post for details). On a normal day, the site used to get between 1 (*thanks Dad!*) and 20 visitors, but recently, two articles made it to the front page of Hacker News ({{< link "https://news.ycombinator.com/item?id=22512149" "Link-1" >}} and {{< link "https://news.ycombinator.com/item?id=22661029" "Link-2" >}}) bringing outsized swells in traffic.
 
 {{< img "images/google-analytics-2-peaks.png" "2178% increase from the previous peak!" >}}
 
