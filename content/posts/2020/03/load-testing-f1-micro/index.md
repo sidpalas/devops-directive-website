@@ -136,10 +136,10 @@ I did run into some technical limitations when configuring and executing these t
 
 ## (Aside) Total Costs
 
-The total cost to run this experiment was $__:
-- $0.51 for 12.81 GB of network egress
-- $0.36 for running the server f1-micro instance for a ~2 days
-- $0.38 for running the testing n1-standard-8 instances for a ~2 hrs
+The total cost to run this experiment was $2.82:
+- $1.60 for 40.1 GB of network egress
+- $0.50 for running the f1-micro server for a ~3 days
+- $0.72 for running the n1-standard-8 testing client for a ~2 hrs
 
 ## Conclusions
 
