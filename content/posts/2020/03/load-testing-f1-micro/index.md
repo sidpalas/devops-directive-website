@@ -1,5 +1,5 @@
 ---
-title: "DDoS'ing Myself (aka Load Testing Caddy Webserver on a GCP F1-Micro Instance)"
+title: "DDoS'ing Myself (aka Load Testing Caddy Webserver on a GCP F1-Micro Instance Using K6)"
 date: 2020-03-24T10:23:54-07:00
 bookToc: false
 tags: [
