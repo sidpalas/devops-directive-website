@@ -44,7 +44,7 @@ DevOps Directive is a static website generated with [Hugo](https://gohugo.io/) a
 
 {{< img "images/google-analytics-2-peaks.png" "2178% increase from the previous peak!" >}}
 
-In a single hour on March 7th, a total of 1307 people visited this site ({{< link "images/realtime-analytics.png" "from all over the world!" >}}). Thankfully, even with all of that traffic, CPU usage of the virtual machine never even reached 10% (and the short spikes correspond to redeploying the site).
+In a single hour on March 7th, a total of 1307 people visited this site ({{< link "images/realtime-analytics.png" "from all over the world!" >}}). Thankfully, even with all of that traffic, CPU usage of the virtual machine never even reached 10% (and the short spikes correspond to redeploying the site with copy edits).
 
 {{< img "images/march-7-traffic.png" "No flames yet..." >}}
 
