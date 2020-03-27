@@ -59,7 +59,7 @@ In order to avoid causing any impact to my actual site, I spun up an identical r
 Here is a summary of the configuration:
 - Compute Engine f1-micro Instance (0.2 vCPU burstable to 1 vCPU for short periods, 0.6GB Memory) running Container Optimized OS (COS)
 - [Caddy (1.0.3) container image](https://hub.docker.com/r/abiosoft/caddy/) with the site content files built directly into the container
-- Cloudflare configured to proxy traffic and set to the "standard" caching level (I performed tests for both caching turned on and off)
+- Cloudflare configured to proxy traffic and set to the "standard" caching level (I performed tests with caching turned on and caching turned off)
 
 *NOTE:* I didn't tune/configure the COS image running on the VM, nor specify resource requests in the `docker run` command. 
 
