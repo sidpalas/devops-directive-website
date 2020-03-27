@@ -7,15 +7,15 @@ tags: [
   "Testing",
   "GCP",
   "Caddy",
-  "Web Servers"
+  "Web Servers",
+  "Performance"
 ]
 categories: [
   "Benchmark"
 ]
-draft: true
 ---
 
-**TL;DR:** I used the [k6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy webserver](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
+**TL;DR:** I used the [K6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy webserver](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
 
 ![this is fine](/static/images/this-is-fine.png)
 
@@ -54,12 +54,12 @@ At this point, the setup has proven itself capable of embracing a Hacker News hu
 
 ### Site Setup
 
-In order to avoid causing any impact to my actual site, I spun up an identical replica on a separate virtual machine using [this script](https://github.com/sidpalas/hugo-gcp-deploy) and configured the https://test.devopsdirective.com/ (which will likely be inactive at the time you are reading this) subdomain to point to it.
+In order to avoid causing any impact to my actual site, I spun up an identical replica on a separate virtual machine using [this script](https://github.com/sidpalas/hugo-gcp-deploy) and configured the https://test.devopsdirective.com/ subdomain (which will likely be inactive at the time you are reading this) to resolve to it.
 
-As a reminder, here is a summary of the configuration:
-- Compute Engine f1-micro Instance (0.2 vCPU burstable to 1 vCPU for short periods, 0.6GB Memory) running Container Optimized OS (COS). This concise post explores the stated resource limits of the instance ([LINK](https://www.opsdash.com/blog/google-cloud-f1-micro.html)).
+Here is a summary of the configuration:
+- Compute Engine f1-micro Instance (0.2 vCPU burstable to 1 vCPU for short periods, 0.6GB Memory) running Container Optimized OS (COS)
 - [Caddy (1.0.3) container image](https://hub.docker.com/r/abiosoft/caddy/)
-- Cloudflare configured to proxy traffic and set to the "standard" caching level
+- Cloudflare configured to proxy traffic and set to the "standard" caching level (testing performed both with caching turned on and off)
 
 *NOTE:* I didn't tune/configure the COS image running on the VM, nor specify resource requests in the `docker run` command. 
 
@@ -71,7 +71,7 @@ To perform the load test I used [k6.io](https://k6.io/), an open source performa
 
 First, I created a script to approximate the load that the two HN posts brought. The peak hour had 1443 page views, or 0.4 pageviews/second. To account for the load not being constant across the entire hour, I rounded this up to 1 pageview/second.
 
-K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests for things like the Google Analytics script. The full k6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
+K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests for things like the Google Analytics script. The full K6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
 
 ```
     check_failure_rate.........: 0.00%   ✓ 0   ✗ 138
@@ -128,9 +128,9 @@ These were the two most informative plots, but all of the data and code to gener
 
 I did run into some technical limitations when configuring and executing these tests. Here are the main issues and how I overcame them:
 
- 1) **Bandwidth Limitations:** My home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured @ 900+ Mbps) as the test client running k6 solved this. For the later tests in the cached configuration, this actually still became a limiting factor.
+ 1) **Bandwidth Limitations:** My home internet was not sufficient to support the load test. Moving to a GCP virtual machine with sufficient bandwidth (Measured @ 900+ Mbps) as the test client running K6 solved this. For the later tests in the cached configuration, this actually still became a limiting factor.
 
- 2) **Memory Limitations:** After moving from my laptop to an n1-standard-1 instance as the testing client, the more demanding tests caused k6 to run out of memory (`fatal error: runtime: out of memory`). Moving to an n1-standard-8 (30GB memory) solved this.
+ 2) **Memory Limitations:** After moving from my laptop to an n1-standard-1 instance as the testing client, the more demanding tests caused K6 to run out of memory (`fatal error: runtime: out of memory`). Moving to an n1-standard-8 (30GB memory) solved this.
 
  3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to manage at once. Testing on multiple VMs in parallel solved this (and allowed me to add the "Distributed" D to the title of this article 🤓...), but increasing the open file limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
 
