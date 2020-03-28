@@ -101,7 +101,7 @@ K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to 
 
 ### Ramping It Up!
 
-With that test as a baseline, I proceeded to run a series of tests, each 60 seconds long, starting with 6 virtual users and increasing the number of VUs with each test. The most important metric is `http_req_duration`, which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`).
+With that test as a baseline, I proceeded to run a series of tests, each 60 seconds long, starting with 6 virtual users and increasing the number of VUs with each test. I also reduced the delay between virtual user iterations to 100ms. The most important metric is `http_req_duration`, which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`), which I have plotted below for the full set of tests.
 
 {{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsuprisingly... a CDN with caching makes a big difference">}}
 
