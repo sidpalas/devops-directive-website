@@ -1,5 +1,5 @@
 ---
-title: "DDoS'ing Myself (aka Load Testing Caddy Webserver on a GCP F1-Micro Instance Using K6)"
+title: "Load Testing Caddy Web Server on a GCP F1-Micro Instance Using K6 (k6.io)"
 date: 2020-03-24T10:23:54-07:00
 bookToc: false
 tags: [
@@ -15,7 +15,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** I used the [K6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy webserver](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
+**TL;DR:** I used the [K6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy web server](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
 
 ![this is fine](/static/images/this-is-fine.png)
 
@@ -134,7 +134,7 @@ I did run into some technical limitations when configuring and executing these t
 
  2) **Memory Limitations:** After moving from my laptop to an n1-standard-1 instance as the testing client, the more demanding tests caused K6 to run out of memory (`fatal error: runtime: out of memory`). Moving to an n1-standard-8 (30GB memory) solved this.
 
- 3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to manage at once. Testing on multiple VMs in parallel solved this (and allowed me to add the "Distributed" D to the title of this article 🤓...), but increasing the open file limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
+ 3) **Unix Resource Limits:** Because each request group makes multiple HTTP requests, the final test with 1600 target virtual users surpasses the [default maximum number of open files](https://k6.io/docs/misc/fine-tuning-os#user-resource-limits) allowed by the OS for a single process to manage at once. Using multiple test client VMs in parallel solved this, but increasing the open file limit with `ulimit -n <NEW_LARGER_LIMIT>` is the approach I ended up using.
 
 ## (Aside) Total Costs
 
