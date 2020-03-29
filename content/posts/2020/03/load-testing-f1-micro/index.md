@@ -31,10 +31,10 @@ categories: [
   - [Site Setup](#site-setup)
   - [K6 Performance Testing Framework](#k6-performance-testing-framework)
   - [Replicating Current Peak](#replicating-current-peak)
-    - [Key Takeaways:](#key-takeaways)
+    - [Key Takeaways](#key-takeaways)
   - [Ramping It Up!](#ramping-it-up)
     - [Virtual Users and Server Load](#virtual-users-and-server-load)
-  - [Snags Along the Way:](#snags-along-the-way)
+  - [Snags Along the Way](#snags-along-the-way)
 - [(Aside) Total Costs](#aside-total-costs)
 - [Conclusions](#conclusions)
 
@@ -95,7 +95,7 @@ K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to 
     vus_max....................: 1       min=1 max=1
 ```
 
-#### Key Takeaways:
+#### Key Takeaways
 
 - All requests returned successfully (`Status: 200 OK`)
 - The request duration ranged from 13ms to 213ms
@@ -126,7 +126,7 @@ These were the two most informative plots, but all of the data and code to gener
 {{< img-link "images/binder.png" "https://mybinder.org/v2/gh/sidpalas/f1-micro-caddy-benchmark/master?filepath=plotting-load-test-results.ipynb" >}}
 {{< link "https://mybinder.org/v2/gh/sidpalas/f1-micro-caddy-benchmark/master?filepath=plotting-load-test-results.ipynb" >}}
 
-### Snags Along the Way:
+### Snags Along the Way
 
 I did run into some technical limitations when configuring and executing these tests. Here are the main issues and how I overcame them:
 
