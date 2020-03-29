@@ -67,6 +67,8 @@ Here is a summary of the configuration:
 
 To perform the load test I used [k6.io](https://k6.io/), an open source performance testing framework designed for building automated tests with a straightforward javascript config file. It uses the concept of "virtual users" (VUs) which in [their words](https://k6.io/docs/getting-started/running-k6#adding-more-vus) are "glorified, parallel `while(true)` loops" to load test a site. 
 
+{{< img-link "images/k6-video-thumbnail.png" "https://www.youtube.com/watch?v=brasMBAezJY" "Want to learn more about k6? Watch this video!" >}}
+
 ### Replicating Current Peak
 
 First, I created a script to approximate the load that the two HN posts brought. The peak hour had 1443 page views, or 0.4 pageviews/second. To account for the load not being constant across the entire hour, I rounded this up to 1 pageview/second.
