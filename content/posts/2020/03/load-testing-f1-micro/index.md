@@ -15,7 +15,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** I used the [K6](https://k6.io/) performance testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy web server](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
+**TL;DR:** I used the [K6](https://k6.io/) load testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy web server](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
 
 ![this is fine](/static/images/this-is-fine.png)
 
