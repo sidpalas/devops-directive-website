@@ -67,7 +67,7 @@ Here is a summary of the configuration:
 
 To perform the load test I used [k6.io](https://k6.io/), an open source performance testing framework designed for building automated tests with a straightforward javascript config file. It uses the concept of "virtual users" (VUs) which in [their words](https://k6.io/docs/getting-started/running-k6#adding-more-vus) are "glorified, parallel `while(true)` loops" to load test a site. 
 
-{{< img-link "images/k6-video-thumbnail.png" "https://www.youtube.com/watch?v=brasMBAezJY" "Want to learn more about k6? Watch this video!" >}}
+{{< img-link "images/k6-video-thumbnail.png" "https://www.youtube.com/watch?v=brasMBAezJY" "Want to learn more about K6? Watch this video!" >}}
 
 ### Replicating Current Peak
 
