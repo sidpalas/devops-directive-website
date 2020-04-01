@@ -8,7 +8,7 @@ headless: true
 - [- About]({{< ref "/about" >}})
 - [- Articles]({{< ref "/posts" >}})
 - [- YouTube]({{< ref "/youtube" >}})
-<!-- - [- Resources]({{< ref "/resources" >}}) -->
+- [- Resources]({{< ref "/resources" >}})
 
 
 
