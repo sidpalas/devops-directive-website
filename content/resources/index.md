@@ -1,8 +1,7 @@
 ---
-title: "YouTube"
+title: "Resources"
 bookToc: true
 bookComments: false
-draft: true
 ---
 
 # Resources
