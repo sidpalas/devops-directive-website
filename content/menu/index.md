@@ -14,9 +14,9 @@ headless: true
 
 **Other places to find me:**
 
-<a href="https://twitter.com/sidpalas?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @sidpalas</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <a target="_blank" href="https://www.linkedin.com/in/sid-palas"><img src="https://static-exp1.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_93x21_v2.png" alt="LinkedIn"></a>
 
-<!-- <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script> -->
+<a href="https://twitter.com/sidpalas?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @sidpalas</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
 
