@@ -13,6 +13,9 @@ SectionPagesMenu = "main"
   category = "categories"
   tag = "tags"
 
+[markup.goldmark.renderer]
+unsafe= true
+
 [params]
   youtube = "https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA"
   linkedin = "https://www.linkedin.com/in/sid-palas-971b2329/"

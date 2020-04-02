@@ -15,6 +15,7 @@ While I plan to do my part in producing such content, this page is meant to serv
 ### Code + Documentation:
 - [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/examples/)
 - [Kubernetes the Hard Way (Kelsey Hightower)](https://github.com/kelseyhightower/kubernetes-the-hard-way)
+- [awesome-k6 repo (A curated list of resources on automated load- and performance testing using k6)](https://github.com/k6io/awesome-k6)
 
 ### Written:
 - [Google Code Labs](https://codelabs.developers.google.com/) (Some are still in hello world territory though...)
