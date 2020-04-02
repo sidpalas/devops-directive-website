@@ -6,7 +6,7 @@ bookComments: false
 
 # Resources
 
-One of my reasons for starting DevOps Directive is a shortage of high quality examples and instructional content that go beyond an initial hello world implementation.
+One of my reasons for starting DevOps Directive is a the feeling that there is a shortage of high quality examples and instructional content that go beyond an initial hello world implementation.
 
 {{< img "images/draw-an-owl.png" "I think you may have skipped a step...">}}
 
