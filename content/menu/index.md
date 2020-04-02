@@ -12,7 +12,7 @@ headless: true
 
 --- 
 
-**Other places to find me:**
+**Other Places to Find Me:**
 
 <a target="_blank" href="https://www.linkedin.com/in/sid-palas"><img src="https://static-exp1.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_93x21_v2.png" alt="LinkedIn"></a>
 
