@@ -20,6 +20,7 @@ While I plan to do my part in producing such content, this page is meant to serv
 ### Written:
 - [Google Code Labs](https://codelabs.developers.google.com/) (Some are still in hello world territory though...)
 - [RealPython.com DevOps Tutorials](https://realpython.com/tutorials/devops/)
+- [Making Servers Work: A Practical Guide to Linux System Administration](https://www.digitalocean.com/community/curriculums/making-servers-work-a-practical-guide-to-linux-system-administration)
 
 ### Video:
 - [The Linux Basics Course: Beginner to Sysadmin, Step by Step (tutoriaLinux YouTube Channel)](https://www.youtube.com/watch?v=bju_FdCo42w&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK)
