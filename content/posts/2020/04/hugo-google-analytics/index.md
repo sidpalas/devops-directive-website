@@ -11,7 +11,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** If using Google Analytics for tracking, by default most Hugo themes load the script even when running locally. This causes a bunch of bogus page views when writing a new article. Using an environment variable is an easy way to fix this.
+**TL;DR:** If using Google Analytics, most Hugo themes load the tracking script even when running locally. This causes a bunch of bogus page views when writing a new article. Using an environment variable is an easy way to fix this.
 
 ![DevOps Symbols](/static/images/bogus-google-analytics.png)
 *Whoops... that's me visiting my site on localhost*
