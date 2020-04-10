@@ -20,26 +20,22 @@ categories: [
 
 ---
 
-To solve this, find where in the theme the following template is being used:
+To solve this, take advantage of the fact that Hugo allows for specifying multiple configuration files. In this case create a separate "production" `config.toml` file without the `googleAnalytics` code specified and rearrange the directory structure as follows:
 
 ```
-{{- template "_internal/google_analytics_async.html" . -}}
+├── config
+|   ├── _default
+|   │   └── config.toml
+|   └── production
+|       └── config.toml
 ```
 
-and wrap it in a conditional that checks whether the `HUGO_ENV` environment variable is set to `"Production"`:
+When serving locally with `hugo serve` the config in _default will be used, but when generating the site with `hugo`, Hugo will default to the production configuration.
 
-```
-{{ if eq (getenv "HUGO_ENV") "production"}}
-  {{- template "_internal/google_analytics_async.html" . -}}
-{{ end }}
-```
+If you do want to test the production configuration locally, you can specify the environment via a command flag:
 
-This way if you run your server locally with `$ hugo server` it will not get triggered. Wherever you build your site for production make sure to set that environment variable like so:
+`hugo serve --environment production`
 
-```
-HUGO_ENV=production hugo 
-```
-
-For the DevOps Directive site, the hugo build step actually happens within a GCP cloud build pipeline, so I set the environment variable inside the DockerFile for that build step which can [be seen here](https://github.com/sidpalas/cloud-builder-hugo/blob/0dc33337e4432414c0ea35ed445e87851e1cdd3c/Dockerfile#L11).
+The full documentation for this feature can be found on the [gohugo.io website](https://gohugo.io/getting-started/configuration/#configuration-directory).
 
 I hope that helps anyone who encounters the same situation!
