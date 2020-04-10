@@ -12,6 +12,12 @@ bookComments: false
 
 ## Videos:
 
+### **2020-04-09:** [5 YouTube Channels EVERY DevOps Engineer Should Subscribe To!](https://www.youtube.com/watch?v=7NU-DjMYeyk)
+
+{{< youtube 7NU-DjMYeyk >}}
+
+---
+
 ### **2020-03-29:** [Website Performance + Load Testing with K6 (k6.io) in 5 MINUTES!](https://www.youtube.com/watch?v=MF2gMZ5aDBQ)
 
 {{< youtube brasMBAezJY >}}
