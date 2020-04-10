@@ -24,10 +24,10 @@ To solve this, take advantage of the fact that Hugo allows for specifying multip
 
 ```
 ├── config
-|   ├── _default
-|   │   └── config.toml
-|   └── production
-|       └── config.toml
+│   ├── _default
+│   │   └── config.toml
+│   └── production
+│       └── config.toml
 ```
 
 When serving locally with `hugo serve` the config in _default will be used, but when generating the site with `hugo`, Hugo will default to the production configuration.
