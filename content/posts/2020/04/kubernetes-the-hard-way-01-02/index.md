@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes the Hard Way Deep Dive -- 01 & 02 (System Set Up)"
-date: 2020-03-12T13:39:41-08:00
+date: 2020-04-12T13:39:41-08:00
 bookToc: false
 tags: [
   "Kubernetes"
@@ -9,7 +9,6 @@ categories: [
   "Deep Dive",
   "Tutorial"
 ]
-draft: true
 ---
 
 **TL;DR:** Setting up GCP account, and installing various software prerequisites (`gcloud`, `tmux`, `cfssl` and `kubectl`)

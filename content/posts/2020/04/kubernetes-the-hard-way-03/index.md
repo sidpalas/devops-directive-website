@@ -1,6 +1,6 @@
 ---
-title: "Kubernetes the Hard Way -- 03 (Provisioning Compute Resources)"
-date: 2020-03-13T14:39:41-08:00
+title: "Kubernetes the Hard Way Deep Dive -- 03 (Provisioning Compute Resources)"
+date: 2020-04-13T14:39:41-08:00
 bookToc: false
 tags: [
   "Kubernetes"
@@ -9,13 +9,11 @@ categories: [
   "Deep Dive",
   "Tutorial"
 ]
-draft: true
 ---
  
-**TL;DR:** Lorem Ipsum
+**TL;DR:** Setting up a Virtual Private Cloud (network), configuring firewall rules, and provisioning the Compute Engine virtual machine instances!
 
-**KTHW Lessons:**
-- [03-compute-resources.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/03-compute-resources.md)
+**KTHW Lesson:** [03-compute-resources.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/03-compute-resources.md)
 
 ![GCP product logos](/static/images/gcp-k8s-resources.png)
 
@@ -54,7 +52,7 @@ This subnet mask denotes that the first 3 octets `10.240.0.` will be the same ac
 
 For a more in depth look at Network ID's and Subnet Masks, this YouTube video is a great resource:
 
-{{< img-link "images/cidr-video.png" "https://www.youtube.com/watch?v=XQ3T14SIlV4" >}}
+{{< youtube XQ3T14SIlV4 >}}
 
 ### Firewall Rules 
 

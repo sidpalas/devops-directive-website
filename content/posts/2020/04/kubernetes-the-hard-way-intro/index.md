@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes the Hard Way Deep Dive -- Intro"
-date: 2020-03-11T12:39:41-08:00
+date: 2020-04-11T12:39:41-08:00
 bookToc: false
 tags: [
   "Kubernetes"
@@ -9,7 +9,6 @@ categories: [
   "Deep Dive",
   "Tutorial"
 ]
-draft: true
 ---
 
 **TL;DR:** This is the introduction to a series of posts in which I will work through Kelsey Hightower's [Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way), explaining key concepts in detail along the way.
