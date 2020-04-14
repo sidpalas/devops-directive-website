@@ -3,7 +3,8 @@ title: "Kubernetes the Hard Way Deep Dive -- 03 (Provisioning Compute Resources)
 date: 2020-04-13T14:39:41-08:00
 bookToc: false
 tags: [
-  "Kubernetes"
+  "Kubernetes",
+  "KTHW"
 ]
 categories: [
   "Deep Dive",

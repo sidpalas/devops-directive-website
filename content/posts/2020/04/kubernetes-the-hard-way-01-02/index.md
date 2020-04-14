@@ -3,7 +3,8 @@ title: "Kubernetes the Hard Way Deep Dive -- 01 & 02 (System Set Up)"
 date: 2020-04-12T13:39:41-08:00
 bookToc: false
 tags: [
-  "Kubernetes"
+  "Kubernetes",
+  "KTHW"
 ]
 categories: [
   "Deep Dive",

@@ -3,7 +3,8 @@ title: "Kubernetes the Hard Way Deep Dive -- Intro"
 date: 2020-04-11T12:39:41-08:00
 bookToc: false
 tags: [
-  "Kubernetes"
+  "Kubernetes",
+  "KTHW"
 ]
 categories: [
   "Deep Dive",
