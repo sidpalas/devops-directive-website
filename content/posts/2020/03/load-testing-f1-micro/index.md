@@ -75,24 +75,24 @@ First, I created a script to approximate the load that the two HN posts brought.
 
 K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests for things like the Google Analytics script. The full K6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
 
-```
-    check_failure_rate.........: 0.00%   ✓ 0   ✗ 138
-    checks.....................: 100.00% ✓ 414 ✗ 0  
-    data_received..............: 66 MB   549 kB/s
-    data_sent..................: 219 kB  1.8 kB/s
-    group_duration.............: avg=873.64ms min=850.89ms med=864.69ms max=1.13s    p(90)=891.35ms p(95)=908.24ms
-    http_req_blocked...........: avg=81.77µs  min=156ns    med=446ns    max=133.52ms p(90)=861ns    p(95)=1.42µs  
-    http_req_connecting........: avg=7.06µs   min=0s       med=0s       max=11.69ms  p(90)=0s       p(95)=0s      
-    http_req_duration..........: avg=26.89ms  min=12.6ms   med=23.11ms  max=213.29ms p(90)=38.19ms  p(95)=47.38ms 
-    http_req_receiving.........: avg=726.31µs min=62.01µs  med=242.75µs max=29.96ms  p(90)=1.84ms   p(95)=2.41ms  
-    http_req_sending...........: avg=52.23µs  min=11.27µs  med=38.27µs  max=4.07ms   p(90)=106.59µs p(95)=115.18µs
-    http_req_tls_handshaking...: avg=72.85µs  min=0s       med=0s       max=120.64ms p(90)=0s       p(95)=0s      
-    http_req_waiting...........: avg=26.11ms  min=12.37ms  med=22.51ms  max=212.53ms p(90)=37.05ms  p(95)=45.32ms 
-    http_reqs..................: 1656    13.799982/s
-    iteration_duration.........: avg=873.71ms min=850.96ms med=864.75ms max=1.13s    p(90)=891.46ms p(95)=908.31ms
-    iterations.................: 137     1.141665/s
-    vus........................: 1       min=1 max=1
-    vus_max....................: 1       min=1 max=1
+```bash
+check_failure_rate.........: 0.00%   ✓ 0   ✗ 138
+checks.....................: 100.00% ✓ 414 ✗ 0  
+data_received..............: 66 MB   549 kB/s
+data_sent..................: 219 kB  1.8 kB/s
+group_duration.............: avg=873.64ms min=850.89ms med=864.69ms max=1.13s    p(90)=891.35ms p(95)=908.24ms
+http_req_blocked...........: avg=81.77µs  min=156ns    med=446ns    max=133.52ms p(90)=861ns    p(95)=1.42µs  
+http_req_connecting........: avg=7.06µs   min=0s       med=0s       max=11.69ms  p(90)=0s       p(95)=0s      
+http_req_duration..........: avg=26.89ms  min=12.6ms   med=23.11ms  max=213.29ms p(90)=38.19ms  p(95)=47.38ms 
+http_req_receiving.........: avg=726.31µs min=62.01µs  med=242.75µs max=29.96ms  p(90)=1.84ms   p(95)=2.41ms  
+http_req_sending...........: avg=52.23µs  min=11.27µs  med=38.27µs  max=4.07ms   p(90)=106.59µs p(95)=115.18µs
+http_req_tls_handshaking...: avg=72.85µs  min=0s       med=0s       max=120.64ms p(90)=0s       p(95)=0s      
+http_req_waiting...........: avg=26.11ms  min=12.37ms  med=22.51ms  max=212.53ms p(90)=37.05ms  p(95)=45.32ms 
+http_reqs..................: 1656    13.799982/s
+iteration_duration.........: avg=873.71ms min=850.96ms med=864.75ms max=1.13s    p(90)=891.46ms p(95)=908.31ms
+iterations.................: 137     1.141665/s
+vus........................: 1       min=1 max=1
+vus_max....................: 1       min=1 max=1
 ```
 
 #### Key Takeaways

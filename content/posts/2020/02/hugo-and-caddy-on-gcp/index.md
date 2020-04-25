@@ -90,15 +90,19 @@ Either option would be fine, but option 1 is nice for a small site because it en
 
 Bundling the site files into the container can be accomplished with a 2 line dockerfile.
 
-        FROM abiosoft/caddy:1.0.3
-        COPY ./public /srv
+```bash
+FROM abiosoft/caddy:1.0.3
+COPY ./public /srv
+```
 
 Here `./public` is the local directory where Hugo builds the site, and `/srv` is the directory within the container Caddy expects to find the files it is serving. The following 4 commands will build the site, build the container, and run the container:
 
-        export IMAGE_NAME=my-hugo-caddy-docker-image
-        hugo -D    # -D flag tells Hugo to build drafts 
-        docker build ./ --tag $IMAGE_NAME
-      	docker run -p 2015:2015 $IMAGE_NAME     
+```bash
+export IMAGE_NAME=my-hugo-caddy-docker-image
+hugo -D    # -D flag tells Hugo to build drafts 
+docker build ./ --tag $IMAGE_NAME
+docker run -p 2015:2015 $IMAGE_NAME     
+```
 
 The `-p` forwards the port from host system into container allowing us to connect to http://localhost:2015/ and that request will be forwarded into the container on port 2015 where Caddy is listening. 
 
@@ -114,7 +118,9 @@ If you are more comfortable working with the GCP web interface, that is perfectl
 
 **NOTE:** for any of the following commands `$PROJECT_ID` would need to be replaced with your GCP project id. I also like to explicitly pass the project ID into the commands to ensure they are executed in the correct location (Just in case I happened to have changed my default project configuration). 
 
-                export PROJECT_ID=my-awesome-project-1234
+```bash
+export PROJECT_ID=my-awesome-project-1234
+```
 
 ### 1) Enable Billing for the Project
 Even though the resources used here are included in the free tier, Google requires having a payment method on file. This is the one step I recommend doing via the console as the command line command is [still in alpha](https://cloud.google.com/sdk/gcloud/reference/alpha/billing):
@@ -125,29 +131,35 @@ https://console.cloud.google.com/billing/linkedaccount?project=$PROJECT_ID
 
 This is necessary to provision the VM and to be able to push container images.
 
-        gcloud services enable compute.googleapis.com --project=$PROJECT_ID
-	    gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
+```bash
+gcloud services enable compute.googleapis.com --project=$PROJECT_ID
+gcloud services enable containerregistry.googleapis.com --project=$PROJECT_ID
+```
 
 ### 3) Reserve a static IP address
 
 If the VM needs to restart (or if I wanted to move to a larger machine type), a static IP ensures it won't change unexpectedly and mess up DNS configuration.
 
-	gcloud compute addresses create my-site-external-ip \
-		--project=$PROJECT_ID \
-		--region=us-central1
+```bash
+gcloud compute addresses create my-site-external-ip \
+        --project=$PROJECT_ID \
+        --region=us-central1
+```
 
 ### 4) Add firewall rules
 
 By default Compute Engine VMs do not allow http or https traffic. Adding firewall rules allow those requests to make it to the webserver.
 
-    gcloud compute firewall-rules create default-allow-http \
-		--project=$PROJECT_ID \
-		--target-tags=http-server \
+```bash
+gcloud compute firewall-rules create default-allow-http \
+        --project=$PROJECT_ID \
+        --target-tags=http-server \
         --allow tcp:80
-	gcloud compute firewall-rules create default-allow-https \
-		--project=$PROJECT_ID \
-		--target-tags=https-server \
+gcloud compute firewall-rules create default-allow-https \
+        --project=$PROJECT_ID \
+        --target-tags=https-server \
         --allow tcp:443
+```
 
 The target-tags allow the VM configuration to utilize these rules.
 
@@ -155,13 +167,15 @@ The target-tags allow the VM configuration to utilize these rules.
 
 When creating the VM, the static IP and firewall rule tags are used to configure it:
 
-        gcloud compute instances create my-f1-micro-instance \
-            --project=$PROJECT_ID \
-            --zone=us-central1-a \
-            --machine-type=f1-micro \
-            --image=projects/cos-cloud/global/images/cos-69-10895-385-0 \
-            --address=my-site-external-ip \
-            --tags=http-server,https-server
+```bash
+gcloud compute instances create my-f1-micro-instance \
+        --project=$PROJECT_ID \
+        --zone=us-central1-a \
+        --machine-type=f1-micro \
+        --image=projects/cos-cloud/global/images/cos-69-10895-385-0 \
+        --address=my-site-external-ip \
+        --tags=http-server,https-server
+```
 
 This takes a few minutes to provision.
 
@@ -169,59 +183,73 @@ This takes a few minutes to provision.
 
 In order to configure my local Docker install to push images to google container registry I had to run:
 
-        gcloud auth configure-docker    
+```bash
+gcloud auth configure-docker    
+```
 
 In order for the Docker installed in container optimized OS running on the VM I had to run the following:
 
-        gcloud compute ssh my-f1-micro-instance \
-            --project=$PROJECT_ID \
-            --zone=us-central1-a -- \
-            docker-credential-gcr configure-docker
+```bash
+gcloud compute ssh my-f1-micro-instance \
+        --project=$PROJECT_ID \
+        --zone=us-central1-a -- \
+        docker-credential-gcr configure-docker
+```
 
 ### 7) Deploy
 
 Before deploying the site, I had to add a Caddyfile to the container image to configure the server. The default configuration will serve the site on port 2015 which is inaccessible on our VM (because my firewall rules only allow traffic on ports 80 and 443). The following will tell Caddy to serve on port 80 and accept requests from any domain ([documentation](https://caddyserver.com/v1/docs/http-caddyfile)):
 
-        # This test configuration will be replaced later when setting up HTTPS
-        :80 {
-        browse
-        log stdout
-        errors stdout
-        }
+```yaml
+# This test configuration will be replaced later when setting up HTTPS
+:80 {
+browse
+log stdout
+errors stdout
+}
+```
 
 I also updated the Dockerfile to copy this Caddyfile into the container image:
 
-        FROM abiosoft/caddy:1.0.3
-        COPY ./public /srv
+```bash
+FROM abiosoft/caddy:1.0.3
+COPY ./public /srv
 
-        # This environment variable gets used later during the container start up
-        # to accept the Let's Encrypt subscriber agreement (without requiring user input)
-        ENV ACME_AGREE=true 
-        COPY ./Caddyfile /etc/Caddyfile 
+# This environment variable gets used later during the container start up
+# to accept the Let's Encrypt subscriber agreement (without requiring user input)
+ENV ACME_AGREE=true 
+COPY ./Caddyfile /etc/Caddyfile 
+```
 
 With the configuration ready, I needed to get the container image into the google container registry by building, tagging, and then pushing it:
 
-        export IMAGE_NAME=my-hugo-caddy-docker-image
-        export IMAGE_TAG=incrementing-tag-001 # change this with each deploy to ensure latest image is used
-        docker build ./ --tag $IMAGE_NAME
-    	docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
-	    docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+```bash
+export IMAGE_NAME=my-hugo-caddy-docker-image
+export IMAGE_TAG=incrementing-tag-001 # change this with each deploy to ensure latest image is used
+docker build ./ --tag $IMAGE_NAME
+docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+```
 
 If the site is already running, it needs to be cleaned up before the new container can be deployed or else it would fail when trying to bind to the same host ports. This can be accomplished using:
 
-        gcloud compute ssh my-f1-micro-instance \
-            --project=$PROJECT_ID \
-            --zone=us-central1-a -- \
-            'docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq)'
+```bash
+gcloud compute ssh my-f1-micro-instance \
+        --project=$PROJECT_ID \
+        --zone=us-central1-a -- \
+        'docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq)'
+```
 
 Having to do this step is one downside to bundling the entire site into the container image, the site has to be down for a second or two while the new version starts up. If the site was mounted into the container, the server could keep running and the files could be copied onto the host filesystem with no downtime.
 
 Finally, we can issue a `docker run` to run the new container image:
 
-        gcloud compute ssh my-f1-micro-instance \
-                --project=$PROJECT_ID \
-                --zone=us-central1-a -- \
-                'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG'
+```bash
+gcloud compute ssh my-f1-micro-instance \
+        --project=$PROJECT_ID \
+        --zone=us-central1-a -- \
+        'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG'
+```
 
 **NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, this will allow the certificate files to persist across container redeploys, avoiding extra requests to Let's Encrypt which could lead to being rate limited.
 
@@ -237,9 +265,11 @@ I even scripted the whole process so that it takes less than 5 minutes:
 
 The final element of the setup is to point a domain to the IP address which I accomplished with the following settings:
 
-        Name      Type   TTL     Data
-        @         A      1h      123.456.78.90
-        www       CNAME  1h      my-awesome-domain.com.
+```bash
+Name      Type   TTL     Data
+@         A      1h      123.456.78.90
+www       CNAME  1h      my-awesome-domain.com.
+```
 
 (The CNAME record maps the www subdomain to the primary domain without www)
 
@@ -247,12 +277,14 @@ The final element of the setup is to point a domain to the IP address which I ac
 
 The final element of the setup is to enable https within Caddy. This can be accomplished by modifying the `Caddyfile` to include the domains and an email address for the TLS configuration:
 
-        my-awesome-domain.com www.my-awesome-domain.com {
-                tls my-email-address@domain.com
-                browse
-                log stdout
-                errors stdout
-        }
+```bash
+my-awesome-domain.com www.my-awesome-domain.com {
+        tls my-email-address@domain.com
+        browse
+        log stdout
+        errors stdout
+}
+```
 
 After redeploying and waiting for the DNS settings to propagate I was able to access my site and bask in the glory of the https connection symbol!
 

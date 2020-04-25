@@ -50,7 +50,7 @@ Because my goal is to achieve a low-cost solution, I wanted to do a quick calcul
 {{< img "images/mba-power.png" >}}
 
 Pricing Estimate:
-```
+```bash
   10 (W) 
 x 1/1000 (W/kW) 
 x 24 (hrs/day) 
@@ -66,7 +66,7 @@ x 0.2 ($/kWh)
 
 Because the MacBook Air is not designed to be used in this configuration, it is necessary to disable sleep using the power management settings (`pmset`) command line utility. The following commands will make the time to sleep infinite as well as prevent sleeping when there is no display connected:
 
-```
+```bash
 sudo pmset -a sleep 0; 
 sudo pmset -a disablesleep 1
 ```
@@ -89,49 +89,53 @@ In order for `kubectl` commands to make their way to the Minikube cluster, it is
 
 When executing the `minikube start` command on the server system, a kubectl context called 'minikube' is added to the kubectl configuration file @ `~/.kube/config`:
 
-    apiVersion: v1
-    clusters:
-    - cluster:
-        certificate-authority: <PATH-TO-CONFIG>/.minikube/ca.crt
-        server: https://192.168.99.100:8443
-      name: minikube
-    contexts:
-    - context:
-        cluster: minikube
-        user: minikube
-      name: minikube
-    current-context: "minikube"
-    kind: Config
-    preferences: {}
-    users:
-    - name: minikube
-      user:
-        client-certificate: <PATH-TO-CONFIG>/.minikube/client.crt
-        client-key: <PATH-TO-CONFIG>/.minikube/client.key
+```yaml
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: <PATH-TO-CONFIG>/.minikube/ca.crt
+    server: https://192.168.99.100:8443
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    user: minikube
+  name: minikube
+current-context: "minikube"
+kind: Config
+preferences: {}
+users:
+- name: minikube
+  user:
+    client-certificate: <PATH-TO-CONFIG>/.minikube/client.crt
+    client-key: <PATH-TO-CONFIG>/.minikube/client.key
+```
 
 This configuration needs to be copied onto the client machine (along with the `client.crt` and `client.key` files).
 
 I copied those files to `<PATH-TO-CONFIG>/.minikube-macbook-air` on the client system and updated the kubectl configuration as follows:
 
-    apiVersion: v1
-    clusters:
-    - cluster:
-        insecure-skip-tls-verify: true
-        server: https://<INTERNAL-NETWORK-IP>:51928
-      name: minikube-macbook-air
-    contexts:
-    - context:
-        cluster: minikube-macbook-air
-        user: minikube-macbook-air
-      name: minikube-macbook-air
-    current-context: "minikube-macbook-air"
-    kind: Config
-    preferences: {}
-    users:
-    - name: minikube-macbook-air
-      user:
-        client-certificate: <PATH-TO-CONFIG>/.minikube-macbook-air/client.crt
-        client-key: <PATH-TO-CONFIG>/.minikube-macbook-air/client.key
+```yaml
+apiVersion: v1
+clusters:
+- cluster:
+    insecure-skip-tls-verify: true
+    server: https://<INTERNAL-NETWORK-IP>:51928
+  name: minikube-macbook-air
+contexts:
+- context:
+    cluster: minikube-macbook-air
+    user: minikube-macbook-air
+  name: minikube-macbook-air
+current-context: "minikube-macbook-air"
+kind: Config
+preferences: {}
+users:
+- name: minikube-macbook-air
+  user:
+    client-certificate: <PATH-TO-CONFIG>/.minikube-macbook-air/client.crt
+    client-key: <PATH-TO-CONFIG>/.minikube-macbook-air/client.key
+```
 
 This can either be inserted as a context within the primary `.kube/config` file or stored as a separate configuration and used by setting the `KUBECONFIG` environment variable ([documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable))
 

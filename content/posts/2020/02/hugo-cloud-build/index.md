@@ -65,8 +65,10 @@ The content files were there, but I realized that It wasn't being rendered prope
 
 In an attempt to solve this, I adding a step to the build pipeline to grab the submodule files using:
 
-    git submodule init
-    git submodule update
+```bash
+git submodule init
+git submodule update
+```
 
 but Cloud Builds triggered from GitHub don't have access to the `.git` directory within the repo and these commands will fail. The best workaround I could find was to mirror the GitHub repo into a Cloud Source Repository. This is already getting more complicated than I had hoped, but the show must go on!
 
@@ -76,7 +78,9 @@ At this point I had arrived what I thought was a viable plan that I just needed 
 
 **NOTE:** The commands that follow use $PROJECT_ID and other template variables that should reflect the relevant project and values.
 
-    export PROJECT_ID=my-awesome-project-1234
+```bash
+export PROJECT_ID=my-awesome-project-1234
+```
 
 #### Video Walkthrough
 
@@ -92,37 +96,45 @@ As noted above, I needed to mirror the GitHub repo for my website into a Cloud S
 
 In order to use Cloud Build I had to enable the cloud build api using:
 
-  	gcloud services enable cloudbuild.googleapis.com --project=$PROJECT_ID
+```bash
+gcloud services enable cloudbuild.googleapis.com --project=$PROJECT_ID
+```
 
 #### 3) Add IAM Roles for Cloud Build Service Account
 
 When the Cloud Build API is enabled, a service account of the format `projectNumber@cloudbuild.gserviceaccount.com` is granted some IAM roles, but for this build pipeline the service account also needs the following two roles:
 
-    Compute Instance Admin (v1)
-    Service Account User
+```bash
+Compute Instance Admin (v1)
+Service Account User
+```
 
 which I accomplished with the following commands:
 
-    gcloud projects add-iam-policy-binding $PROJECT_ID \
-      --member serviceAccount:$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")@cloudbuild.gserviceaccount.com \
-      --role roles/compute.instanceAdmin.v1
-    gcloud projects add-iam-policy-binding $PROJECT_ID \
-      --member serviceAccount:$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")@cloudbuild.gserviceaccount.com \
-      --role roles/iam.serviceAccountUser
+```bash
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")@cloudbuild.gserviceaccount.com \
+  --role roles/compute.instanceAdmin.v1
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")@cloudbuild.gserviceaccount.com \
+  --role roles/iam.serviceAccountUser
+```
 
 #### 4) Creating Cloud Build Trigger
 
 With all of the prerequisite configurations in place, it was then time to create the Cloud Build trigger:
 
-    export IMAGE_NAME=my-hugo-caddy-docker-image
-    export INSTANCE_NAME=my-f1-micro-instance
-    export ZONE=us-central1-a
-    gcloud beta builds triggers create cloud-source-repositories \
-      --project=$PROJECT_ID \
-      --repo=my-cloud-source-repo-mirroring-a-github-repo \
-      --branch-pattern=master \
-      --build-config=cloudbuild.yaml \
-      --substitutions=_IMAGE_NAME=$IMAGE_NAME,_SSH_STRING=$USER@$INSTANCE_NAME,_ZONE=$ZONE,_HOME=/home/$USER
+```bash
+export IMAGE_NAME=my-hugo-caddy-docker-image
+export INSTANCE_NAME=my-f1-micro-instance
+export ZONE=us-central1-a
+gcloud beta builds triggers create cloud-source-repositories \
+  --project=$PROJECT_ID \
+  --repo=my-cloud-source-repo-mirroring-a-github-repo \
+  --branch-pattern=master \
+  --build-config=cloudbuild.yaml \
+  --substitutions=_IMAGE_NAME=$IMAGE_NAME,_SSH_STRING=$USER@$INSTANCE_NAME,_ZONE=$ZONE,_HOME=/home/$USER
+```
 
 The `--substitutions` represent template variables that get used in the pipeline definition as will become apparent below.
 
@@ -140,57 +152,67 @@ Below I have broken down this pipeline into its 6 steps:
 
 As mentioned above, one of the initial challenges using Cloud Build was it failing to get the files associated with the Hugo theme because they are located in a git submodule. The following uses the git cloud-builders image to initialize and update the git submodules, resulting in the theme files being available for future steps:
 
-    steps:
-    - name: 'gcr.io/cloud-builders/git'
-      entrypoint: 'bash'
-      args:
-      - -c
-      - |
-        git submodule init
-        git submodule update
+```bash
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    git submodule init
+    git submodule update
+```
 
 #### 2) Build the Hugo Site
 
 The whole reason for needing a build step is that only the content source files are version controlled (not the generated site files). This step runs the Hugo generator. I couldn't find a publicly available container image which was compatible with Cloud Build, so I created my own (based on [this example](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/hugo)) and posted it to DockerHub: https://hub.docker.com/r/sidpalas/cloud-builder-hugo.
 
-    # build hugo site
-    - name: 'sidpalas/cloud-builder-hugo:0.64.1'
+```bash
+# build hugo site
+- name: 'sidpalas/cloud-builder-hugo:0.64.1'
+```
 
 #### 3) Build + Push the Caddy Container Image
 
 This step builds the website container image and pushes it to Google Container Registry. It uses the COMMIT_SHA (which is populated automatically by Cloud Build based on the triggering commit) to tag the image.
 
-    - name: 'gcr.io/cloud-builders/docker'
-      # Overriding entrypoint to allow for running two docker commands
-      entrypoint: 'bash'
-      args: 
-        - -c
-        - |
-          docker build -t gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA . &&
-          docker push gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
+```bash
+- name: 'gcr.io/cloud-builders/docker'
+  # Overriding entrypoint to allow for running two docker commands
+  entrypoint: 'bash'
+  args: 
+    - -c
+    - |
+      docker build -t gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA . &&
+      docker push gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
+```
 
 #### 4) Stop Running Containers & Start New Container
 
 With the new container available in GCR, the pipeline stops any running containers and then starts the new container using a gcloud container image to execute a `gcloud ssh` command on the VM.
 
-    - name: 'gcr.io/cloud-builders/gcloud'
-      args:
-      - compute
-      - ssh
-      - $_SSH_STRING
-      - --project=$PROJECT_ID
-      - --zone=$_ZONE
-      - --
-      - docker container stop $$(docker container ls -aq) && 
-      - docker container rm $$(docker container ls -aq) &&
-      - docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
-  
+```bash
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - compute
+  - ssh
+  - $_SSH_STRING
+  - --project=$PROJECT_ID
+  - --zone=$_ZONE
+  - --
+  - docker container stop $$(docker container ls -aq) && 
+  - docker container rm $$(docker container ls -aq) &&
+  - docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $_HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA
+```
+
 #### NOTE: Pushing Images 
 
 Normally, the build configuration would have an `images:` section specifying which container images should be pushed to GCR. Because step #3 already tagged and pushed the container image, it is **not** necessary to include an images section:
 
-    images:
-    - 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
+```bash
+images:
+- 'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$COMMIT_SHA'
+```
 
 ### Closing Thoughts
 

@@ -22,7 +22,7 @@ categories: [
 
 To solve this, take advantage of the fact that Hugo allows for specifying multiple configuration files. In this case create a separate "production" `config.toml` file without the `googleAnalytics` code specified and rearrange the directory structure as follows:
 
-```
+```bash
 ├── config
 │   ├── _default
 │   │   └── config.toml
@@ -34,7 +34,9 @@ When serving locally with `hugo serve` the config in _default will be used, but 
 
 If you do want to test the production configuration locally, you can specify the environment via a command flag:
 
-`hugo serve --environment production`
+```bash
+hugo serve --environment production
+```
 
 The full documentation for this feature can be found on the [gohugo.io website](https://gohugo.io/getting-started/configuration/#configuration-directory).
 
