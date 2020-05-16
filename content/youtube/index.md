@@ -12,6 +12,12 @@ bookComments: false
 
 ## Videos:
 
+### **2020-05-07:** [Build a CI/CD Pipeline for Google App Engine Site Using CircleCI [Full Walkthrough]](https://www.youtube.com/watch?v=e7K8oUUyv-Q)
+
+{{< youtube v=e7K8oUUyv-Q >}}
+
+---
+
 ### **2020-05-07:** [Build a Password Protected Website with Google App Engine + Identity Aware Proxy [Full Walkthrough]](https://www.youtube.com/watch?v=jPMWWLf9W-Q)
 
 {{< youtube jPMWWLf9W-Q >}}
