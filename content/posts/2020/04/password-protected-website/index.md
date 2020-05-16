@@ -56,7 +56,7 @@ Netlify does offer [password protection](https://docs.netlify.com/visitor-access
 
 Historically, implementing authentication would require adding significant complexity to our website's architecture. We would need a database of some kind to store the (hashed) passwords and server side processing to check if a login attempt is valid. We would also probably need to add some form of email confirmation/password reset functionality because people are [terrible at remembering their passwords](https://xkcd.com/936/). All of the sudden the one hour task of getting the documentation site set up just ballooned into something that could take weeks to accomplish!
 
-Luckily, we don't actually need to take on all of this complexity ourselves. A standard called [OAuth](https://en.wikipedia.org/wiki/OAuth) allows us to leverage the authentication system of another entity (for example, Google) to provided "secure delegated access" to our content. 
+Luckily, we don't actually need to take on all of this complexity ourselves. A standard called [OAuth](https://en.wikipedia.org/wiki/OAuth) allows us to leverage the authentication system of another entity (for example, Google) to provide"secure delegated access" to our content. 
 
 ---
 ## Solution (IAP + App engine)
