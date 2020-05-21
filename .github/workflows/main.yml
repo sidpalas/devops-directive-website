@@ -1,0 +1,17 @@
+name: uptime-monitor
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  ping_site:
+    runs-on: ubuntu-latest
+    name: Ping the site
+    steps:
+    - name: Check the site
+      id: hello
+      uses: srt32/uptime@v0.2
+      with:
+        url-to-hit: "https://devopsdirective.com/lsidhfwihf"
+        expected-statuses: "200"
