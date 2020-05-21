@@ -2,7 +2,7 @@ name: Uptime Monitor
 on:
   schedule:
     # Maximum frequency is every 5th minute
-    - cron: '*/10 * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   ping_site:
