@@ -1,5 +1,4 @@
-name: uptime-monitor
-
+name: Uptime Monitor
 on:
   schedule:
     # Maximum frequency is every 5th minute
@@ -8,10 +7,9 @@ on:
 jobs:
   ping_site:
     runs-on: ubuntu-latest
-    name: Ping the site
+    name: Uptime Check
     steps:
-    - name: Check the site
-      id: hello
+    - name: Ping Site
       uses: srt32/uptime@v0.2
       with:
         url-to-hit: "https://devopsdirective.com/"
