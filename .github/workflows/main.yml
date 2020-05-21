@@ -1,10 +1,6 @@
 on:
-  push:
-    branches:
-    - master
-# on:
-#   schedule:
-#     - cron: '*/5 * * * *'
+  schedule:
+    - cron: '* * * * *'
 
 jobs:
   ping_site:
@@ -15,5 +11,5 @@ jobs:
       id: hello
       uses: srt32/uptime@v0.2
       with:
-        url-to-hit: "https://devopsdirective.com"
+        url-to-hit: "https://devopsdirective.com/lsidhfwihf"
         expected-statuses: "200"
