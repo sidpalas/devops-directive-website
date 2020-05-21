@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Check the site
       id: hello
-      uses: srt32/uptime@0.2
+      uses: srt32/uptime@v0.2
       with:
         url-to-hit: "https://devopsdirective.com"
         expected-statuses: "200"
