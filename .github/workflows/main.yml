@@ -3,7 +3,7 @@ name: uptime-monitor
 on:
   schedule:
     # Maximum frequency is every 5th minute
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   ping_site:
@@ -14,5 +14,5 @@ jobs:
       id: hello
       uses: srt32/uptime@v0.2
       with:
-        url-to-hit: "https://devopsdirective.com/lsidhfwihf"
+        url-to-hit: "https://devopsdirective.com/"
         expected-statuses: "200"
