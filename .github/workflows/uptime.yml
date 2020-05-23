@@ -2,8 +2,8 @@ name: Uptime Monitor
 
 on:
   schedule:
-    # Run every 10 minutes
-    - cron: '*/10 * * * *'
+    # Run at midnight UTC
+    - cron: '0 0 * * *'
 
 jobs:
   ping_site:
