@@ -12,6 +12,10 @@ bookComments: false
 
 ## Videos:
 
+### **2020-05-07:** [Set up GitHub Actions as a Free Website Uptime Monitor in Just 3 Minutes!](https://www.youtube.com/watch?v=o5ZLWpvus50)
+
+{{< youtube o5ZLWpvus50 >}}
+
 ### **2020-05-07:** [Build a CI/CD Pipeline for Google App Engine Site Using CircleCI [Full Walkthrough]](https://www.youtube.com/watch?v=e7K8oUUyv-Q)
 
 {{< youtube e7K8oUUyv-Q >}}
