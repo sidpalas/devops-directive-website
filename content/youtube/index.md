@@ -12,6 +12,10 @@ bookComments: false
 
 ## Videos:
 
+### **2020-05-07:** [Doing Stupid Stuff with GitHub Actions! (FIVE Actions Implemented and Explained)](https://www.youtube.com/watch?v=w7-ugGAYVCo)
+
+{{< youtube w7-ugGAYVCo >}}
+
 ### **2020-05-07:** [Set up GitHub Actions as a Free Website Uptime Monitor in Just 3 Minutes!](https://www.youtube.com/watch?v=o5ZLWpvus50)
 
 {{< youtube o5ZLWpvus50 >}}
