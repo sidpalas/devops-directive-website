@@ -12,15 +12,23 @@ bookComments: false
 
 ## Videos:
 
-### **2020-05-07:** [Doing Stupid Stuff with GitHub Actions! (FIVE Actions Implemented and Explained)](https://www.youtube.com/watch?v=w7-ugGAYVCo)
+### **2020-06-20:** [Is this the FASTEST way to learning a new programing language?! (Clément M. parody 😎)](https://www.youtube.com/watch?v=TYY6y8Nwo-o)
+
+{{< youtube TYY6y8Nwo-o >}}
+
+### **2020-06-12:** [The HIDDEN COST of Machine Learning!](https://youtu.be/F2NpGbbZ6s8)
+
+{{< youtube F2NpGbbZ6s8 >}}
+
+### **2020-06-05:** [Doing Stupid Stuff with GitHub Actions! (FIVE Actions Implemented and Explained)](https://www.youtube.com/watch?v=w7-ugGAYVCo)
 
 {{< youtube w7-ugGAYVCo >}}
 
-### **2020-05-07:** [Set up GitHub Actions as a Free Website Uptime Monitor in Just 3 Minutes!](https://www.youtube.com/watch?v=o5ZLWpvus50)
+### **2020-05-23:** [Set up GitHub Actions as a Free Website Uptime Monitor in Just 3 Minutes!](https://www.youtube.com/watch?v=o5ZLWpvus50)
 
 {{< youtube o5ZLWpvus50 >}}
 
-### **2020-05-07:** [Build a CI/CD Pipeline for Google App Engine Site Using CircleCI [Full Walkthrough]](https://www.youtube.com/watch?v=e7K8oUUyv-Q)
+### **2020-05-16:** [Build a CI/CD Pipeline for Google App Engine Site Using CircleCI [Full Walkthrough]](https://www.youtube.com/watch?v=e7K8oUUyv-Q)
 
 {{< youtube e7K8oUUyv-Q >}}
 
