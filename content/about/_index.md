@@ -35,7 +35,7 @@ Topics include:
 - Cloud Providers
 - Career Advancement
 
-I am not an expert in all of these topics. In fact I'm not an expert in ANY of these topics. That being said, I am good at [Reading the Docs](https://en.wikipedia.org/wiki/RTFM), asking the right questions, and explaining what I learn along the way.
+I am not an expert in all of these topics. That being said, I am good at [Reading the Docs](https://en.wikipedia.org/wiki/RTFM), asking the right questions, and explaining what I learn along the way.
 
 Join me!
 

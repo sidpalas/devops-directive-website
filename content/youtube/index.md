@@ -12,7 +12,11 @@ bookComments: false
 
 ## Videos:
 
-### **2020-06-20:** [Is this the FASTEST way to learning a new programing language?! (Clément M. parody 😎)](https://www.youtube.com/watch?v=TYY6y8Nwo-o)
+### **2020-06-28:** [Jr Developer's Portfolio Reviewed By A Senior Silicon Valley Software Engineer.](https://www.youtube.com/watch?v=3W3QbpZlB7M)
+
+{{< youtube 3W3QbpZlB7M >}}
+
+### **2020-06-20:** [Is this the FASTEST way to learning a new programing language?! (Clément M. parody 😎)](https://www.youtube.com/watch?v=3W3QbpZlB7M)
 
 {{< youtube TYY6y8Nwo-o >}}
 
