@@ -12,6 +12,11 @@ bookComments: false
 
 ## Videos:
 
+### **2020-07-10:** [Deploying your FIRST Web App as a Junior Developer!](https://www.youtube.com/watch?v=zX1dol4j2JA)
+
+{{< youtube zX1dol4j2JA >}}
+
+
 ### **2020-06-28:** [Jr Developer's Portfolio Reviewed By A Senior Silicon Valley Software Engineer.](https://www.youtube.com/watch?v=3W3QbpZlB7M)
 
 {{< youtube 3W3QbpZlB7M >}}
