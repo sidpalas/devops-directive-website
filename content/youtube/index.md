@@ -12,6 +12,11 @@ bookComments: false
 
 ## Videos:
 
+### **2020-07-20:** [How to debug Docker containers! (Python + VSCode)](https://www.youtube.com/watch?v=qCCj7qy72Bg)
+
+{{< youtube qCCj7qy72Bg >}}
+
+
 ### **2020-07-10:** [Deploying your FIRST Web App as a Junior Developer!](https://www.youtube.com/watch?v=zX1dol4j2JA)
 
 {{< youtube zX1dol4j2JA >}}
