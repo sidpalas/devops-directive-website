@@ -13,7 +13,7 @@ categories: [
 ]
 ---
  
-**TL;DR:** DevOps doesn't have to be all work and no play. I build 5 stupid (but fun!) GitHub actions... because *why not*?
+**TL;DR:** DevOps doesn't have to be all work and no play. I built 5 stupid (but fun!) GitHub actions... because *why not*?
 
 The full code for these actions can all be found in this **[GitHub repo](https://github.com/sidpalas/stupid-actions)**. I encourage you to fork and/or add issues/PRs with impractical actions of your own!
 
@@ -49,7 +49,7 @@ Enough preamble, let's get to the stupid stuff!
 
 ### 1 -- Holiday Reminder
 
-Starting simple, in this first action, I advantage of the fact that actions can be triggered on a cron schedule to create the following 10 line action:
+Starting simple with this first action, I take advantage of the fact that actions can be triggered on a cron schedule to create the following 10 line action:
 
 ```yaml
 name: holiday-reminder-happy-new-year
@@ -97,11 +97,11 @@ fi;
 
 ### 3 -- Exponential Action
 
-The previous action has the potential to run indefinitely, but only one instance executes at a time, so it could be stopped manually if necessary. What if instead of triggering a single instance of itself it triggered multiple instead? This way, if it got out of hand there would be no stopping the exponential growth 😰. That sounds dumb... lets do it!
+The previous action has the potential to run indefinitely, but only one instance executes at a time, so it could be stopped manually if necessary. What if instead, the action triggered itself multiple times? This way, if it got out of hand there would be no stopping the exponential growth 😰. That sounds dumb... lets do it!
 
-The file counter trick from before no longer works because multiple actions would be executing in parallel, all trying to modify and commit simultaneously. Instead, I decided to store the state in Git tags!
+The file counter trick from before no longer works because multiple actions would be executing in parallel, all trying to modify and commit simultaneously causing conflicts. Instead, I stored the state in Git tags!
 
-I create the base tag as a random UUID and then append the current iteration to prevent collisions. The current implementation only support single digits, but if I make it past 9 iterations of exponential growth, that means I messed up 💀.
+A random UUID is used as the base for the tag and the current iteration is appended to prevent collisions. The current implementation only support single digits, but if I make it past 9 iterations of exponential growth that means I messed up 💀.
 
 ```bash
 function increment_tag_push {
@@ -166,7 +166,7 @@ With the team starting to get a bit burnt out having to commit code constantly j
 
 {{< img "images/tic-tac-toe.png" "Command line interface + board state file" >}}
 
-I wanted to try out the [Javascript runtime](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action), so I built the game with Node, persisting the board state in a text file. Since the point of this game was to learn about actions, the computer's strategy is random but this has the added benefit of letting the human win, boosting morale 🤔.
+I wanted to try out the [Javascript runtime](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action), so I built the game with Node, persisting the board state in a text file. Since the point of this game was to learn about actions the computer's strategy is random, but this has the added benefit of letting the human win, boosting morale 🤔.
 
 ## Closing Thoughts
 
