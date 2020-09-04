@@ -12,6 +12,18 @@ bookComments: false
 
 ## Videos:
 
+### **2020-08-31:** [Docker Compose in 6 minutes! Mongo, Express, React, Node (MERN) Application Tutorial](https://www.youtube.com/watch?v=0B2raYYH2fE)
+
+{{< youtube 0B2raYYH2fE >}}
+
+### **2020-08-17:** [How to secure your Docker containers! (5 practical tips with example Dockerfiles! 🐳)](https://www.youtube.com/watch?v=JE2PJbbpjsM)
+
+{{< youtube JE2PJbbpjsM >}}
+
+### **2020-08-10:** [How to make smaller Docker containers (including multi-stage build demo!)](https://www.youtube.com/watch?v=2KzDMD5Qk2k)
+
+{{< youtube 2KzDMD5Qk2k >}}
+
 ### **2020-07-20:** [How to debug Docker containers! (Python + VSCode)](https://www.youtube.com/watch?v=qCCj7qy72Bg)
 
 {{< youtube qCCj7qy72Bg >}}
