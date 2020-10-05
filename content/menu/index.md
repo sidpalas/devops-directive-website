@@ -14,7 +14,8 @@ headless: true
 
 **Other Places to Find Me:**
 
-<a target="_blank" href="https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA"><img src="/static/images/youtube-logo.png" alt="YouTube"></a>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div class="g-ytsubscribe" data-channelid="UC4MdpjzjPuop_qWNAvR23JA" data-layout="full" data-count="default"></div>
 
 <a target="_blank" href="https://www.linkedin.com/in/sid-palas"><img src="https://static-exp1.licdn.com/scds/common/u/images/logos/linkedin/logo_linkedin_93x21_v2.png" alt="LinkedIn"></a>
 
