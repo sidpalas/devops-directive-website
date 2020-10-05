@@ -9,6 +9,6 @@ bookComments: false
 
 ---
 
-## A place for DevOps and Cloud infrastructure content.
+## A place for DevOps and Cloud infrastructure content!
 
 ### Recent Posts:

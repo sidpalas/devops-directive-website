@@ -1,0 +1,29 @@
+name: Build and deploy (GCS)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Hugo Actions
+        uses: srt32/hugo-action@v0.0.3
+        env:
+          HUGO_ENV: production
+           
+      - name: Authenticate on GCS
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '270.0.0'
+          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        
+      - name: Rsync Site
+        run: make rsync-site
