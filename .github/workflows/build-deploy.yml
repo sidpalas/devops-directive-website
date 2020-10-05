@@ -23,5 +23,5 @@ jobs:
           PROJECT_ID: devops-directive-project
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: -m rsync -h "Cache-Control:private, max-age=0, no-transform" -d -r public gs://devopsdirective.com/
+          args: -m rsync -d -r public gs://devopsdirective.com/
           cli: gsutil
