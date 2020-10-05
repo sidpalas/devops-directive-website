@@ -3,7 +3,7 @@ name: Build and deploy (GCS)
 on:
   push:
     branches:
-      - gcs-github-action
+      - master
 
 jobs:
   build_deploy:
@@ -16,6 +16,8 @@ jobs:
 
       - name: Hugo Actions
         uses: srt32/hugo-action@v0.0.3
+        env:
+          HUGO_ENV: production
       
       - name: Google Cloud Platform (GCP) CLI - gcloud
         uses: actions-hub/gcloud@307.0.0
