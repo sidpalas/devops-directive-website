@@ -29,4 +29,4 @@ create-bucket:
 	gsutil iam ch allUsers:legacyObjectReader gs://$(DOMAIN)
 
 rsync-site:
-	gsutil -m rsync -d -r public gs://$(DOMAIN)
+	gsutil -m -h "Cache-Control:no-cache, max-age=0" rsync -d -r public gs://$(DOMAIN)
