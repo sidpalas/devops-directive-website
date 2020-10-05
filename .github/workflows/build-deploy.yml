@@ -17,7 +17,11 @@ jobs:
       - name: Hugo Actions
         uses: srt32/hugo-action@v0.0.3
       
-      - name: Echo some stuff
-        run: |
-          ls
-          ls public
+      - name: Google Cloud Platform (GCP) CLI - gcloud
+        uses: actions-hub/gcloud@307.0.0
+        env:
+          PROJECT_ID: devops-directive-project
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        with:
+          args: -m rsync -h "Cache-Control:private, max-age=0, no-transform" -d -r public gs://devopsdirective.com/
+          cli: gsutil
