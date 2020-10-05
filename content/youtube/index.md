@@ -12,6 +12,18 @@ bookComments: false
 
 ## Videos:
 
+### **2020-10-05:** [Port Knocking (Network Security Technique) Explained and Demoed in 5 Minutes!](https://www.youtube.com/watch?v=IBR3oLqGBj4)
+
+{{< youtube IBR3oLqGBj4 >}}
+
+### **2020-09-28:** [Using Google Cloud Storage + Cloudflare to Host a Static Website for just PENNIES PER MONTH!](https://www.youtube.com/watch?v=sUr4GBzEqNs)
+
+{{< youtube sUr4GBzEqNs >}}
+
+### **2020-09-28:** [Docker Compose on Google's Container Optimized OS!](https://www.youtube.com/watch?v=GoOB8YoRSbA)
+
+{{< youtube GoOB8YoRSbA >}}
+
 ### **2020-08-31:** [Docker Compose in 6 minutes! Mongo, Express, React, Node (MERN) Application Tutorial](https://www.youtube.com/watch?v=0B2raYYH2fE)
 
 {{< youtube 0B2raYYH2fE >}}
