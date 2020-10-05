@@ -19,18 +19,10 @@ jobs:
         uses: srt32/hugo-action@v0.0.3
         env:
           HUGO_ENV: production
-      
-#       - name: Google Cloud Platform (GCP) CLI - gcloud
-#         uses: actions-hub/gcloud@307.0.0
-#         env:
-#           PROJECT_ID: devops-directive-project
-#           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-#         with:
-#           args: -m rsync -d -r public gs://devopsdirective.com/
-#           cli: gsutil
-      
+           
       - name: Authenticate on GCS
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '270.0.0'
           service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        run: make rsync-site
