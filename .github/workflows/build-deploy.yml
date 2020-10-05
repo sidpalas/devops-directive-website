@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - gcs-github-action 
 
 jobs:
   build_deploy:
