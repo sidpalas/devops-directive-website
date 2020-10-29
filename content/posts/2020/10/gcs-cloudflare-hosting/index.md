@@ -10,7 +10,6 @@ tags: [
 categories: [
   "Tutorial"
 ]
-draft: true
 ---
 
 **TL;DR:** I used to host my site on a [virtual machine running Caddy webserver]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}}), but recently migrated it to Google Cloud Storage with Cloudflare in front of it as a proxy/cache/SSL termination solution. It's pretty awesome! 😎
