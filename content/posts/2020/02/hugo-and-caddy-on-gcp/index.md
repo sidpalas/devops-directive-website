@@ -23,7 +23,8 @@ Alternate title: **Just use [Netlify](https://www.netlify.com/)**.
 
 --- 
 
-EDIT: In October 2020 I updated the hosting of this site to use [GCS + Cloudflare]({{< ref "/posts/2020/10/gcs-cloudflare-hosting/index.md" >}})
+EDIT: In October 2020 I updated the hosting of this site to use GCS + Cloudflare.
+
 <!--more--> 
 
 --- 
