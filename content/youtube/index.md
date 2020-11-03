@@ -12,6 +12,10 @@ bookComments: false
 
 ## Videos:
 
+### **2020-11-02:** [How to Properly Manage Application Secrets (5 LEVELS)](https://www.youtube.com/watch?v=7NTFZoDpzbQ)
+
+{{< youtube 7NTFZoDpzbQ >}}
+
 ### **2020-10-05:** [Port Knocking (Network Security Technique) Explained and Demoed in 5 Minutes!](https://www.youtube.com/watch?v=IBR3oLqGBj4)
 
 {{< youtube IBR3oLqGBj4 >}}

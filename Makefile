@@ -19,7 +19,7 @@ build-site:
 
 .PHONY: run-hugo-server
 run-hugo-server:
-	hugo server -D
+	hugo server -D --disableFastRender
 
 ### GCS
 
@@ -29,4 +29,4 @@ create-bucket:
 	gsutil iam ch allUsers:legacyObjectReader gs://$(DOMAIN)
 
 rsync-site:
-	gsutil -m -h "Cache-Control:no-cache, max-age=0" rsync -d -r public gs://$(DOMAIN)
+	gsutil -m rsync -d -r public gs://$(DOMAIN)

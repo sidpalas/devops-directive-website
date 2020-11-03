@@ -74,9 +74,9 @@ The first step is to purchase a domain. Any domain provider will do, but purchas
 
 ## 2) Verify Ownership
 
-Before creating a bucket associated to a particular domain, Google requires you to verify ownership of the domain.
+Before creating a GCS bucket associated to a particular domain, Google requires you to verify ownership of the domain.
 
-There are a few method to verify your ownership of the domain. If purchased through google domains, this can be done through the [Webmaster Central page](https://www.google.com/webmasters/verification/home), otherwise you can use a [DNS text record](https://cloud.google.com/identity/docs/verify-domain-txt) 
+There are a few method to verify your ownership of the domain. If purchased through Google Domains, this can be done through the [Webmaster Central page](https://www.google.com/webmasters/verification/home), otherwise you can use a [DNS text record](https://cloud.google.com/identity/docs/verify-domain-txt). 
 
 ## 3) Create GCS bucket
 
@@ -105,7 +105,7 @@ These will be use in place of the default nameservers provided by the domain pro
 
 ### CNAME Record
 
-Because the website content will be served from a google managed server at `c.storage.googleapis.com` a CNAME record setting that maps the custom domain to that:
+Because the website content will be served from a Google managed server at `c.storage.googleapis.com` a CNAME record setting that maps the custom domain to that:
 
 ```
 Type   |  Name                 |  Content
