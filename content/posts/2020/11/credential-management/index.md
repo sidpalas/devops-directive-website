@@ -142,7 +142,7 @@ The biggest shortfall with this approach is that rotating can still be a hassle,
 
 To acheive fully enlightened credential management, we can move to a model of auto-generating credentials for each use case and only allow them to be active for a short period of time. This way if there is a leak, it greatly minimizes the potential blast radius.
 
-The best implementation of this concept I have seen is [HashiCorp's Vault] (https://www.vaultproject.io/). You can configure Vault so that whenever an application (or individual) needs access to a resource such as a database. It will create a new username/password and handle deleting those credentials after a pre-specified period of time.
+The best implementation of this concept I have seen is [HashiCorp's Vault](https://www.vaultproject.io/). You can configure Vault so that whenever an application (or individual) needs access to a resource such as a database. It will create a new username/password and handle deleting those credentials after a pre-specified period of time.
 
 There is a great talk on YouTube by Bench Accounting showcasing this approach in action (https://www.youtube.com/watch?v=Y0SdwZDy20Q), along with the corresponding Github Repo (https://github.com/BenchLabs/talk-vault-ephemeral-credentials).
 
