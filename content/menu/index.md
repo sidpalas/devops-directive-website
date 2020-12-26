@@ -33,7 +33,7 @@ headless: true
 <div id="mc_embed_signup">
 <form action="https://devopsdirective.us10.list-manage.com/subscribe/post?u=841e51a2aeecaabe97c42e973&amp;id=da9004568f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL">Subscribe for weekly digests!</label>
+	<label for="mce-EMAIL">Subscribe for content notifications!</label>
 	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_841e51a2aeecaabe97c42e973_da9004568f" tabindex="-1" value=""></div>

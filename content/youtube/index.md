@@ -12,6 +12,26 @@ bookComments: false
 
 ## Videos:
 
+### **2020-12-22:** [An Intro to DevOps - Live Coding a Sample DevOps Workflow](https://www.youtube.com/watch?v=zDuTMwDp04g)
+
+{{< youtube zDuTMwDp04g >}}
+
+### **2020-12-07:** [How to START FREELANCING in 2021 (Interview with Bradley Jacobs, CEO @ mylance.co)](https://www.youtube.com/watch?v=UKvECwtVfcA)
+
+{{< youtube UKvECwtVfcA >}}
+
+### **2020-12-01:** [Styling Subscriber Images with TensorFlow! (5000 Subscriber Celebration 🎉🎉🎉)](https://www.youtube.com/watch?v=XGcKdsgMrIY)
+
+{{< youtube XGcKdsgMrIY >}}
+
+### **2020-11-17:** [DO NOT Buy the New Apple Silicon M1 Macs... (as a Software Engineer)](https://www.youtube.com/watch?v=ji9j-JWbgAo)
+
+{{< youtube ji9j-JWbgAo >}}
+
+### **2020-11-11:** [GitHub Super Linter in 5 minutes! (Run Local + GitHub Actions)](https://www.youtube.com/watch?v=fL8de_m8imY)
+
+{{< youtube fL8de_m8imY >}}
+
 ### **2020-11-02:** [How to Properly Manage Application Secrets (5 LEVELS)](https://www.youtube.com/watch?v=7NTFZoDpzbQ)
 
 {{< youtube 7NTFZoDpzbQ >}}
