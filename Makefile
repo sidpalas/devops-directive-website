@@ -1,5 +1,6 @@
 # Project config variables
-SITE_NAME := devops-directive
+PROJECT_ID:=devops-directive-project
+SITE_NAME:=devops-directive
 DOMAIN:=devopsdirective.com
 
 ### Local Operations

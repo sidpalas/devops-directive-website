@@ -12,6 +12,18 @@ bookComments: false
 
 ## Videos:
 
+### **2021-01-17:** [How to Build Multi-Architecture Docker Images with BuildX | Deploy containers to x86 and ARM!](https://www.youtube.com/watch?v=hWSHtHasJUI)
+
+{{< youtube hWSHtHasJUI >}}
+
+### **2021-01-17:** [Introduction to AWS in 10 minutes! (Ten services you need to know to get started)](https://www.youtube.com/watch?v=J-w4CJLeAfc)
+
+{{< youtube J-w4CJLeAfc >}}
+
+### **2020-12-27:** [Deploying a MERN Application (with Docker, Atlas, and Digital Ocean!)](https://www.youtube.com/watch?v=DftsReyhz2Q)
+
+{{< youtube DftsReyhz2Q >}}
+
 ### **2020-12-22:** [An Intro to DevOps - Live Coding a Sample DevOps Workflow](https://www.youtube.com/watch?v=zDuTMwDp04g)
 
 {{< youtube zDuTMwDp04g >}}
