@@ -12,6 +12,22 @@ bookComments: false
 
 ## Videos:
 
+### **2021-04-08:** [TINY CONTAINER CHALLENGE: Building the World's Smallest Docker Container!](https://www.youtube.com/watch?v=VG8rZIE8ET8)
+
+{{< youtube VG8rZIE8ET8 >}}
+
+### **2021-03-22:** [STOP WATCHING MY VIDEOS.](https://www.youtube.com/watch?v=oQ7R1eGDdTY)
+
+{{< youtube oQ7R1eGDdTY >}}
+
+### **2021-03-15:** [Kubernetes Secrets in 5 Minutes!](https://www.youtube.com/watch?v=cQAEK9PBY8U)
+
+{{< youtube cQAEK9PBY8U >}}
+
+### **2021-03-01:** [Are AWS Certifications Worth It? 🤔 [Featuring Dylan Albertazzi]](https://www.youtube.com/watch?v=1ev7z4zmRKw)
+
+{{< youtube 1ev7z4zmRKw >}}
+
 ### **2021-01-17:** [How to Build Multi-Architecture Docker Images with BuildX | Deploy containers to x86 and ARM!](https://www.youtube.com/watch?v=hWSHtHasJUI)
 
 {{< youtube hWSHtHasJUI >}}
