@@ -1,5 +1,5 @@
 ---
-title: "Tiny Container Image"
+title: "Tiny Container Challenge: Building a 6kB Containerized HTTP Server!"
 date: 2021-04-14T15:16:04-07:00
 bookToc: false
 tags: [
