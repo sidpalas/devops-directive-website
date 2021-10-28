@@ -18,9 +18,9 @@ jobs:
         uses: srt32/hugo-action@v0.0.3
         env:
           HUGO_ENV: production
-           
+        
       - name: Authenticate on GCS
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@master
         with:
           version: '270.0.0'
           service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
