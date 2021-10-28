@@ -17,9 +17,9 @@ My goal with DevOps Directive is to provide educational and entertaining (hopefu
 I will be exploring many different types of media, including:
 - [Video Tutorials](https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA)
 - [Open Source Projects](https://github.com/sidpalas)
-- Interviews
-- Live & Recorded Screen Casts
-- Internet Office Hours
+- [Interviews](https://www.youtube.com/watch?v=vTNv2RKa5LU&list=PLFzuOAehUPHFMFSe7OeKLecTcbjydSUHa)
+- [Live & Recorded Screen Casts](https://www.youtube.com/watch?v=DftsReyhz2Q)
+- [Internet Office Hours](https://www.youtube.com/watch?v=qGRRndZCKpE&list=PLFzuOAehUPHHymg68r0DNdc05rJqbD4Yg)
 - [Interpretive Song and Dance](https://www.youtube.com/watch?v=oHg5SJYRHA0)
 
 Topics include:
