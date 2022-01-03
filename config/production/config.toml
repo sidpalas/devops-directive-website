@@ -1,5 +1,5 @@
 googleAnalytics = "UA-24019779-3"
-disqusShortname = "devops-directive"
+# disqusShortname = "devops-directive"
 
 baseURL = "https://devopsdirective.com/"
 languageCode = "en-us"
