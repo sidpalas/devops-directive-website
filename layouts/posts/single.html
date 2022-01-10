@@ -8,13 +8,13 @@
     {{- .Content -}}
   </p>
 </article>
+{{ partial "docs/comment-box" .}}
 {{ template "social" . }}
 {{ end }}
 
 {{ define "toc" }}
   {{ partial "docs/toc" . }}
 {{ end }}
-
 
 {{ define "social" }}
   <!-- Sharingbutton Hacker News -->
