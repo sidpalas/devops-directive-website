@@ -1,7 +1,13 @@
 ---
 title: "Cloud Control Spectrum"
 date: 2022-04-10T10:49:47-04:00
-draft: false
+bookToc: false
+tags: [
+  "Cloud"
+]
+categories: [
+  "Comparison",
+]
 ---
 
 There are seemingly infinite ways to deploy web applications to the cloud:
@@ -13,7 +19,9 @@ There are seemingly infinite ways to deploy web applications to the cloud:
 - [⚙️ Managed Services](#️-managed-services)
 - [✨ Platform as a Service](#-platform-as-a-service)
 
-Which option is right for you?
+Which option is right for you? Read on to find out!
+
+<!--more--> 
 
 ---
 
