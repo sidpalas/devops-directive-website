@@ -14,6 +14,10 @@ create-site:
 	echo 'theme = "ananke"' >> config.toml
 	hugo new posts/test-post.md
 
+.PHONY: create-post
+create-post:
+	hugo new posts/2022/$(MONTH)/$(POST_NAME)
+
 .PHONY: build-site
 build-site:
 	HUGO_ENV=production hugo
