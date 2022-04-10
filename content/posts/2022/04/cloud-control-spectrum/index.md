@@ -1,5 +1,5 @@
 ---
-title: "Cloud Control Spectrum"
+title: "Cloud Control Spectrum: How Should I Deploy My Web Application?"
 date: 2022-04-10T10:49:47-04:00
 bookToc: false
 tags: [
