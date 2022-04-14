@@ -116,7 +116,7 @@ As you iterate on your platform, you will almost certainly start to push the bou
 
 ### Stage 5 (Optional): Inventing New Platform Building Blocks
 
-At a certain scale/complexity there might not be an existing tool/project and your custom scripts and glue code are no longer enough. At that point you might choose to building a new tool to fill the gap.
+At a certain scale/complexity, there might not be an existing tool/project and your custom scripts and glue code are no longer enough. At that point, you might choose to build a new tool to fill the gap.
 
 ### Stage 6: Full Internal Platform as a Service
 
