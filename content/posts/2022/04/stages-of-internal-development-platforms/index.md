@@ -37,7 +37,7 @@ categories: [
 
 ## What the Heck is an Internal Development Platform?
 
-What actually is an **Internal Developer Platform (IDP)**? it is the system that your organization uses to facilitate developing, deploying, and operating applications. The IDP defines how application developers create, modify, and test their applications, ideally in a self-service manner.
+An Internal Development Platform (IDP) is the system that your organization uses to facilitate developing, deploying, and operating applications. The IDP defines how application developers create, modify, and test their applications, ideally in a self-service manner.
 
 Instead of just handing application teams an AWS root account and saying **"have fun"**, IDPs seek to provide abstractions that enable those teams focus on building products, without needing to become DevOps/cloud experts!
 
