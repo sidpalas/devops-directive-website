@@ -41,6 +41,14 @@ An Internal Development Platform (IDP) is the system that your organization uses
 
 Instead of just handing application teams an AWS root account and saying **"have fun"**, IDPs seek to provide abstractions that enable those teams focus on building products, without needing to become DevOps/cloud experts!
 
+As outlined by {{< link "https://internaldeveloperplatform.org/core-components/" "internaldeveloperplatform.org" >}}, the 5 core components of an Internal development platform are:
+
+1. **Application Configuration Management:** Manage application configuration in a scalable and reliable way
+2. **Infrastructure Orchestration:** Integrate with your existing and future infrastructure
+3. **Environment Management:** Enable developers to create new environments whenever needed
+4. **Deployment Management:** Implement a Continuous Delivery or even Continuous Deployment (CD) approach
+5. **Role-Based Access Control:** Manage who can do what in a scalable way
+
 Everywhere I turn these days I see another article/talk about companies building internal development platforms on top of Kubernetes:
   - **2022-03:** {{< link "https://slack.engineering/applying-product-thinking-to-slacks-internal-compute-platform/" "Applying Product Thinking to Slack’s Internal Compute Platform" >}}
   - **2022-02:** {{< link "https://www.youtube.com/watch?v=j5i00z3QXyU" "DevOps MUST Build Internal Developer Platform (IDP)" >}}
