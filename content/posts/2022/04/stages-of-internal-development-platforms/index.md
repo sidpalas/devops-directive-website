@@ -106,9 +106,11 @@ Very early on you will come across scenarios where you want to have variants of 
 
 ### Stage 3: Initial Internal Developer Platform
 
-Eventually as the team and applications grow, creating bespoke definitions for each workload becomes unwieldy. To wrangle this complexity you will likely begin stitching together some collection of tools from the [CNCF ecosystem](https://landscape.cncf.io/) to help. 
+Eventually as the team and applications grow, creating bespoke definitions for each workload becomes unwieldy. To wrangle this complexity you will likely begin stitching together some collection of tools from the [CNCF ecosystem](https://landscape.cncf.io/) to help.
 
 Much of the work at this stage is selecting the tools that best suit your team's needs and configuring them to play nicely together. This is also the stage where you start to bake more control/opinions into the platform itself and you shape the application developer experience (for better for for worse).
+
+There are a number of companies and projects such as [backstage](https://backstage.io/), [humanitec](https://humanitec.com/), and [shipa](https://shipa.io/) that are attempting to help make rolling an IDP easier. It's worth evaluating these options to see if they will suit your need and/or for inspiration in designing your own.
 
 ### Stage 4: Extending Existing Platform Building Blocks
 
