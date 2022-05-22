@@ -57,7 +57,7 @@ Everywhere I turn these days I see another article/talk about companies building
 
 This concept is not actually new! {{< link "https://twitter.com/kelseyhightower" "Kelsey Hightower" >}}, {{< link "https://twitter.com/jbeda" "Joe Beda" >}} (and others) have been telling us that Kubernetes is a platform for building platforms since 2017!
 
-{{< img "images/kelsey-tweet.png" "It's pretty dope... but it's not still not the endgame">}}
+{{< img "images/kelsey-tweet.png" "It's pretty dope... but it's still not the endgame">}}
 
 {{< img-link "images/beda-video.png" "https://youtu.be/QQsq2Ny5a4A?t=1151" "\"How can we turn Kubernetes into a platform for building platforms?\"" >}}
 
