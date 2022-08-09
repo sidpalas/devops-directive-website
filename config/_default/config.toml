@@ -13,6 +13,10 @@ SectionPagesMenu = "main"
 [markup.goldmark.renderer]
 unsafe= true
 
+# Could add this if I wanted to remove dates from urls
+# [permalinks]
+# posts= "/:filename"
+
 [params]
   youtube = "https://www.youtube.com/channel/UC4MdpjzjPuop_qWNAvR23JA"
   linkedin = "https://www.linkedin.com/in/sid-palas-971b2329/"

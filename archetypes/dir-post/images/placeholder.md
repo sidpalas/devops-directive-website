@@ -1,0 +1,1 @@
+Placeholder file to ensure images dir gets created when running `hugo new -k=dir-post`

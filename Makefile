@@ -14,9 +14,17 @@ create-site:
 	echo 'theme = "ananke"' >> config.toml
 	hugo new posts/test-post.md
 
+POST_PATH=posts/$(shell date +%Y)/$(shell date +%m)/$(POST_NAME)
+
 .PHONY: create-post
 create-post:
-	hugo new posts/2022/$(MONTH)/$(POST_NAME)
+	hugo new $(POST_PATH)
+
+
+.PHONY: create-dir-post 
+create-dir-post:
+	hugo new -k=dir-post $(POST_PATH) 
+
 
 .PHONY: build-site
 build-site:
@@ -28,10 +36,25 @@ run-hugo-server:
 
 ### GCS
 
+.PHONY: create-bucket
 create-bucket:
 	gsutil mb -p $(PROJECT_ID) -b on gs://$(DOMAIN)
 	gsutil web set -m index.html -e 404.html gs://$(DOMAIN)
 	gsutil iam ch allUsers:legacyObjectReader gs://$(DOMAIN)
 
+.PHONY: rsync-site
 rsync-site:
 	gsutil -m rsync -d -r public gs://$(DOMAIN)
+
+### GITPOD
+
+HUGO_VERSION?=0.76.5
+HUGO_TAR_FILE:=hugo_extended_$(HUGO_VERSION)_Linux-64bit.tar.gz
+
+install-hugo-gitpod:
+	wget https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/$(HUGO_TAR_FILE)
+	tar -xf $(HUGO_TAR_FILE)
+	mv hugo /usr/local/bin/hugo
+
+run-hugo-server-gitpod:
+	hugo server -D --disableFastRender --baseURL=$(shell gp url 1313) --appendPort=false
