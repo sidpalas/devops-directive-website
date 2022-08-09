@@ -54,7 +54,8 @@ HUGO_TAR_FILE:=hugo_extended_$(HUGO_VERSION)_Linux-64bit.tar.gz
 install-hugo-gitpod:
 	wget https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/$(HUGO_TAR_FILE)
 	tar -xf $(HUGO_TAR_FILE)
-	mv hugo /usr/local/bin/hugo
+	mv hugo /workspace
+	rm $(HUGO_TAR_FILE)
 
 run-hugo-server-gitpod:
 	hugo server -D --disableFastRender --baseURL=$(shell gp url 1313) --appendPort=false

@@ -4,5 +4,5 @@
 
 tasks:
   - init: make install-hugo-gitpod
-
+  - before: printf 'export PATH="%s:$PATH"\n' "/workspace" >> $HOME/.bashrc && exit
 
