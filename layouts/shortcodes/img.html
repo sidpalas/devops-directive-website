@@ -1,6 +1,6 @@
 {{ $img := $.Page.Resources.GetMatch (.Get 0)}}
 {{ $caption := (.Get 1)}}
 <figure>
-	<img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}" />
+	<img src="{{ ( $img.Fit "650x500" ).RelPermalink }}" alt="{{ $img.Name }}" />
 	<figcaption style="font-style: italic">{{ $caption }}</figcaption>
 </figure>
