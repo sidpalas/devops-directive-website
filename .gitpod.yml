@@ -1,7 +1,7 @@
 
-tasks:
-  - before: printf 'export PATH="%s:$PATH"\n' "/workspace" >> $HOME/.bashrc
-  - init: ./gitpodinit.sh
+tasks: 
+  # Running during before since it moves file outside of /workspace
+  - before: ./gitpodinit.sh
 
 vscode:
   extensions:
