@@ -10,4 +10,4 @@ mv hugo /workspace
 rm ${HUGO_TAR_FILE}
 
 printf 'export PATH="%s:$PATH"\n' "/workspace" >> $HOME/.bashrc
-source $HOME/.bashrc
+export PATH="/workspace:$PATH"
