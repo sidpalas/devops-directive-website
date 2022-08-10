@@ -6,3 +6,4 @@ tasks:
 vscode:
   extensions:
     - znck.grammarly
+    - yzhang.markdown-all-in-one

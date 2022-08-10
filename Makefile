@@ -29,7 +29,9 @@ create-post: check-post-name
 
 .PHONY: create-dir-post 
 create-dir-post: check-post-name
+	git checkout -b $(POST_NAME)
 	hugo new -k=dir-post $(POST_PATH) 
+	code content/$(POST_PATH)/index.md
 
 
 .PHONY: build-site
