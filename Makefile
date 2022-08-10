@@ -14,15 +14,21 @@ create-site:
 	echo 'theme = "ananke"' >> config.toml
 	hugo new posts/test-post.md
 
+.PHONY: check-post-name
+check-post-name:
+ifndef POST_NAME
+	$(error POST_NAME is undefined)
+endif
+
 POST_PATH=posts/$(shell date +%Y)/$(shell date +%m)/$(POST_NAME)
 
 .PHONY: create-post
-create-post:
+create-post: check-post-name
 	hugo new $(POST_PATH)
 
 
 .PHONY: create-dir-post 
-create-dir-post:
+create-dir-post: check-post-name
 	hugo new -k=dir-post $(POST_PATH) 
 
 
@@ -47,15 +53,5 @@ rsync-site:
 	gsutil -m rsync -d -r public gs://$(DOMAIN)
 
 ### GITPOD
-
-HUGO_VERSION?=0.76.5
-HUGO_TAR_FILE:=hugo_extended_$(HUGO_VERSION)_Linux-64bit.tar.gz
-
-install-hugo-gitpod:
-	wget https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/$(HUGO_TAR_FILE)
-	tar -xf $(HUGO_TAR_FILE)
-	mv hugo /workspace
-	rm $(HUGO_TAR_FILE)
-
 run-hugo-server-gitpod:
 	hugo server -D --disableFastRender --baseURL=$(shell gp url 1313) --appendPort=false
