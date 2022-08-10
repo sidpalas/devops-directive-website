@@ -1,5 +1,6 @@
 
 tasks:
+  - before: printf 'export PATH="%s:$PATH"\n' "/workspace" >> $HOME/.bashrc
   - init: ./gitpodinit.sh
 
 vscode:
