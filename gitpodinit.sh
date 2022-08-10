@@ -8,6 +8,3 @@ wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_
 tar -xf ${HUGO_TAR_FILE}
 mv hugo /workspace
 rm ${HUGO_TAR_FILE}
-
-printf 'export PATH="%s:$PATH"\n' "/workspace" >> $HOME/.bashrc
-export PATH="/workspace:$PATH"
