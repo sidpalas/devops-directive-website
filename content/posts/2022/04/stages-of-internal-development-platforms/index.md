@@ -39,7 +39,7 @@ categories: [
 
 An Internal Development Platform (IDP) is the system that your organization uses to facilitate developing, deploying, and operating applications. The IDP defines how application developers create, modify, and test their applications, ideally in a self-service manner.
 
-Instead of just handing application teams an AWS root account and saying **"have fun"**, IDPs seek to provide abstractions that enable those teams focus on building products, without needing to become DevOps/cloud experts!
+Instead of just handing application teams an AWS root account and saying **"have fun"**, IDPs seek to provide abstractions that enable those teams to focus on building products, without needing to become DevOps/cloud experts!
 
 As outlined by {{< link "https://internaldeveloperplatform.org/core-components/" "internaldeveloperplatform.org" >}}, the 5 core components of an Internal development platform are:
 
@@ -63,18 +63,18 @@ This concept is not actually new! {{< link "https://twitter.com/kelseyhightower"
 
 ## Why am I hearing about this now?
 
-At this point you might ask, what is fueling this renaissance of companies building (and publicly talking about) Internal Developer Platforms? In my opinion it is driven by the rapid maturation of the cloud native tools that represent the building blocks for these types of platforms. This makes it feasible for smaller teams to build and support platforms that actually work and add business value.
+At this point you might ask, what is fueling this renaissance of companies building (and publicly talking about) Internal Developer Platforms? In my opinion, it is driven by the rapid maturation of the cloud-native tools that represent the building blocks for these types of platforms. This makes it feasible for smaller teams to build and support platforms that actually work and add business value.
 
-That being said, the {{< link "https://landscape.cncf.io/" "Cambrian explosion" >}} of cloud native tools is both a blessing and a curse. While it is more likely than ever that a tool exists which [somewhat] addresses your particular need, choosing between them and ensuring interoperability is becoming increasingly difficult! (more on this in a future post... {{< link "https://roamresearch.com/#/app/devopsdirective/page/xi2CaPv5i" "but you can find some raw thoughts here" >}}) 
+That being said, the {{< link "https://landscape.cncf.io/" "Cambrian explosion" >}} of cloud-native tools is both a blessing and a curse. While it is more likely than ever that a tool exists that somewhat addresses your particular need, choosing between them and ensuring interoperability is becoming increasingly difficult! (more on this in a future post... {{< link "https://roamresearch.com/#/app/devopsdirective/page/xi2CaPv5i" "but you can find some raw thoughts here" >}}) 
 
 ## Designing the Right IDP
 
-The size and complexity of the appropriate platform to suit your organization depends on a three main of factors:
+The size and complexity of the appropriate platform to suit your organization depends on three main factors:
   1. The number and nature of the applications it needs to support
   2. The size and skill set of the application development team(s)
   3. The size and skill set of the platform development team 
 
-Building an internal development process is generally an iterative process and ideally you will have some early adopter application developers willing to use it as soon as possible and provide feedback to ensure it is meeting their needs effectively.
+Building an internal development process is generally an iterative process and ideally, you will have some early adopter application developers willing to use it as soon as possible and provide feedback to ensure it is meeting their needs effectively.
 
 Below is a rough spectrum (scale intentionally vague) of the different stages an internal developer platform often exhibits within an organization. This is based on my experience working with teams as they build out these types of application platforms and from discussions with others doing the same.
 
@@ -88,9 +88,9 @@ For very small teams, you likely should avoid building your own platform entirel
   - [Heroku](https://www.heroku.com/)
   - [Cloud Foundry](https://www.cloudfoundry.org/)
   - [Render](https://render.com/)
-  - [App Engine](https://cloud.google.com/appengine)
-
-Eventually though, it is likely that either:
+  - [App Engine]
+  
+Eventually, though, it is likely that either:
   1. Your workloads no longer fit the constraints imposed by the PaaS 📦
   2. The PaaS pricing begins to hurt your wallet a bit too much 💸
 
@@ -106,15 +106,15 @@ Very early on you will come across scenarios where you want to have variants of 
 
 ### Stage 3: Initial Internal Developer Platform
 
-Eventually as the team and applications grow, creating bespoke definitions for each workload becomes unwieldy. To wrangle this complexity you will likely begin stitching together some collection of tools from the [CNCF ecosystem](https://landscape.cncf.io/) to help.
+Eventually, as the team and applications grow, creating bespoke definitions for each workload becomes unwieldy. To wrangle this complexity you will likely begin stitching together some collection of tools from the [CNCF ecosystem](https://landscape.cncf.io/) to help.
 
-Much of the work at this stage is selecting the tools that best suit your team's needs and configuring them to play nicely together. This is also the stage where you start to bake more control/opinions into the platform itself and you shape the application developer experience (for better for for worse).
+Much of the work at this stage is selecting the tools that best suit your team's needs and configuring them to play nicely together. This is also the stage where you start to bake more control/opinions into the platform itself and you shape the application developer experience (for better or for worse).
 
 There are a number of companies and projects such as [backstage](https://backstage.io/), [humanitec](https://humanitec.com/), and [shipa](https://shipa.io/) that are attempting to help make rolling an IDP easier. It's worth evaluating these options to see if they will suit your need and/or for inspiration in designing your own.
 
 ### Stage 4: Extending Existing Platform Building Blocks
 
-As you iterate on your platform, you will almost certainly start to push the boundaries of what existing tools can support or encounter use cases that aren't quite supported. In this case you may start to extend those tools (either via a wrapper or a fork) to meet your own needs.
+As you iterate on your platform, you will almost certainly start to push the boundaries of what existing tools can support or encounter use cases that aren't quite supported. In this case, you may start to extend those tools (either via a wrapper or a fork) to meet your own needs.
 
 ### Stage 5 (Optional): Inventing New Platform Building Blocks
 
@@ -122,7 +122,7 @@ At a certain scale/complexity, there might not be an existing tool/project and y
 
 ### Stage 6: Full Internal Platform as a Service
 
-At this point you have come full circle! While the platform will never be __complete__, a mature internal developer platform starts to look and feel a lot like the 3rd party PaaS you started with, except it has all the specific features your organization needs.
+At this point, you have come full circle! While the platform will never be __complete__, a mature internal developer platform starts to look and feel a lot like the 3rd party PaaS you started with, except it has all the specific features your organization needs.
 
 ## Go Forth and Conquer!
 
