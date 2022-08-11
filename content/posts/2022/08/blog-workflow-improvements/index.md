@@ -122,7 +122,7 @@ create-dir-post: check-post-name
 
 As you can see, it checks out a new git branch, creates a post using the directory-based archetype I set up, and opens the `index.md` file so I can start editing right away. No more fiddling with moving/renaming files, etc...
 
-## Finaly Thoughts
+## Final Thoughts
 
 I am hopeful that this new workflow will make it easier for me to write articles and therefore I will do so more frequently. Only time will tell! 🤞
 
