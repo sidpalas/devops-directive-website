@@ -16,8 +16,7 @@ categories: [
 
 I also recorded a video about this setup on **[YouTube](https://www.youtube.com/watch?v=sUr4GBzEqNs)**. ← Check out the video and subscribe if you are into this sort of thing 🙏
 
-![GCS Bucket Website](/static/images/gcs-site.png)
-*Does this count as serverless?*
+{{< img "images/gcs-site.png" "Does this count as serverless?" >}}
 
 <!--more--> 
 

@@ -17,7 +17,7 @@ categories: [
 
 **TL;DR:** Configuring Cloud Build to automatically handle Continuous Integration and Continuous Deployment for this site based on Git triggers ended up being a bit trickier than I would have expected.
 
-![logos](/static/images/hugo-cloud-build.png)
+{{< img "images/hugo-cloud-build.png" >}}
 
 <!--more--> 
 
@@ -36,7 +36,7 @@ Table of Contents:
   - [1) Initialize and Update the Submodules](#1-initialize-and-update-the-submodules)
   - [2) Build the Hugo Site](#2-build-the-hugo-site)
   - [3) Build + Push the Caddy Container Image](#3-build--push-the-caddy-container-image)
-  - [4) Stop Running Containers & Start New Container](#4-stop-running-containers--start-new-container)
+  - [4) Stop Running Containers \& Start New Container](#4-stop-running-containers--start-new-container)
   - [NOTE: Pushing Images](#note-pushing-images)
 - [Closing Thoughts](#closing-thoughts)
 

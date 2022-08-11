@@ -14,7 +14,7 @@ categories: [
 
 **TL;DR:** This is the introduction to a series of posts in which I will work through Kelsey Hightower's [Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way), explaining key concepts in detail along the way.
 
-![k8s logo](/static/images/kubernetes-horizontal.png)
+{{< img "images/kubernetes-horizontal.png" >}}
 
 <!--more--> 
 

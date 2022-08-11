@@ -12,7 +12,8 @@ categories: [
 
 **TL;DR** I set out to build the smallest container image that I could that was still able to do something useful. By taking advantage of multistage builds, the `scratch` base image, and a tiny assembly based http server, I was able to get it down to 6.32kB!
 
-![container-for-ants](/static/images/container-for-ants.png)
+{{< img "images/container-for-ants.png" >}}
+
 
 <!--more-->
 

@@ -19,7 +19,7 @@ The full code for these actions can all be found in this **[GitHub repo](https:/
 
 I also recorded a video about this project on **[YouTube](https://www.youtube.com/watch?v=w7-ugGAYVCo)**. ← Check out the video and subscribe if you are into this sort of thing 🙏
 
-![Whiteboard Screenshot](/static/images/stupid-actions.png)
+{{< img "images/stupid-actions.png" >}}
 
 <!--more--> 
 

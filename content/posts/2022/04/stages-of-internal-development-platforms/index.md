@@ -15,7 +15,8 @@ categories: [
 
 > ### You either die supporting raw Kubernetes manifests, or live long enough to see yourself build an internal developer platform. ~Anonymous
 
-![internal-development-platform](/static/images/internal-development-platform.jpeg)
+{{< img "images/internal-development-platform.jpeg" >}}
+
 
 <!--more-->
 

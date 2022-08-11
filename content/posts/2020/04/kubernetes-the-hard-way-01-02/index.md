@@ -18,7 +18,8 @@ categories: [
 - [01-prerequisites.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/01-prerequisites.md)
 - [02-client-tools.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/02-client-tools.md)
 
-![tmux 4 pane](/static/images/tmux-4pane.png)
+{{< img "images/tmux-4pane.png" >}}
+
 *Is this the Matrix?*
 
 <!--more--> 
@@ -27,7 +28,7 @@ categories: [
 **Table of Contents:**
 - [GCP + gcloud](#gcp--gcloud)
 - [tmux](#tmux)
-- [CFSSL & cfssljson](#cfssl--cfssljson)
+- [CFSSL \& cfssljson](#cfssl--cfssljson)
 - [kubectl](#kubectl)
 
 ## GCP + gcloud

@@ -13,7 +13,7 @@ categories: [
 
 **TL;DR:** I set up Minikube on an old (2012) MacBook Air and configured it to be able to connect from outside my home network so I would have an always-on Kubernetes cluster at home to experiment with.
 
-![macbook air](/static/images/macbook-air.jpg)
+{{< img "images/macbook-air.jpg" >}}
 
 *Photo Attribution: [flickr](https://flickr.com/photos/pahudson/5127789519/in/photolist-8P8gb8-afjVVd-sVaUtd-4vxyii-8PbmZQ-4vBEo3-4vxyGR-4vBEx9-4m6Uar-4Ykxb1-4vxysv-4xrcrc-5XtHJY-5Xpuee-5Xpuve-4m9FUL-9dUh84-5XpvMz-5XtHTq-66nicm-4Ygiht-4s33cu-5XtHrb-4YkxAy-8NuFUn-4YkxL9-4Ygi84-7daFrV-4C92kK-4YkM85-7dexwb-5XtJaL-7dexW7-7dexPG-5Xpwax-fA3EnA-5XtKSh-ea6KL6-coVFws-coVJSu-4ud9UZ-5QLfy1-7ViDVD-dfYj9B-68FXdw-68BHUH-68BHzM-68BHEk-68FWYo-68FXCf)*
 

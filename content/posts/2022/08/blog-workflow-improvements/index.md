@@ -13,7 +13,7 @@ draft: false
 
 **TL;DR:** I set up GitPod and improved the tooling for creating new posts. I am hoping that this reduces the activation energy for writing new posts significantly!
 
-![blog-workflow-improvements](/static/images/blog-workflow-new-life.jpg)
+{{< img "images/blog-workflow-new-life.jpg" >}}
 
 <!--more--> 
 
@@ -25,7 +25,7 @@ draft: false
   - [Content Management Systems](#content-management-systems)
   - [Containerized / Remote Dev Environment](#containerized--remote-dev-environment)
 - [Additional Tweaks](#additional-tweaks)
-- [Finaly Thoughts](#finaly-thoughts)
+- [Final Thoughts](#final-thoughts)
 
 
 ## Why Don't I Post here Frequently?

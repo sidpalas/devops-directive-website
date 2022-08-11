@@ -18,7 +18,7 @@ If you want to follow along with a site of your own, I have provided a working e
 
 *Note:* I have also seen [S3 + Lambda used to accomplish this](https://douglasduhaime.com/posts/s3-lambda-auth.html)
 
-![Docs Screenshot](/static/images/read-the-docs.png)
+{{< img "images/read-the-docs.png" >}}
 
 <!--more--> 
 

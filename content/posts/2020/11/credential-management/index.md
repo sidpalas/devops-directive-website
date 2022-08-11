@@ -15,7 +15,7 @@ categories: [
 
 There are always trade-offs when writing software, and in this case the tradeoff is between convenience and security. The ideal solution will establish convenient developer workflows while also protecting user data.
 
-![cosmic-brain-progression](/static/images/credential-management-meme.png)
+{{< img "images/credential-management-meme.png" >}}
 
 <!--more--> 
 

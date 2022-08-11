@@ -16,7 +16,7 @@ categories: [
 
 **KTHW Lesson:** [03-compute-resources.md](https://github.com/kelseyhightower/kubernetes-the-hard-way/blob/master/docs/03-compute-resources.md)
 
-![GCP product logos](/static/images/gcp-k8s-resources.png)
+{{< img "images/gcp-k8s-resources.png" >}}
 
 <!--more--> 
 
