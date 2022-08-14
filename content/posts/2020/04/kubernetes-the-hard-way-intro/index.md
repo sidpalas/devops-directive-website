@@ -33,12 +33,12 @@ Later, I needed to set up a new cluster to support a variety of data analysis wo
 
 To help illuminate the inner workings of k8s, I am going to take off the GKE training wheels and work my way through the process of setting up a Kubernetes cluster from scratch. [Kelsey Hightower](https://twitter.com/kelseyhightower)* published a fantastic guide to do exactly this, but it assumes a certain level of understanding of many of the foundational tools/technologies.
 
-My plan is to follow along Kelsey's guide, and document the process as I try to dig one layer deeper to grok exactly what each step is doing and why it is necessary for setting up k8s.
+I plan to follow Kelsey's guide, and document the process as I try to dig one layer deeper to grok exactly what each step is doing and why it is necessary for setting up k8s.
 
 This series will be most useful for individuals who have worked with k8s, but primarily in a managed configuration.
 
-**Lets dive in!**
+**Let's dive in!**
  
 --- 
 
-\* If you don't know who Kelsey Hightower is, do yourself a favor and go watch a few of his presentations [on YouTube](https://www.youtube.com/results?search_query=kelsey+hightower). You won't regret it!
+If you don't know who Kelsey Hightower is, do yourself a favor and go watch a few of his presentations [on YouTube](https://www.youtube.com/results?search_query=kelsey+hightower). You won't regret it!

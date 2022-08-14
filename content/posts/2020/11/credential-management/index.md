@@ -13,7 +13,7 @@ categories: [
 
 **TL;DR:** If you develop web applications, inevitably you will have secrets (database credentials, 3rd party API keys, etc...) that you need to manage. I have seen a variety of approaches used here and wanted to walk through them, from least secure to most. 
 
-There are always trade-offs when writing software, and in this case the tradeoff is between convenience and security. The ideal solution will establish convenient developer workflows while also protecting user data.
+There are always trade-offs when writing software, and in this case, the tradeoff is between convenience and security. The ideal solution will establish convenient developer workflows while also protecting user data.
 
 {{< img "images/credential-management-meme.png" >}}
 
@@ -116,7 +116,7 @@ This approach doesn't provide any ability to monitor when individual developers 
 
 ## Level +3: Use a Secret Manager 
 
-At this point we have taken the concept of a local configuration file about as far as we can. The next level is to move secrets into a dedicated secret manager. All of the major cloud providers offer a service like this, for example AWS has the [Secrets Manager](https://aws.amazon.com/secrets-manager/).
+At this point we have taken the concept of a local configuration file about as far as we can. The next level is to move secrets into a dedicated secret manager. All of the major cloud providers offer a service like this, for example, AWS has the [Secrets Manager](https://aws.amazon.com/secrets-manager/).
 
 The credentials can then be passed into your application as an environment variable at runtime. I often use the following Makefile snippet to retrieve credentials from GCP as needed:
 
@@ -132,15 +132,15 @@ run-app:
 	@DB_PASS=$(call get-secret,$(DB_PASS))" npm start
 ```
 
-Moving secrets into a system like this offers a number of benefits. First, these companies have entire teams of security experts building their products making them highly likely to be more secure than whatever system you roll yourself (analogous to "Don't roll your own crypto").
+Moving secrets into a system like this offer many benefits. First, these companies have entire teams of security experts building their products making them highly likely to be more secure than whatever system you roll yourself (analogous to "Don't roll your own crypto").
 
 If you are already using the cloud provider to host your application, the tight integration with Identity and Access Management (IAM) functionality, and audit logging can be big wins from a security perspective.
 
-The biggest shortfall with this approach is that rotating can still be a hassle, and often leads to a static set of long lived credentials.
+The biggest shortfall with this approach is that rotating can still be a hassle, and often leads to a static set of long-lived credentials.
 
 ## Level +4: Dynamic Ephemeral Credentials
 
-To acheive fully enlightened credential management, we can move to a model of auto-generating credentials for each use case and only allow them to be active for a short period of time. This way if there is a leak, it greatly minimizes the potential blast radius.
+To achieve fully enlightened credential management, we can move to a model of auto-generating credentials for each use case and only allow them to be active for a short period of time. This way if there is a leak, it greatly minimizes the potential blast radius.
 
 The best implementation of this concept I have seen is [HashiCorp's Vault](https://www.vaultproject.io/). You can configure Vault so that whenever an application (or individual) needs access to a resource such as a database. It will create a new username/password and handle deleting those credentials after a pre-specified period of time.
 
@@ -163,10 +163,10 @@ password           A1a-9yW06ZdVk54I5KnX
 username           v-token-service--1luYzAYl7SdMxvdpibYv-1555972312
 ```
 
-Moving to this approach does require that you truly trust Vault (or whatever tool you use) because you have to grant it `root` level permissions across many of your resources. You should protect those credentials as described in level +3.
+Moving to this approach does require that you truly trust Vault (or whatever tool you use) because you have to grant it `root`-level permissions across many of your resources. You should protect those credentials as described in level +3.
 
 ## Final Thoughts
 
-Hopefully this overview has helped you understand many of the available options for managing credentials for your web application. The right solution for your project will depend on its scale and the sensitivity of the resources being protected.
+Hopefully, this overview has helped you understand many of the available options for managing credentials for your web application. The right solution for your project will depend on its scale and the sensitivity of the resources being protected.
 
 Before you start building your next application, think about where along this scale makes sense for you and your team so that you can keep your application secure.

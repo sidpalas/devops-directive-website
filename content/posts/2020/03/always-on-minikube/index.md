@@ -35,13 +35,13 @@ Table of Contents:
 
 ## Why?
 
-Over the past five years, Kubernetes (k8s) has risen to become the defacto standard for managing container orchestration at scale. 
+Over the past five years, Kubernetes (k8s) has risen to become the de facto standard for managing container orchestration at scale. 
 
 However, with many layers of abstraction and [non-trivial costs]({{< ref "/posts/2020/03/managed-kubernetes-comparison/index.md" >}}) to run even the smallest cloud-based cluster, the barriers to entry for an individual who wants to familiarize themselves with Kubernetes can be quite high. 
 
-There are a variety of options for running Kubernetes locally including: [Minikube](https://github.com/kubernetes/minikube), [Docker Desktop](https://www.docker.com/products/kubernetes), and [Microk8s](https://microk8s.io/). These are all good options for aiding in the development process, but all suffer from the fact that they are tied to the power status of the system they are running on (i.e. if I shut down my laptop, the local cluster shuts down too). In order to run workloads that are either time-dependent (cronjobs) or event-driven (asynchronous data processing), it would be much better to have a cluster that is always on.
+There are a variety of options for running Kubernetes locally including [Minikube](https://github.com/kubernetes/minikube), [Docker Desktop](https://www.docker.com/products/kubernetes), and [Microk8s](https://microk8s.io/). These are all good options for aiding in the development process, but all suffer from the fact that they are tied to the power status of the system they are running on (i.e. if I shut down my laptop, the local cluster shuts down too). In order to run workloads that are either time-dependent (cronjobs) or event-driven (asynchronous data processing), it would be much better to have a cluster that is always on.
 
-I happen to have a 2012 MacBook Air sitting around unused now that it is no longer my daily driver. Amazingly, this 8 year old system has a CPU that supports the necessary [software based virtualization](https://en.wikipedia.org/wiki/X86_virtualization) to run a Linux virtual machine where we can install Kubernetes.
+I happen to have a 2012 MacBook Air sitting around unused now that it is no longer my daily driver. Amazingly, this 8-year-old system has a CPU that supports the necessary [software-based virtualization](https://en.wikipedia.org/wiki/X86_virtualization) to run a Linux virtual machine where we can install Kubernetes.
 
 ## Power/Cost Considerations
 
@@ -77,7 +77,7 @@ I followed these instructions ([Minikube Installation Instructions](https://kube
 
 ### 2) Install `kubectl` on the Client System
 
-I already had `kubectl` installed on my primary development machine, but you could follow these instructions ([Kubectl Installation Instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/)) to install on the system you plan to access the cluster from. 
+I already had `kubectl` installed on my primary development machine, but you could follow these instructions ([Kubectl Installation Instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl/)) to install it on the system you plan to access the cluster from. 
 
 ### 3) Add port forwarding rule from the Server System to the Minikube VM
 
@@ -145,7 +145,7 @@ This can either be inserted as a context within the primary `.kube/config` file 
 
 At this point, I was able to connect to the cluster, but only when the Client and Server systems were connected to the same network. 
 
-Two additional things needed to be configured in order to connect from outside of my home network:
+Two additional things needed to be configured to connect from outside of my home network:
 
   1) I set up a free dynamic DNS using https://www.dynu.com/. After doing this I replaced `<INTERNAL-NETWORK-IP>` with `<MY-DDNS-DOMAIN-NAME>` 
   2) I configured my router to port forward incoming requests on port `51928` to the MacBook Air and reserve the IP address for the MAC Address of the machine to ensure it doesn't change.
@@ -158,10 +158,4 @@ At this point I was able to successfully connect to the cluster from an external
 
 There we have it -- For about the price of a McDonald's coffee each month in electricity, I have an always-on Kubernetes cluster (with a single 2 vCPU + 2 GB Memory node) ready for experimentation!  
 
-If I didn't happen to have the MacBook Air sitting around, building a home cluster using Raspberry Pi's is another popular option (and enables having more than just a single worker node). 
-
-
-
-
-
-
+If I didn't happen to have the MacBook Air sitting around, building a home cluster using Raspberry Pis is another popular option (and enables having more than just a single worker node).

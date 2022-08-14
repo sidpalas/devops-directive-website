@@ -15,7 +15,7 @@ categories: [
 ]
 ---
 
-**TL;DR:** I used the [K6](https://k6.io/) load testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy web server](https://caddyserver.com/v1/) hosting this site. With CloudFlare caching turned off, the server was able to serve an onslaught 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
+**TL;DR:** I used the [K6](https://k6.io/) load testing framework to benchmark the Compute Engine [f1-micro](https://cloud.google.com/compute/docs/machine-types#n1_shared-core_machine_types) and [Caddy web server](https://caddyserver.com/v1/) hosting this site. With Cloudflare caching turned off, the server was able to serve an onslaught of 800 virtual users continuously reloading the page (while maintaining a median request duration of `<400ms`), but started dropping requests when increasing the load further.
 
 {{< img "images/this-is-fine.png" >}}
 
@@ -48,7 +48,7 @@ In a single hour on March 7th, a total of 1307 people visited this site ({{< lin
 
 {{< img "images/march-7-traffic.png" "No flames yet..." >}}
 
-At this point, the setup has proven itself capable of embracing a Hacker News hug without dying, but I wanted to get a sense of what kind of load it can actually handle.
+At this point, the setup has proven itself capable of embracing a Hacker News hug without dying, but I wanted to get a sense of what kind of load it can handle.
 
 ## Testing
 
@@ -59,7 +59,7 @@ In order to avoid causing any impact to my actual site, I spun up an identical r
 Here is a summary of the configuration:
 - Compute Engine f1-micro Instance (0.2 vCPU burstable to 1 vCPU for short periods, 0.6GB Memory) running Container Optimized OS (COS)
 - [Caddy (1.0.3) container image](https://hub.docker.com/r/abiosoft/caddy/) with the site content files built directly into the container
-- Cloudflare configured to proxy traffic and set to the "standard" caching level (I performed tests with caching turned on and caching turned off)
+- Cloudflare is configured to proxy traffic and set to the "standard" caching level (I performed tests with caching turned on and caching turned off)
 
 *NOTE:* I didn't tune/configure the COS image running on the VM, nor specify resource requests in the `docker run` command. 
 
@@ -71,9 +71,9 @@ To perform the load test I used [k6.io](https://k6.io/), an open source performa
 
 ### Replicating Current Peak
 
-First, I created a script to approximate the load that the two HN posts brought. The peak hour had 1443 page views, or 0.4 pageviews/second. To account for the load not being constant across the entire hour, I rounded this up to 1 pageview/second.
+First, I created a script to approximate the load that the two HN posts brought. The peak hour had 1443 page views or 0.4 pageviews/second. To account for the load not being constant across the entire hour, I rounded this up to 1 pageview/second.
 
-K6 is able use a [HAR file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests for things like the Google Analytics script. The full K6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
+K6 is able to use a [HAR](https://en.wikipedia.org/wiki/HAR_(file_format)) file](https://en.wikipedia.org/wiki/HAR_(file_format)) to create a representative set of HTTP requests. I used 1 virtual user and adjusted the pause between iterations to achieve just over 1 pageload/second (with a "pageload" corresponding to the batch of HTTP requests). I excluded external requests for things like the Google Analytics script. The full K6 configuration script can be found as a [GitHub gist](https://gist.github.com/sidpalas/7f284eb88a832ba21190b1b0cd5f5ba9) and the resulting output can be seen below:
 
 ```bash
 check_failure_rate.........: 0.00%   ✓ 0   ✗ 138
@@ -105,19 +105,19 @@ vus_max....................: 1       min=1 max=1
 
 With that test as a baseline, I proceeded to run a series of tests, each 60 seconds long, starting with 6 virtual users and increasing the number of VUs with each test. I also reduced the delay between virtual user iterations to 100ms. The most important metric is `http_req_duration`, which represents is the total request time (`http_req_sending + http_req_waiting + http_req_receiving`), which I have plotted below for the full set of tests.
 
-{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsuprisingly... a CDN with caching makes a big difference">}}
+{{< img-link "images/http_req_duration.png" "images/http_req_duration.png" "Unsurprisingly... a CDN with caching makes a big difference">}}
 
 {{< img-link "images/http_req_duration_zoomed_thumbnail.png" "images/http_req_duration_zoomed.png" "Click for full size image">}}
 
 Up until around 50 VUs, the response time remains flat, with an uncached median of 68ms and a cached median of 31ms.
 
-After 50 VUs, the response times begin to climb in a linear fashion. At 800 VUs the uncached median was 349ms and the cached median was 67ms. As would be expected at these higher loads, most (90+%) of the `http_req_duration` is spent in the `http_req_waiting` stage.
+After 50 VUs, the response times begin to climb linearly. At 800 VUs the uncached median was 349ms and the cached median was 67ms. As would be expected at these higher loads, most (90+%) of the `http_req_duration` is spent in the `http_req_waiting` stage.
 
 The uncached configuration finally gave out during the 1600 virtual user test, with only 414 successful responses, indicating that ~74% of the virtual users never received a response.
 
 #### Virtual Users and Server Load
 
-It is important to note that while the virtual users run in parallel with each other, they run in serial with themselves. Each individual VU waits until its current pageload is complete before making a new set of requests. As the server slows down under load, this causes the total rate of requests to drop in the more demanding tests. The impact is clearly seen in the total amount of data received during the tests plotted below.
+It is important to note that while the virtual users run in parallel with each other, they run in serial with themselves. Each individual VU waits until its current page load is complete before making a new set of requests. As the server slows down under load, this causes the total rate of requests to drop in the more demanding tests. The impact is clearly seen in the total amount of data received during the tests plotted below.
 
 {{< img-link "images/data_received.png" "images/data_received.png" "Data received (and pageloads/s) peaks before the more demanding tests">}}
 
@@ -149,12 +149,12 @@ I am continuously amazed at the level of load that even such a tiny virtual mach
 
 Utilizing a service like Cloudflare to help cache and serve content reduces the load on the server significantly. It cut the response times in half under light load and prevented the server from being overwhelmed under heavy load.
 
-I would have liked to record realtime resource (CPU + Memory usage) on the server VM but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1 min averaged view in the GCP console:
+I would have liked to record real-time resource (CPU + Memory usage) on the server VM but the GCP cloud monitoring agent isn't compatible with Container Optimized OS, so I settled for the rough 1 min averaged view in the GCP console:
 
 {{< img "images/peak-cpu.png" "Now we're cooking with gas! (bursting above the 0.2 vCPU limit for a short period)">}}
 
 This test gives me confidence that my current server configuration should be able to handle quite a bit of growth before needing any major overhaul. 
 
-In the future, I hope to do similar benchmarking across other hosting options. If someone has a contact at [@github](https://twitter.com/github) or [@netlify](https://twitter.com/Netlify) that could grant me permission to run a test against a Github Pages or Netlify Starter site let me know! Or maybe at [@bluehost](https://twitter.com/bluehost) so I can benchmark some Wordpress installs...
+In the future, I hope to do similar benchmarking across other hosting options. If someone has a contact at [@github](https://twitter.com/github) or [@netlify](https://twitter.com/Netlify) that could permit me to run a test against a Github Pages or Netlify Starter site let me know! Or maybe at [@bluehost](https://twitter.com/bluehost) so I can benchmark some WordPress installs...
 
 <!-- -- Shout out YouTube + call to action -->

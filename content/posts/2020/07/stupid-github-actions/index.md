@@ -68,7 +68,7 @@ The action will run at midnight on New Year's day and fail every time due to the
 
 ### 2 -- Recursive Action
 
-The next idea was proposed by a friend and former colleague (https://scotchka.github.io/). He suggested that I make an action which triggers itself, thus creating an infinite chain of actions.
+The next idea was proposed by a friend and former colleague (https://scotchka.github.io/). He suggested that I make an action that triggers itself, thus creating an infinite chain of actions.
 
 Given that the GitHub documentation explicitly states ["To minimize your GitHub Actions usage costs, ensure that you don't create recursive or unintended workflow runs,"](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token) this seemed like a sufficiently stupid idea. To achieve this, I created an action triggered by commits that makes and commits a code change of its own.
 
@@ -97,11 +97,11 @@ fi;
 
 ### 3 -- Exponential Action
 
-The previous action has the potential to run indefinitely, but only one instance executes at a time, so it could be stopped manually if necessary. What if instead, the action triggered itself multiple times? This way, if it got out of hand there would be no stopping the exponential growth 😰. That sounds dumb... lets do it!
+The previous action has the potential to run indefinitely, but only one instance executes at a time, so it could be stopped manually if necessary. What if instead, the action triggered itself multiple times? This way, if it got out of hand there would be no stopping the exponential growth 😰. That sounds dumb... let's do it!
 
 The file counter trick from before no longer works because multiple actions would be executing in parallel, all trying to modify and commit simultaneously causing conflicts. Instead, I stored the state in Git tags!
 
-A random UUID is used as the base for the tag and the current iteration is appended to prevent collisions. The current implementation only support single digits, but if I make it past 9 iterations of exponential growth that means I messed up 💀.
+A random UUID is used as the base for the tag and the current iteration is appended to prevent collisions. The current implementation only supports single digits, but if I make it past 9 iterations of exponential growth that means I messed up 💀.
 
 ```bash
 function increment_tag_push {
@@ -138,9 +138,9 @@ If you are looking for a quick way to burn through your 2000 free tier minutes..
 
 ### 4 -- Smart Lights
 
-Thus far, these actions have been implemented in small bash scripts. In order to actually explore the capabilities of GitHub actions I decided the next action should utilize [Docker](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action). 
+Thus far, these actions have been implemented in small bash scripts. To explore the capabilities of GitHub actions I decided the next action should utilize [Docker](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action). 
 
-I had a couple of WiFi smart plugs from VeSync that I received as a gift a few years ago and found a [python client for their API](https://pypi.org/project/pyvesync/). This made it simple to create an action which turns the lights on for a short period of time after each commit (what better way to incentivize code velocity?!💡)
+I had a couple of WiFi smart plugs from VeSync that I received as a gift a few years ago and found a [python client for their API](https://pypi.org/project/pyvesync/). This made it simple to create an action that turns the lights on for a short period after each commit (what better way to incentivize code velocity?!💡)
 
 {{< img "images/lights-off.gif" "Lights on... Lights off!" >}}
 
@@ -170,6 +170,6 @@ I wanted to try out the [Javascript runtime](https://docs.github.com/en/actions/
 
 ## Closing Thoughts
 
-Overall, GitHub Actions turned out to be fairly easy to work with and the option Dockerize the action steps ensures that it should be able to support pretty much any CI/CD need. Also, GitHub has made sharing and reuse of actions a core part of the experience through the Marketplace. 
+Overall, GitHub Actions turned out to be fairly easy to work with and the option to Dockerize the action steps ensures that it should be able to support pretty much any CI/CD need. Also, GitHub has made sharing and reuse of actions a core part of the experience through the Marketplace. 
 
-While I'm won't be rushing off to port existing CI/CD workloads onto GitHub actions, I will certainly consider it for future greenfield projects!
+While I won't be rushing off to port existing CI/CD workloads onto GitHub actions, I will certainly consider it for future greenfield projects!

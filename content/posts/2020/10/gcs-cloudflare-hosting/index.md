@@ -27,9 +27,9 @@ Table of Contents:
   - [Cloud Storage](#cloud-storage)
   - [Cloudflare](#cloudflare)
 - [Setup](#setup)
-  - [1) Purchase Domain](#1-purchase-domain)
+  - [1) Purchase a Domain](#1-purchase-a-domain)
   - [2) Verify Ownership](#2-verify-ownership)
-  - [3) Create GCS bucket](#3-create-gcs-bucket)
+  - [3) Create a GCS bucket](#3-create-a-gcs-bucket)
   - [4) Configure Cloudflare](#4-configure-cloudflare)
     - [DNS Nameservers](#dns-nameservers)
     - [CNAME Record](#cname-record)
@@ -49,35 +49,35 @@ If you want to host a static website in 2020, the number of options can be a bit
 
 ## Cloud Storage
 
-Cloud object storage (S3, GCS, Azure Storage) is pretty amazing technology. For a few pennies/GB/month you can store files and the cloud provider will serve them with high reliability to pretty much any level of traffic you can throw at it. Also, for nearly 10 years, AWS S3 has provided features to make [hosting a website directly from a storage bucket simple](https://aws.amazon.com/blogs/aws/host-your-static-website-on-amazon-s3/). 
+Cloud object storage (S3, GCS, Azure Storage) is a pretty amazing technology. For a few pennies/GB/month you can store files and the cloud provider will serve them with high reliability to pretty much any level of traffic you can throw at it. Also, for nearly 10 years, AWS S3 has provided features to make [hosting a website directly from a storage bucket simple](https://aws.amazon.com/blogs/aws/host-your-static-website-on-amazon-s3/). 
 
 That being said, those solutions don't support HTTPS by default. Google Cloud Platform does offer a guide for setting up a [site with GCS with an HTTPS load balancer in front of it](https://cloud.google.com/storage/docs/hosting-static-website), but the load balancer [costs $18/month](https://cloud.google.com/vpc/network-pricing#lb) at which point this solution becomes significantly less attractive relative to its competition.
 
 ## Cloudflare
 
-Cloudflare is a web-infrastructure company that provides a variety of network related services, including DNS and content delivery caching. The also have a variety of SSL/TLS encryption options ranging from "Off" to "Full (strict)". The "Flexible" setting is the one we want here. 
+Cloudflare is a web-infrastructure company that provides a variety of network-related services, including DNS and content delivery caching. They also have a variety of SSL/TLS encryption options ranging from "Off" to "Full (strict)". The "Flexible" setting is the one we want here. 
 
-With this setting, SSL termination is done on the Cloudflare server, so the users traffic is encrypted from their browser to Cloudflare and then requests between Cloudflare and the origin server (in our case the GCS server) will be un-encrypted.
+With this setting, SSL termination is done on the Cloudflare server, so the users' traffic is encrypted from their browser to Cloudflare and then requests between Cloudflare and the origin server (in our case the GCS server) will be un-encrypted.
 
 If you were hosting a site with sensitive information, this would not be the right option, but for a public website (such as this one), this option gives us [most of the benefits of HTTPS](https://doesmysiteneedhttps.com/) without having to set up an SSL certificate on our server!
 
-{{< img "images/flexible-ssl.png" "CloudFlare flexible SSL" >}}
+{{< img "images/flexible-ssl.png" "Cloudflare flexible SSL" >}}
 
-Cloudflare has the added benefit of automatcally caching your content, speeding up delivery and reducing the data egress from GCS.
+Cloudflare has the added benefit of automatically caching your content, speeding up delivery and reducing the data egress from GCS.
 
 # Setup
 
-## 1) Purchase Domain 
+## 1) Purchase a Domain 
 
 The first step is to purchase a domain. Any domain provider will do, but purchasing with [Google Domains](https://domains.google/) makes the next step easier or unnecessary. 
 
 ## 2) Verify Ownership
 
-Before creating a GCS bucket associated to a particular domain, Google requires you to verify ownership of the domain.
+Before creating a GCS bucket associated with a particular domain, Google requires you to verify ownership of the domain.
 
-There are a few method to verify your ownership of the domain. If purchased through Google Domains, this can be done through the [Webmaster Central page](https://www.google.com/webmasters/verification/home), otherwise you can use a [DNS text record](https://cloud.google.com/identity/docs/verify-domain-txt). 
+There are a few methods to verify your ownership of the domain. If purchased through Google Domains, this can be done through the [Webmaster Central [page](https://www.google.com/webmasters/verification/home), otherwise, you can use a [DNS text record](https://cloud.google.com/identity/docs/verify-domain-txt). 
 
-## 3) Create GCS bucket
+## 3) Create a GCS bucket
 
 After verifying ownership, creating and configuring the bucket can be done using the [gsutil tool](https://cloud.google.com/storage/docs/gsutil).
 
@@ -104,7 +104,7 @@ These will be use in place of the default nameservers provided by the domain pro
 
 ### CNAME Record
 
-Because the website content will be served from a Google managed server at `c.storage.googleapis.com` a CNAME record setting that maps the custom domain to that:
+Because the website content will be served from a Google-managed server at `c.storage.googleapis.com` a CNAME record set that maps the custom domain to that:
 
 ```
 Type   |  Name                 |  Content
@@ -118,7 +118,7 @@ As described above, the site will use the "Flexible" SSL/TLS encryption mode, wh
 
 ### Page Rules
 
-This step is optional, but but without it, the `www` subdomain (e.g. `www.devopsdirective.com` won't work properly).
+This step is optional, but without it, the `www` subdomain (e.g. `www.devopsdirective.com` won't work properly).
 
 I prefer to use the root domain, but if a user adds a `www.` prefix I don't want them to encounter an error. This can be handled by creating the following forwarding rule.
 
@@ -154,4 +154,3 @@ gsutil -m rsync -d -r $LOCAL_SITE_DIR gs://$DOMAIN
 I have been using this approach for a few months now and so far it has been rock solid. I love the simplicity of the setup, especially redeploying via a single `rsync` command.
 
 Let me know how you end up hosting your next static site and why!
-

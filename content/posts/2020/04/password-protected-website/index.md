@@ -44,7 +44,7 @@ If you want to follow along with a site of your own, I have provided a working e
 
 ## The Need
 
-A company I have been working with ([Gauntlet Networks](https://gauntlet.network/)) needed to set up a website containing documentation for the simulation SDK they are building, but wanted to restrict access to only their clients and employees.
+A company I have been working with ([Gauntlet Networks](https://gauntlet.network/)) needed to set up a website containing documentation for the simulation SDK they are building but wanted to restrict access to only their clients and employees.
 
 ### Other static hosting solutions
 
@@ -54,14 +54,14 @@ Netlify does offer [password protection](https://docs.netlify.com/visitor-access
 
 ### Handling passwords
 
-Historically, implementing authentication would require adding significant complexity to our website's architecture. We would need a database of some kind to store the (hashed) passwords and server side processing to check if a login attempt is valid. We would also probably need to add some form of email confirmation/password reset functionality because people are [terrible at remembering their passwords](https://xkcd.com/936/). All of the sudden the one hour task of getting the documentation site set up just ballooned into something that could take weeks to accomplish!
+Historically, implementing authentication would require adding significant complexity to our website's architecture. We would need a database of some kind to store the (hashed) passwords and server-side processing to check if a login attempt is valid. We would also probably need to add some form of email confirmation/password reset functionality because people are [terrible at remembering their passwords](https://xkcd.com/936/). All of the sudden the one-hour task of getting the documentation site set up just ballooned into something that could take weeks to accomplish!
 
-Luckily, we don't actually need to take on all of this complexity ourselves. A standard called [OAuth](https://en.wikipedia.org/wiki/OAuth) allows us to leverage the authentication system of another entity (for example, Google) to provide"secure delegated access" to our content. 
+Luckily, we don't need to take on all of this complexity ourselves. A standard called [OAuth](https://en.wikipedia.org/wiki/OAuth) allows us to leverage the authentication system of another entity (for example, Google) to provide"secure delegated access" to our content. 
 
 ---
 ## Solution (IAP + App engine)
 
-OAuth by itself would allow us to set up a sign-in flow using an external authentication provider, but for this use case we want the process to be completely hands off.
+OAuth by itself would allow us to set up a sign-in flow using an external authentication provider, but for this use case, we want the process to be completely hands-off.
 
 This is where Google's [Identity Aware Proxy (IAP)](https://cloud.google.com/iap/docs/concepts-overview) comes in. Cloud IAP uses Google Sign-In and GCP's Identity and Access Management (IAM) to handle authentication and authorization to control access to GCP resources. Granting access to the site can then be managed using individual Google accounts and/or Google groups.
 
@@ -94,7 +94,7 @@ handlers:
   upload: docs/build/html/(.*)
 ```
 
-With this in place, a running the `gcloud app deploy` command within the root of the project deploys the application.
+With this in place, running the `gcloud` app deploy` command within the root of the project deploys the application.
 
 ### Setting up IAP
 
@@ -110,7 +110,7 @@ The final step is to grant the `IAP-secured Web App User` access to all authoriz
 
 ### Configuring CI/CD with CircleCI
 
-At this point the website is live and access controlled, but in order to minimize future work, it is useful to set up a system to handle continuous integration and deployment.
+At this point, the website is live and access controlled, but to minimize future work, it is useful to set up a system to handle continuous integration and deployment.
 
 [CircleCi](https://circleci.com/) offers simple integration with GitHub and a [free tier](https://circleci.com/pricing/) that will easily handle a small project like this. The first step is to create a CircleCI account and then grant access to the GitHub repo containing the source files using their [GitHub marketplace app](https://github.com/marketplace/circleci).
 
@@ -168,7 +168,7 @@ As its name suggests, this step retrieves the source code within the repo and st
             python3 -m pip install -r requirements.txt
 ```
 
-The `google/cloud-sdk:slim` container image we are using is based on debian, so we can install Sphinx and its dependencies by first installing `pip` with `apt` and then using `pip` to install the `requirements.txt` file.
+The `google/cloud-sdk:slim` container image we are using is based on Debian, so we can install Sphinx and its dependencies by first installing `pip` with `apt` and then using `pip` to install the `requirements.txt` file.
 
 #### 3) Make Docs
 
@@ -197,7 +197,7 @@ The Sphinx quickstart creates a Makefile within the `/docs` directory which can 
             gcloud --quiet app deploy
 ```
 
-The final step in the job is to deploy the site. In order to do this we first need to create a service account (https://console.cloud.google.com/iam-admin/serviceaccounts) and grant it the necessary permissions. Although it seems as though `App Engine Deployer` would be sufficient, it turns out there are actually a few additional permissions involved with deploying the site. The screenshot below shows the 5 roles I needed to add to achieve a successful deploy.
+The final step in the job is to deploy the site. To do this, we first need to create a service account (https://console.cloud.google.com/iam-admin/serviceaccounts) and grant it the necessary permissions. Although it seems as though `App Engine Deployer` would be sufficient, it turns out there are actually a few additional permissions involved with deploying the site. The screenshot below shows the 5 roles I needed to add to achieve a successful deployment.
 
 {{< img "images/sa-roles.png" >}}
 
@@ -215,11 +215,11 @@ This caused `gcloud` to assume the key was a `.p12` type and fail.
 ERROR: (gcloud.auth.activate-service-account) Missing required argument [ACCOUNT]: An account is required when using .p12 keys
 ```
 
-As shown in the full example at the beginning of the step, I was able to solve this by redirecting the echo output to a temporary file containing the json key and pass the filepath to `gcloud auth`.
+As shown in the full example at the beginning of the step, I was able to solve this by redirecting the echo output to a temporary file containing the JSON key and passing the file path to `gcloud auth`.
 
 {{< img "images/green-build.png" "Success!" >}}
 
-That's it! We now have a password protected website, with CI/CD, that falls within the free usage tiers of GCP + CircleCI. If this site had heavy traffic or data egress it could exceed the free tier, but for this internal documentation use case it that is unlikely. 
+That's it! We now have a password-protected website, with CI/CD, that falls within the free usage tiers of GCP + CircleCI. If this site had heavy traffic or data egress it could exceed the free tier but for this internal documentation use case that is unlikely. 
 
 ---
 
@@ -233,7 +233,7 @@ By default, App Engine assigns a domain such as https://devops-directive-project
 
 #### Custom OAuth screen
 
-The default Oauth consent screen is fairly boring, but can be customized with logo image, application homepage link, etc... from [Google Cloud Console](https://console.cloud.google.com/apis/credentials/consent)
+The default OAuth consent screen is fairly boring but can be customized with a logo image, application homepage link, etc... from [Google Cloud Console](https://console.cloud.google.com/apis/credentials/consent)
 
 {{< img "images/oauth-screen.png" >}}
 

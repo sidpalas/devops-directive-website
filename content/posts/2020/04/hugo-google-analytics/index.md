@@ -20,7 +20,7 @@ categories: [
 
 ---
 
-To solve this, take advantage of the fact that Hugo allows for specifying multiple configuration files. In this case create a separate "production" `config.toml` file without the `googleAnalytics` code specified and rearrange the directory structure as follows:
+To solve this, take advantage of the fact that Hugo allows for specifying multiple configuration files. In this case, create a separate "production" `config.toml` file without the `googleAnalytics` code specified and rearrange the directory structure as follows:
 
 ```bash
 ├── config

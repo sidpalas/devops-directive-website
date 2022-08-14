@@ -52,7 +52,7 @@ If you mess something up, you may need to wipe the system and reinstall the OS f
 This can be a good option if you have performance-critical workloads but your compute needs are variable and you don't want to buy your own servers!
 
 ## 📜 Dedicated Hosts/instances
-Adding a virtualization layer, but renting a specific server(s) from a cloud provider makes it easier to create/destroy/configure  servers while retaining hardware-level isolation from other customers (e.g. nobody else is running on the same servers).
+Adding a virtualization layer, but renting a specific server(s) from a cloud provider makes it easier to create/destroy/configure servers while retaining hardware-level isolation from other customers (e.g. nobody else is running on the same servers).
 
 You choose or create an "image" with an operating system (and potentially some dependencies) installed and the cloud provider creates a virtual server for you.
 You then install additional dependencies and your software OR you might pre-build them into the image.
@@ -67,7 +67,7 @@ Similar to dedicated hosts, you choose or create an "image" with an OS (and pote
 
 The main difference here is that standard VMs are cheaper and have no guarantees about which physical server your deployment goes on.
 
-This is a great option to keep full control over the configuration but want the flexibility to create and destroy servers quickly and easily!
+This is a great option to keep full control over the configuration but retain the flexibility to create and destroy servers quickly and easily!
 
 ## ⚙️ Managed Services
 

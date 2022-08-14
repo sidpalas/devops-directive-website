@@ -41,17 +41,17 @@ When the [Compute Engine API](https://console.cloud.google.com/apis/api/compute.
 
 {{< img "images/default-vpc.png" "Default VPC: 22 subnets (1 per GCP region) + 4 firewall rules are created by default!" >}}
 
-Using the default network makes the getting started with setting things up easy, but also enables any Compute Engine instances using that VPC to make network requests to one another using tcp, udp, or icmp protocols (based on the `default-allow-internal` firewall rule). 
+Using the default network makes getting started with setting things up easy, but also enables any Compute Engine instances using that VPC to make network requests to one another using tcp, udp, or icmp protocols (based on the `default-allow-internal` firewall rule). 
 
 ### Custom VPC + Subnets
 
 To isolate the Kubernetes cluster in this tutorial and minimize the attack surface area, we create a separate VPC with a single subnet and more restrictive firewall rules. Specifying the `--subnet-mode custom` when creating the VPC is what prevents GCP from auto-provisioning a subnet for each region. What about IP address range `--range` specified (`10.240.0.0/24`)?
 
-The `/24` is what is known as classless inter-domain routing (CIDR) notation and is a shorthand way of specifying the subnet mask. 24 corresponds to the number of active bits in the subnet mask, so in this case the subnet mask is: `11111111.11111111.11111111.00000000` in binary (or `255.255.255.0` in decimal).
+The `/24` is what is known as classless inter-domain routing (CIDR) notation and is a shorthand way of specifying the subnet mask. 24 corresponds to the number of active bits in the subnet mask, so in this case, the subnet mask is: `11111111.11111111.11111111.00000000` in binary (or `255.255.255.0` in decimal).
 
-This subnet mask denotes that the first 3 octets `10.240.0.` will be the same across the entire subnet and the final octet can vary throughout its full range from `0` to `255`. The highest address (`10.240.0.255`) is the "[broadcast address](https://en.wikipedia.org/wiki/Broadcast_address)", leaving 254 open for IP addresses (as Kelsey states).
+This subnet mask denotes the first 3 octets `10.240.0.` will be the same across the entire subnet and the final octet can vary throughout its full range from `0` to `255`. The highest address (`10.240.0.255`) is the "[broadcast address](https://en.wikipedia.org/wiki/Broadcast_address)", leaving 254 open for IP addresses (as Kelsey states).
 
-For a more in depth look at Network ID's and Subnet Masks, this YouTube video is a great resource:
+For a more in-depth look at Network IDs and Subnet Masks, this YouTube video is a great resource:
 
 {{< youtube XQ3T14SIlV4 >}}
 
@@ -98,7 +98,7 @@ Workers:
 
 ## Connecting to VMs
 
-The use of the `gcloud compute ssh` command is straight-forward and no additional commentary is needed.
+The use of the `gcloud compute ssh` command is straightforward and no additional commentary is needed.
 
 At this point, we now have networking + compute resources provisioned and configured. Next, we will generate certificates and keys to enable secure communications amongst the machines.
 

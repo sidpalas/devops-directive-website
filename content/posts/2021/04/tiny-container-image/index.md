@@ -10,7 +10,7 @@ categories: [
 ]
 ---
 
-**TL;DR** I set out to build the smallest container image that I could that was still able to do something useful. By taking advantage of multistage builds, the `scratch` base image, and a tiny assembly based http server, I was able to get it down to 6.32kB!
+**TL;DR** I set out to build the smallest container image that I could that was still able to do something useful. By taking advantage of multistage builds, the `scratch` base image, and a tiny assembly-based HTTP server, I was able to get it down to 6.32kB!
 
 {{< img "images/container-for-ants.png" >}}
 
@@ -77,7 +77,7 @@ One of the simplest and most obvious tactics for reducing image size is to use a
 
 Using `node:14-slim` and `node:14-alpine` as the base image brought the image size down to `167MB` and `116MB` respectively.
 
-Because docker images are additive, which each layer building on the next there isn't much else we can do to make the node.js solution smaller.
+Because docker images are additive, with each layer building on the next there isn't much else we can do to make the node.js solution smaller.
 
 ## Compiled Languages
 
@@ -116,9 +116,9 @@ The issue here is that the golang base image has a lot of dependencies installed
 
 ## Multi-stage Builds
 
-Docker has a feature called [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) which make it easy to build the code in an environment with all of the necessary dependencies, and then copy the resulting executable into a different image.
+Docker has a feature called [multi-stage [builds](https://docs.docker.com/develop/develop-images/multistage-build/) which makes it easy to build the code in an environment with all of the necessary dependencies, and then copy the resulting executable into a different image.
 
-This is useful for a variety of reasons, but one of the most obvious is image size! By refactoring the dockerfile as follows:
+This is useful for a variety of reasons, but one of the most obvious is image size! By refactoring the Dockerfile as follows:
 
 ```bash
 ### build stage ###
@@ -141,7 +141,7 @@ The resulting image is just `13.2MB`! 🙂
 
 There is a base image called [scratch](https://hub.docker.com/_/scratch) which is explicitly empty and has zero size. Because the `scratch` has nothing inside, any image built from it must bring all of its necessary dependencies. 
 
-To make this possible with our go based server, we need to add a few flags to the compilation step in order to ensure the necessary libraries are statically linked into the executable:
+To make this possible with our go-based server, we need to add a few flags to the compilation step to ensure the necessary libraries are statically linked into the executable:
 
 ```bash
 ### build stage ###
@@ -164,7 +164,7 @@ These two changes bring the image size to `8.65MB` 😀
 
 ## ASM for the Win!
 
-An image less than 10MB, written in a language like Go is plenty small for almost any circumstance... but we can go smaller! Github user [nemasu](https://github.com/nemasu) fully functional http server written in assembly on github named [assmttpd](https://github.com/nemasu/asmttpd).
+An image less than 10MB, written in a language like Go is plenty small for almost any circumstance... but we can go smaller! Github user [nemasu](https://github.com/nemasu) fully functional HTTP server written in assembly on GitHub named [assmttpd](https://github.com/nemasu/asmttpd).
 
 All that was required to containerize it was to install a few build dependencies into the ubuntu base image before running the provided `make release` recipe:
 
@@ -187,6 +187,4 @@ The resulting `asmttpd` executable is then copied into the scratch image and inv
 
 {{< img "images/image-sizes.png" "The progression of container image sizes!" >}}
 
-Hopefully you enjoyed this journey from our initial 943MB Node.js image all the way to this tiny 6.34kB Assembly image and learned some techniques you can apply to make your container images smaller in the future.
-
-
+Hopefully, you enjoyed this journey from our initial 943MB Node.js image all the way to this tiny 6.34kB Assembly image and learned some techniques you can apply to make your container images smaller in the future.

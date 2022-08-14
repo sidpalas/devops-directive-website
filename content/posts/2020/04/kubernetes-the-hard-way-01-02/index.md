@@ -41,7 +41,7 @@ A GCP project needs to be configured with the necessary APIs enabled, and gcloud
 
 Embarrassingly, I had never used tmux prior to this. 😳😳😳
 
-tmux, short for "Terminal Multiplexer" is a program that allows for splitting up your terminal into multiple panes and tabs and manage the associated shell sessions. At first glance, this may sound like the `Split Pane` feature of the macOS terminal or the `Split Horizontally/Vertically` feature of [iterm2](https://iterm2.com/), but the difference is that shell sessions are managed independently from the terminal window. 
+tmux, short for "Terminal Multiplexer" is a program that allows for splitting up your terminal into multiple panes and tabs and managing the associated shell sessions. At first glance, this may sound like the `Split Pane` feature of the macOS terminal or the `Split Horizontally/Vertically` feature of [iterm2](https://iterm2.com/), but the difference is that shell sessions are managed independently from the terminal window. 
 
 There are a variety of benefits this enables, but the feature Kelsey is suggesting for this tutorial is the ability to synchronize inputs across multiple terminal panes. This will allow us to `ssh` into multiple virtual machines, synchronize those sessions, and then execute a series of commands in parallel.
 
@@ -68,12 +68,12 @@ I will go into more detail about what that actually means in the post correspond
 
 ## kubectl
 
-`Kubectl` (It's okay... nobody else knoews [how to pronounce it](https://www.youtube.com/watch?v=2wgAIvXpJqU) either) is a command line tool for interacting with Kubernetes clusters. Once the cluster is up and running, `kubectl` will be the primary mechanism for getting information about the cluster (and things running within it), as well deploying and modifying software running within the cluster.
+`Kubectl` (It's okay... nobody else knows [how to pronounce it](https://www.youtube.com/watch?v=2wgAIvXpJqU) either) is a command line tool for interacting with Kubernetes clusters. Once the cluster is up and running, `kubectl` will be the primary mechanism for getting information about the cluster (and things running within it), as well deploying and modifying software running within the cluster.
 
 Kelsey's instructions for installation are sufficient, but if on MacOS, it can also be installed with Homebrew using:
 
     $ brew install kubectl
 
-At this point your computer should have all the necessary prerequisite software and we can start setting up the cloud resources needed for the cluster.
+At this point, your computer should have all the necessary prerequisite software and we can start setting up the cloud resources needed for the cluster.
 
 See you in the next post!

@@ -42,7 +42,7 @@ Table of Contents:
 
 ---
 
-This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}})) in which I walked through the set up of this site. In this post I add automated builds/deploys to the site.
+This is a continuation of the previous post ([The Making of This Site (Hugo, Caddy, + GCP)]({{< ref "/posts/2020/02/hugo-and-caddy-on-gcp/index.md" >}})) in which I walked through the set up of this site. In this post, I add automated builds/deploys to the site.
 
 All of the commands for creating the site, as well as setting up this automation can be found in this [GitHub Repo](https://github.com/sidpalas/hugo-gcp-deploy).
 
@@ -50,20 +50,20 @@ All of the commands for creating the site, as well as setting up this automation
 
 Initially, I was going to use [Circle CI](https://circleci.com/) to automate the process of building and deploying the site. Circle CI has direct integration with Github and posted to their blog in 2018 explaining how to [Automate Your Static Site Deployment with CircleCI](https://circleci.com/blog/automate-your-static-site-deployment-with-circleci/) using Hugo as the example site generator. 
 
-That being said, since everything in the site setup was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud Build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
+That being said since everything in the site setup was GCP based, I decided to try out [Cloud Build](https://cloud.google.com/cloud-build). Cloud Build also has a [GitHub app](https://github.com/marketplace/google-cloud-build) and being within the same GCP project meant I wouldn't have to deal with shuffling additional service account credentials between platforms.
 
-Also, just like with the server set up, Cloud Build is also included in GCP free tier (up to 120 build minutes/day) so this shouldn't cost me anything. 
+Also, just like with the server setup, Cloud Build is also included in the GCP free tier (up to 120 build minutes/day) so this shouldn't cost me anything. 
 
 ### Attempting to Use the Cloud Build GitHub App
 
-Thinking this would be a 30 minute task, I eagerly installed the Cloud Build Github app and added a build trigger based on pushes to the master branch. When the build succeeded I was not greeted with the website, but instead with the Default Caddy home page. After manually navigating to the `/articles` endpoint I saw the following:
+Thinking this would be a 30-minute task, I eagerly installed the Cloud Build Github app and added a build trigger based on pushes to the master branch. When the build succeeded I was not greeted with the website, but instead with the Default Caddy home page. After manually navigating to the `/articles` endpoint I saw the following:
 
 {{< img "images/*missing-hugo-theme*" >}}
 
 
 The content files were there, but I realized that It wasn't being rendered properly because the build failed to get the theme files. After doing more research I concluded that it has to do with the fact that the theme is not stored within the website Git repo, but is a Git submodule. 
 
-In an attempt to solve this, I adding a step to the build pipeline to grab the submodule files using:
+In an attempt to solve this, I added a step to the build pipeline to grab the submodule files using:
 
 ```bash
 git submodule init
@@ -74,7 +74,7 @@ but Cloud Builds triggered from GitHub don't have access to the `.git` directory
 
 ### GCP Set Up
 
-At this point I had arrived what I thought was a viable plan that I just needed to execute on.
+At this point, I had arrived what I thought was a viable plan that I just needed to execute.
 
 **NOTE:** The commands that follow use $PROJECT_ID and other template variables that should reflect the relevant project and values.
 
@@ -84,7 +84,7 @@ export PROJECT_ID=my-awesome-project-1234
 
 #### Video Walkthrough
 
-To accompany this article, I also created a full video walkthrough of setting up the pipeline. Feel free to follow along or skip it depending if you prefer the video or written format!
+To accompany this article, I also created a full video walkthrough of setting up the pipeline. Feel free to follow along or skip it depending on if you prefer the video or written format!
 
 {{< youtube MF2gMZ5aDBQ >}}
 
@@ -94,7 +94,7 @@ As noted above, I needed to mirror the GitHub repo for my website into a Cloud S
 
 #### 2) Enable the Cloud Build API
 
-In order to use Cloud Build I had to enable the cloud build api using:
+To use Cloud Build I had to enable the cloud build API using:
 
 ```bash
 gcloud services enable cloudbuild.googleapis.com --project=$PROJECT_ID
@@ -165,7 +165,7 @@ steps:
 
 #### 2) Build the Hugo Site
 
-The whole reason for needing a build step is that only the content source files are version controlled (not the generated site files). This step runs the Hugo generator. I couldn't find a publicly available container image which was compatible with Cloud Build, so I created my own (based on [this example](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/hugo)) and posted it to DockerHub: https://hub.docker.com/r/sidpalas/cloud-builder-hugo.
+The whole reason for needing a build step is that only the content source files are version controlled (not the generated site files). This step runs the Hugo generator. I couldn't find a publicly available container image that was compatible with Cloud Build, so I created my own (based on [this example](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/hugo)) and posted it to DockerHub: https://hub.docker.com/r/sidpalas/cloud-builder-hugo.
 
 ```bash
 # build hugo site
@@ -220,4 +220,4 @@ This process ended up being much more complex than I had initially hoped. The is
 
 {{< img "images/*cloud-build-dashboard*" "Success!">}}
 
-While I am happy with the end result, I can't help but think using Circle CI might have been a smoother process. Perhaps sometime down the to road I'll attempt setting up an equivalent pipeline there and see how that goes!
+While I am happy with the end result, I can't help but think using Circle CI might have been a smoother process. Perhaps sometime down the the road I'll attempt setting up an equivalent pipeline there and see how that goes!

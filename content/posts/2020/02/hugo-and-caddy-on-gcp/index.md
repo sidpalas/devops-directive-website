@@ -44,7 +44,7 @@ Table of Contents:
   - [7) Deploy](#7-deploy)
   - [8) We're Live!](#8-were-live)
   - [9) Configuring DNS](#9-configuring-dns)
-  - [10) Enabling HTTPs](#10-enabling-https)
+  - [10) Enabling HTTPS](#10-enabling-https)
 - [Closing Thoughts](#closing-thoughts)
 
 
@@ -52,11 +52,11 @@ Table of Contents:
 
 ## Choosing a Site Generator
 
-With GeoCities no longer an viable option for hosting websites in 2020 (apparently Yahoo Japan shut it down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
+With GeoCities no longer a viable option for hosting websites in 2020 (apparently Yahoo Japan shut down the final remnants in [March 2019](https://www.cnet.com/news/geocities-dies-in-march-2019-and-with-it-a-piece-of-internet-history/)) I needed a more modern solution to host this site.
 
 {{< img "images/*geocities*" "RIP GeoCities" >}}
 
-After a brief look at the leading static site generators Jekyll, Hugo, Next.js, Gatsby, etc... I came to the conclusion that almost any of these would work just fine for my needs. I ended up choosing Hugo for a two main reasons:
+After a brief look at the leading static site generators Jekyll, Hugo, Next.js, Gatsby, etc... I came to the conclusion that almost any of these would work just fine for my needs. I ended up choosing Hugo for two main reasons:
 
 **1) Language:** It's written in Go, a language I have wanted to learn. Having this site with Hugo may provide a nudge of motivation to make some contribution to the Hugo project. 
 
@@ -64,17 +64,17 @@ After a brief look at the leading static site generators Jekyll, Hugo, Next.js, 
 
 ## Initial Setup
 
-The Hugo documentation is concise and they have an easy to follow quick start guide found here: https://gohugo.io/getting-started/quick-start/
+The Hugo documentation is concise and they have an easy-to-follow quick start guide found here: https://gohugo.io/getting-started/quick-start/
 
 I'm currently (as of February 2020) still using the suggested [Ananke](https://themes.gohugo.io/gohugo-theme-ananke/) theme with a few minor styling tweaks, but eventually will probably spend some more time customizing the theme.
 
 ## Choosing a Hosting Solution  
 
-With the site generator working, I then needed to decide how to host the site. In the past, I have used Github Pages to host static sites, but I noticed that they explicitly prohibit **"Get-rich-quick schemes"** (which learning & writing about DevOps and Cloud infrastructure clearly is) so that was out of the running.
+With the site generator working, I then needed to decide how to host the site. In the past, I have used Github Pages to host static sites, but I noticed that they explicitly prohibit **"Get-rich-quick schemes"** (which learning & writing about DevOps and Cloud infrastructure is) so that was out of the running.
 
-I also looked at hosting within a [AWS](https://aws.amazon.com/s3/) / [GCP](https://cloud.google.com/storage) / [Azure](https://azure.microsoft.com/en-us/services/storage/blobs/) bucket. These are all super easy to set up and scale effortlessly, but if you want to use a domain with HTTPS enabled, you end up having to jump through some hoops configuring a Content Delivery Network.
+I also looked at hosting within an [AWS](https://aws.amazon.com/s3/) / [GCP](https://cloud.google.com/storage)](https://cloud.google.com/storage) / [Azure](https://azure.microsoft.com/en-us/services/storage/blobs/) bucket. These are all super easy to set up and scale effortlessly, but if you want to use a domain with HTTPS enabled, you end up having to jump through some hoops configuring a Content Delivery Network.
 
-I then came across [Caddy](https://caddyserver.com/), a webserver with automatic HTTPS configuring using [Let's Encrypt](https://letsencrypt.org/) which seemed ideal for this use case!
+I then came across [Caddy](https://caddyserver.com/), a web server with automatic HTTPS configuring using [Let's Encrypt](https://letsencrypt.org/) which seemed ideal for this use case!
 
 {{< img "images/*caddy*" "With a lock for a logo, it must be secure!" >}}
 
@@ -83,7 +83,7 @@ I then came across [Caddy](https://caddyserver.com/), a webserver with automatic
 
 ## Local Configuration (HTTP-only for Now)
 
-Since my computer is running MacOS, but ultimately the site would be deployed on a sever running some variant of linux, my default is to use containers to eliminate any configuration headaches with slight differences between the two environments.
+Since my computer is running macOS, but ultimately the site would be deployed on a server running some variant of Linux, my default is to use containers to eliminate any configuration headaches with slight differences between the two environments.
 
 This appears to be the defacto standard Caddy docker image https://hub.docker.com/r/abiosoft/caddy with over 10M pulls so I used that as the base. 
 
@@ -91,7 +91,7 @@ There are two options for accessing the files that Caddy needs to host within th
 
 Either option would be fine, but option 1 is nice for a small site because it ensures the entire site and its dependencies are included within the container image. As the site grows, I may switch to storing the site files outside of the container image.
 
-Bundling the site files into the container can be accomplished with a 2 line dockerfile.
+Bundling the site files into the container can be accomplished with a 2 line Dockerfile.
 
 ```bash
 FROM abiosoft/caddy:1.0.3
@@ -107,13 +107,13 @@ docker build ./ --tag $IMAGE_NAME
 docker run -p 2015:2015 $IMAGE_NAME     
 ```
 
-The `-p` forwards the port from host system into container allowing us to connect to http://localhost:2015/ and that request will be forwarded into the container on port 2015 where Caddy is listening. 
+The `-p` forwards the port from the host system into the container allowing us to connect to http://localhost:2015/ and that request will be forwarded into the container on port 2015 where Caddy is listening. 
 
 ## Deploying to GCP
 
-With the container image working, I was then ready to deploy it somewhere. There are a variety of options to do this, but I chose to use a GCP Compute Engine `f1-micro` virtual machine instance running Google's [Container-Optimized OS](https://cloud.google.com/container-optimized-os/docs). Container-Optimized OS provides nice [security features](https://cloud.google.com/container-optimized-os/docs) configured by default making it a good OS options for containerized applications. While the `f1-micro` instance is small (0.2 vCPUs + 600MB Memory), running one is included in the GCP's [always free usage limits](https://cloud.google.com/free/docs/gcp-free-tier#always-free-usage-limits) making this deployment cost me a *grand total of $0!*
+With the container image working, I was then ready to deploy it somewhere. There are a variety of options to do this, but I chose to use a GCP Compute Engine `f1-micro` virtual machine instance running Google's [Container-Optimized OS](https://cloud.google.com/container-optimized-os/docs). Container-Optimized OS provides nice [security features](https://cloud.google.com/container-optimized-os/docs) configured by default making it a good OS option for containerized applications. While the `f1-micro` instance is small (0.2 vCPUs + 600MB Memory), running one is included in the GCP's [always free usage limits](https://cloud.google.com/free/docs/gcp-free-tier#always-free-usage-limits) making this deployment cost me a *grand total of $0!*
 
-Since this site is about DevOps, I clearly needed to automate the entire set up process, which I did here: https://github.com/sidpalas/hugo-gcp-deploy.
+Since this site is about DevOps, I clearly needed to automate the entire setup process, which I did here: https://github.com/sidpalas/hugo-gcp-deploy.
 
 I also decided to create a new GCP project for this site. Doing this makes it easy to clean things up should I decide to take the site down by simply deleting the entire project without having to worry about accidentally leaving some resources running.
 
@@ -151,7 +151,7 @@ gcloud compute addresses create my-site-external-ip \
 
 ### 4) Add firewall rules
 
-By default Compute Engine VMs do not allow http or https traffic. Adding firewall rules allow those requests to make it to the webserver.
+By default, Compute Engine VMs do not allow HTTP or HTTPS traffic. Adding firewall rules allow those requests to make it to the web server.
 
 ```bash
 gcloud compute firewall-rules create default-allow-http \
@@ -184,13 +184,13 @@ This takes a few minutes to provision.
 
 ### 6) Configure Docker(s)
 
-In order to configure my local Docker install to push images to google container registry I had to run:
+In order to configure my local Docker install to push images to Google Container Registry I had to run:
 
 ```bash
 gcloud auth configure-docker    
 ```
 
-In order for the Docker installed in container optimized OS running on the VM I had to run the following:
+To set up Docker and the GCR credentials within in container optimized OS running on the VM I had to run the following:
 
 ```bash
 gcloud compute ssh my-f1-micro-instance \
@@ -254,11 +254,11 @@ gcloud compute ssh my-f1-micro-instance \
         'docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v $HOME/.caddy:/root/.caddy gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG'
 ```
 
-**NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we actually request the TLS certificate, this will allow the certificate files to persist across container redeploys, avoiding extra requests to Let's Encrypt which could lead to being rate limited.
+**NOTE:** the `-v $HOME/.caddy:/root/.caddy` mount isn't necessary here, but later once we request the TLS certificate, this will allow the certificate files to persist across container redeploys, avoiding extra requests to Let's Encrypt which could lead to being rate limited.
 
 ### 8) We're Live!
 
-At this point I was able to visit the external IP address from step 3 and see the website. 
+At this point, I was able to visit the external IP address from step 3 and see the website. 
 
 I even scripted the whole process so that it takes less than 5 minutes:
 
@@ -276,9 +276,9 @@ www       CNAME  1h      my-awesome-domain.com.
 
 (The CNAME record maps the www subdomain to the primary domain without www)
 
-### 10) Enabling HTTPs
+### 10) Enabling HTTPS
 
-The final element of the setup is to enable https within Caddy. This can be accomplished by modifying the `Caddyfile` to include the domains and an email address for the TLS configuration:
+The final element of the setup is to enable HTTPS within Caddy. This can be accomplished by modifying the `Caddyfile` to include the domains and an email address for the TLS configuration:
 
 ```bash
 my-awesome-domain.com www.my-awesome-domain.com {
@@ -289,17 +289,14 @@ my-awesome-domain.com www.my-awesome-domain.com {
 }
 ```
 
-After redeploying and waiting for the DNS settings to propagate I was able to access my site and bask in the glory of the https connection symbol!
+After redeploying and waiting for the DNS settings to propagate I was able to access my site and bask in the glory of the HTTPS connection symbol!
 
 {{< img "images/*https-success*" >}}
 
 ## Closing Thoughts
 
-Overall I'm happy with this configuration and am amazed that all of this can be accomplished for free using mostly open source software! It was also useful to continue gaining experience with the tools and platforms. 
+Overall I'm happy with this configuration and am amazed that all of this can be accomplished for free using mostly open-source software! It was also useful to continue gaining experience with the tools and platforms. 
 
 My hope is now that everything is set up and configured, the amount of maintenance effort required should be low. Time will tell...
 
-In a future post I will cover how I used Google Cloud Build to automate the deployment process. I also plan do some benchmarking to see just what kind of load this tiny server can handle!
-
-
-
+In a future post, I will cover how I used Google Cloud Build to automate the deployment process. I also plan to do some benchmarking to see just what kind of load this tiny server can handle!

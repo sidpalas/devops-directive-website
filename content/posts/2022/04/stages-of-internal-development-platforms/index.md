@@ -99,7 +99,7 @@ at which point you may consider migrating off the PaaS, and in the past few year
 
 ### Stage 1: Vanilla Kubernetes
 
-When you first move to Kubernetes and are still figuring out how migrate things, you probably won't have built out additional abstractions. You will use the raw Kubernetes resource types directly and interact with the cluster via `kubectl`. This stage generally won't last long before moving on to the next stage.
+When you first move to Kubernetes and are still figuring out how to migrate things, you probably won't have built out additional abstractions. You will use the raw Kubernetes resource types directly and interact with the cluster via `kubectl`. This stage generally won't last long before moving on to the next stage.
 
 ### Stage 2: Templating Tools
 
@@ -111,7 +111,7 @@ Eventually, as the team and applications grow, creating bespoke definitions for 
 
 Much of the work at this stage is selecting the tools that best suit your team's needs and configuring them to play nicely together. This is also the stage where you start to bake more control/opinions into the platform itself and you shape the application developer experience (for better or for worse).
 
-There are a number of companies and projects such as [backstage](https://backstage.io/), [humanitec](https://humanitec.com/), and [shipa](https://shipa.io/) that are attempting to help make rolling an IDP easier. It's worth evaluating these options to see if they will suit your need and/or for inspiration in designing your own.
+There are several companies and projects such as [backstage](https://backstage.io/), [humanitec](https://humanitec.com/), and [shipa](https://shipa.io/) that are attempting to help make rolling an IDP easier. It's worth evaluating these options to see if they will suit your need and/or for inspiration in designing your own.
 
 ### Stage 4: Extending Existing Platform Building Blocks
 

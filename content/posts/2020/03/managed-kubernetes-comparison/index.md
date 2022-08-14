@@ -61,7 +61,7 @@ The cost of running Kubernetes on each of these platforms is based on the follow
   
 Additionally, the cloud providers offer large discounts if you are willing/able to use preemptible/spot/low-priority nodes OR commit to using the same nodes for 1-3 years.
 
-It is important to point out that while cost is a useful dimension to examine when evaluating providers, there are other factors which should also be considered including:
+It is important to point out that while cost is a useful dimension to examine when evaluating providers, there are other factors that should also be considered including:
 - Uptime (Service Level Agreement)
 - Surrounding Cloud Ecosystem
 - k8s Version Availability
@@ -87,15 +87,15 @@ If any of my calculations or pricing constants look incorrect, please let me kno
 There are too many variables to give much of a recommendation beyond my TL;DR up top, but here are some takeaways:
 
 - AKS and Digital Ocean do not charge for the control plane resources while GKE and EKS do. If your architecture incorporates many small clusters (e.g. 1 cluster *per developer* or *per customer*) AKS and DO can have an cost advantage.
-- Google's slightly cheaper compute resources result in lower cost as cluster sizes scale*.
+- Google's slightly cheaper compute resources result in lower costs as cluster sizes scale*.
 - Taking advantage of preemptible and/or committed use discounts can reduce costs by >50% (*NOTE:* Digital Ocean does not offer these types of discounts).
 - While Google's data egress fees are higher, the compute resources dominated the cost calculation (unless you are sending a significant amount of data out of the cluster).
-- Choosing machine types that match your workloads CPU and Memory needs will avoid paying for wasted capacity.
+- Choosing machine types that match your workloads' CPU and Memory needs will avoid paying for wasted capacity.
 - Digital Ocean charges relatively less for vCPUs and more for memory which could be an important consideration depending on the nature of the compute workloads.
 
 **NOTE:* I used general-purpose compute node types for all 4 clouds (n1 GCP Compute Engine instances, m5 AWS ec2 instances, D2v3 Azure virtual machines, and dedicated CPU DO droplets). Further exploration could be done across the burstable and entry-level VM types. Also, it appeared that pricing for VMs scaled linearly with # of vCPU and GB of memory, but I am not sure that assumption holds as you move towards some of the less standard memory/cpu ratios.
 
-This article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digital Ocean"](https://www.replex.io/blog/the-ultimate-kubernetes-cost-guide-aws-vs-gce-vs-azure-vs-digital-ocean) published in 2018 used a single reference cluster with 100 vCPU cores and 400 GB of memory. As a point of comparison, here is how much my calculation shows that cluster would cost (using on-demand prices) on each of these platforms. 
+The article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digital Ocean"](https://www.replex.io/blog/the-ultimate-kubernetes-cost-guide-aws-vs-gce-vs-azure-vs-digital-ocean) published in 2018 used a single reference cluster with 100 vCPU cores and 400 GB of memory. As a point of comparison, here is how much my calculation shows that cluster would cost (using on-demand prices) on each of these platforms. 
 
 - AKS: $51,465/year
 - EKS: $43,138/year
@@ -104,4 +104,4 @@ This article ["The Ultimate Kubernetes Cost Guide: AWS vs GCP vs Azure vs Digita
 
 ---
 
-Hopefully this article + notebook will help you in your journey to evaluate the major managed Kuberentes offerings and/or save $$$ on your cloud infrastructure by taking advantage of the available cost saving opportunities.
+Hopefully, this article + notebook will help you in your journey to evaluate the major managed Kubernetes offerings and/or save $$$ on your cloud infrastructure by taking advantage of the available cost-saving opportunities.
