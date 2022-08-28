@@ -1,0 +1,6 @@
+{{ $img := $.Page.Resources.GetMatch (.Get 0)}}
+{{ $caption := (.Get 1)}}
+<figure>
+	<img src="{{ ( $img.Fit "1000x700 q85" ).RelPermalink }}" alt="{{ $img.Name }}" />
+	<figcaption style="font-style: italic">{{ $caption }}</figcaption>
+</figure>
