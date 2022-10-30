@@ -94,7 +94,7 @@ data:
 
 ### Deployment
 
-This `ConfigMap` then gets mounted into a `Deployment` to achieve the desired effect:
+I then created a `Deployment` which mounts this `ConfigMap` to achieve the desired effect:
 ```YAML
 apiVersion: apps/v1
 kind: Deployment
