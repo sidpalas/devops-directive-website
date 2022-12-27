@@ -19,7 +19,7 @@ jobs:
         env:
           HUGO_ENV: production
 
-      - id: Authenticate to GCP
+      - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
