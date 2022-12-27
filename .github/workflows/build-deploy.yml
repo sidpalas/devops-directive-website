@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - fix-github-action-workflow
 
 jobs:
   build_deploy:
@@ -24,19 +23,12 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          # Would be preferred to use workload identity federation
+          ## Would be preferred to use workload identity federation:
           # workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           # service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
-
-      # OLD Approach:
-      # - name: Authenticate on GCS
-      #   uses: google-github-actions/setup-gcloud@v0
-      #   with:
-      #     version: '270.0.0'
-      #     service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         
       - name: Rsync Site
         run: make rsync-site
