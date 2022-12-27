@@ -8,6 +8,7 @@ headless: true
 - [- About]({{< ref "/about" >}})
 - [- Articles]({{< ref "/posts" >}})
 - [- YouTube]({{< ref "/youtube" >}})
+- [- Consulting]({{< ref "/consulting" >}})
 - [- Resources]({{< ref "/resources" >}})
 
 --- 
