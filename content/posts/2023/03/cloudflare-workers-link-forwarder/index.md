@@ -16,9 +16,6 @@ categories: [
 
 <!--more--> 
 
-Table of Contents:
-- [Header](#header)
-
 #  Motivation
 I have lots of content across many different platforms (YouTube, Twitter, LinkedIn, etc...) and wanted to create a was to easily set up custom links pointing to them. This way I can provide people links such as https://links.devopsdirective.com/terraform-gumroad rather than https://sidpalas.gumroad.com/l/hieekq.
 
