@@ -1,5 +1,5 @@
 ---
-title: "Cloudflares Worker Custom Link Forwarder"
+title: "Cloudflare Workers Custom Link Forwarder"
 date: 2023-03-03T14:26:07Z
 bookToc: false
 tags: [
