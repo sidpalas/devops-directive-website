@@ -3,3 +3,6 @@ public/
 *.xcf
 .caddy/
 /resources/
+
+LICENSE
+README.md
