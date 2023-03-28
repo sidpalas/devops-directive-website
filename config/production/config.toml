@@ -40,6 +40,8 @@ SectionPagesMenu = "main"
   linkedin = "https://www.linkedin.com/in/sid-palas-971b2329/"
   github = "https://github.com/sidpalas"
 
+  images = ['/static/images/og-default-image.jpg']
+
   # Set bundle to render side menu
   # if not specified file structure and weights will be used
   bookMenuBundle= "/menu" 
