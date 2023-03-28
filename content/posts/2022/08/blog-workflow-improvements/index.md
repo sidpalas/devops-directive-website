@@ -3,7 +3,7 @@ title: "Blog Workflow Improvements"
 date: 2022-08-10T13:36:15Z
 bookToc: false
 tags: [
-    Update
+    GitPod
 ]
 categories: [
     Development

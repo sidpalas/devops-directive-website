@@ -3,8 +3,8 @@ title: "Static Site Hosting Using Google Cloud Storage and Cloudflare (with SSL!
 date: 2020-10-05T10:15:15-04:00
 bookToc: false
 tags: [
-  "GCP",
-  "GCS",
+  "Google Cloud Platform",
+  "Google Cloud Storage",
   "Cloudflare",
 ]
 categories: [

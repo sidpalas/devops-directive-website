@@ -6,9 +6,9 @@ tags: [
   "Web Servers",
   "Hugo",
   "Caddy",
-  "Compute Engine",
-  "GCP",
+  "Google Cloud Platform",
   "Containers",
+  "Docker"
 ]
 categories: [
   "Tutorial",

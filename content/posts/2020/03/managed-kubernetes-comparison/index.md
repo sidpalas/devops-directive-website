@@ -4,12 +4,12 @@ date: 2020-03-05T07:45:43-08:00
 bookToc: false
 tags: [
   "Kubernetes",
-  "AWS",
-  "GCP",
+  "Amazon Web Services",
+  "Google Cloud Platform",
   "Azure",
-  "EKS",
-  "GKE",
-  "AKS",
+  "Elastic Kubernetes Service",
+  "Google Kubernetes Engine",
+  "Azure Kubernetes Service",
   "Digital Ocean"
 ]
 categories: [

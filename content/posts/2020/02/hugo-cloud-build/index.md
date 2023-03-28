@@ -5,10 +5,11 @@ bookToC: false
 tags: [
   "Hugo",
   "Cloud Build",
-  "GCP",
+  "Google Cloud Platform",
   "Containers",
-  "CI",
-  "CD"
+  "Docker",
+  "Continuous Integration",
+  "Continuous Delivery"
 ]
 categories: [
   "Tutorial"

@@ -3,10 +3,8 @@ title: "Doing Stupid Stuff with GitHub Actions"
 date: 2020-07-25T09:25:12-07:00
 bookToc: false
 tags: [
-  "GitHub",
   "GitHub Actions",
-  "CI",
-  "CD"
+  "Continuous Integration"
 ]
 categories: [
   "Impractical"

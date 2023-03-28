@@ -3,7 +3,7 @@ title: "How to Manage Application Secrets (7 Levels of Credential Management)"
 date: 2020-11-11T08:29:55-05:00
 bookToc: false
 tags: [
-  "Vault",
+  "Hashicorp Vault",
   "Security"
 ]
 categories: [

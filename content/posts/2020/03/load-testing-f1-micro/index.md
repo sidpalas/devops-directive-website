@@ -5,7 +5,7 @@ bookToc: false
 tags: [
   "Monitoring",
   "Testing",
-  "GCP",
+  "Google Cloud Platform",
   "Caddy",
   "Web Servers",
   "Performance"

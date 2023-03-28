@@ -3,9 +3,9 @@ title: "Creating a Password Protected Website with IAP and Google App Engine"
 date: 2020-04-30T13:27:06-07:00
 bookToc: false
 tags: [
-  "GCP",
+  "Google Cloud Platform",
   "Identity Aware Proxy",
-  "App Engine"
+  "Google App Engine"
 ]
 categories: [
   "Tutorial"
