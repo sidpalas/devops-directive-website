@@ -8,7 +8,7 @@ tags: [
 categories: [
     Tutorial
 ]
-draft: true
+draft: false
 ---
 
 **TL;DR:** Tutorials often show simplistic, naive Dockerfiles. We can do better.
