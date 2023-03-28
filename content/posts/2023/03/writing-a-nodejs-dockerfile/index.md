@@ -19,20 +19,20 @@ draft: false
 
 Table of Contents:
 - [Background](#background)
-  - [Naive Implementation](#naive-implementation)
-  - [Pin the Base Image (🔒+🏎️)](#pin-the-base-image-️)
-  - [Set a Working Directory (👁️)](#set-a-working-directory-️)
-  - [Copy package.json and package-lock.json Before Source Code (🏎️)](#copy-packagejson-and-package-lockjson-before-source-code-️)
-  - [Use a non-root USER (🔒)](#use-a-non-root-user-)
-  - [Configure for the Production Environment (🔒 + 🏎️)](#configure-for-the-production-environment---️)
-    - [Add Useful Metadata (👁️)](#add-useful-metadata-️)
-    - [Use a Cache Mount to Speed Up Dependency Installation (🏎️)](#use-a-cache-mount-to-speed-up-dependency-installation-️)
-    - [Use a Multi-Stage Dockerfile (👁️)](#use-a-multi-stage-dockerfile-️)
-    - [References](#references)
+- [Naive Implementation](#naive-implementation)
+- [Pin the Base Image (🔒+🏎️)](#pin-the-base-image-️)
+- [Set a Working Directory (👁️)](#set-a-working-directory-️)
+- [Copy package.json and package-lock.json Before Source Code (🏎️)](#copy-packagejson-and-package-lockjson-before-source-code-️)
+- [Use a non-root USER (🔒)](#use-a-non-root-user-)
+- [Configure for the Production Environment (🔒 + 🏎️)](#configure-for-the-production-environment---️)
+- [Add Useful Metadata (👁️)](#add-useful-metadata-️)
+- [Use a Cache Mount to Speed Up Dependency Installation (🏎️)](#use-a-cache-mount-to-speed-up-dependency-installation-️)
+- [Use a Multi-Stage Dockerfile (👁️)](#use-a-multi-stage-dockerfile-️)
+- [References](#references)
 
-# Background
+## Background
 
-Node.js is a popular Javascript runtime environment that enables developers to write back-end applications. There are many tutorials online showing how to containerize Node.js applications, but many of them show a naive implementation that while functional, is lacking in so many ways!
+Node.js is a popular Javascript runtime environment that enables developers to write back-end applications. There are many tutorials online showing how to containerize Node.js applications, but many of them show a naive implementation that is functional, but lacking in so many ways!
 
 ## Naive Implementation
 
@@ -133,7 +133,7 @@ CMD [ "node", "index.js" ]
 
 Many Node.js packages look for the `NODE_ENV` environment variable and behave differently if it is set to production (reduced logging, etc...). We can set this within the Dockerfile to ensure it will be set at runtime by default.
 
-Also, rather than using `npm install` it is preferable to use `npm ci` or "clean install" which requires the use of a `package-lock.json` file and ensure the installed dependencies match the fully specified versions from that file. By using `--only=production` we can avoid installing unnecessary development dependencies reducing the attack surface area and further reducing the image size.
+Also, rather than using `npm install` it is preferable to use `npm ci` or "clean install" which requires the use of a `package-lock.json` file and ensures the installed dependencies match the fully specified versions from that file. By using `--only=production` we can avoid installing unnecessary development dependencies reducing the attack surface area and further reducing the image size.
 
 ```dockerfile
 FROM node:19.6-bullseye-slim
@@ -152,7 +152,7 @@ COPY --chown=node:node ./src/ .
 CMD [ "node", "index.js" ]
 ```
 
-### Add Useful Metadata (👁️)
+## Add Useful Metadata (👁️)
 
 There are a few Dockerfile instructions that don't change the container runtime behavior, do provide useful metadata for users of the resulting container image.
 
@@ -179,7 +179,7 @@ EXPOSE 3000
 CMD [ "node", "index.js" ]
 ```
 
-### Use a Cache Mount to Speed Up Dependency Installation (🏎️)
+## Use a Cache Mount to Speed Up Dependency Installation (🏎️)
 
 [Buildkit](https://docs.docker.com/build/buildkit/) provides many useful features, including the ability to specify a cache mount for specific `RUN` instructions within a Dockerifle. By specifying a cache in this way, changing a dependency won't require redownloading all dependencies from the internet because previously installed dependencies will be stored locally.
 
@@ -203,7 +203,7 @@ EXPOSE 3000
 CMD [ "node", "index.js" ]
 ```
 
-### Use a Multi-Stage Dockerfile (👁️)
+## Use a Multi-Stage Dockerfile (👁️)
 
 By splitting out separate development and production image stages we can have an ergonomic dev environment with dev dependencies, hot reloading, etc... but retain the production improvements for deployment.
 
@@ -240,6 +240,6 @@ EXPOSE 3000
 CMD [ "node", "index.js" ]
 ```
 
-### References
-- This post from [Liran Tal](https://twitter.com/liran_tal) inspired many of the security related improvements: https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/
+## References
+- This post from [Liran Tal](https://twitter.com/liran_tal) inspired many of the security-related improvements: https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/
 - My tweet thread on this topic went viral. See here for the dialog it generated: https://twitter.com/sidpalas/status/1634194026500096000
