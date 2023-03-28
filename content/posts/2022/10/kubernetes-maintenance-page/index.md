@@ -3,8 +3,7 @@ title: "Kubernetes Maintenance Page"
 date: 2022-10-30T20:48:21Z
 bookToc: false
 tags: [
-  Kubernetes,
-  Docker    
+  Kubernetes
 ]
 categories: [
   Tutorial
@@ -28,7 +27,7 @@ draft: false
 - [Kubernetes resources](#kubernetes-resources)
   - [ConfigMap](#configmap)
   - [Deployment](#deployment)
-  - [Service & Ingress](#service--ingress)
+  - [Service \& Ingress](#service--ingress)
 
 
 ## Why?

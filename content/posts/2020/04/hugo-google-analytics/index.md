@@ -3,7 +3,6 @@ title: "Turning off Google Analytics for Local Hugo Server"
 date: 2020-04-03T16:52:56-07:00
 bookToc: false
 tags: [
-  "Quick",
   "Hugo"
 ]
 categories: [
@@ -13,11 +12,9 @@ categories: [
 
 **TL;DR:** If using Google Analytics, most Hugo themes load the tracking script even when running locally. This causes a bunch of bogus page views when writing a new article. Creating separate config files for development and production is an easy way to fix this.
 
-![DevOps Symbols](/static/)
 {{< img "images/bogus-google-analytics.png" "Whoops... that's me visiting my site on localhost" >}}
 
 <!--more--> 
-
 ---
 
 To solve this, take advantage of the fact that Hugo allows for specifying multiple configuration files. In this case, create a separate "production" `config.toml` file without the `googleAnalytics` code specified and rearrange the directory structure as follows:

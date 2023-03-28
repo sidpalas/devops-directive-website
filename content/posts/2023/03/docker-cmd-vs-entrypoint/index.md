@@ -6,7 +6,7 @@ tags: [
     Docker
 ]
 categories: [
-    Containers
+    Tutorial
 ]
 draft: false
 ---

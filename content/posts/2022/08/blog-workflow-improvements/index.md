@@ -6,7 +6,7 @@ tags: [
     Update
 ]
 categories: [
-    Development, Meta
+    Development
 ]
 draft: false
 ---

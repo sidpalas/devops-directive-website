@@ -5,7 +5,6 @@ draft: false
 bookToc: false
 tags: [
   "Cloud",
-  "DevOps",
   "Kubernetes"
 ]
 categories: [
