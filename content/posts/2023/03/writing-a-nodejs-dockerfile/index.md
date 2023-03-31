@@ -111,7 +111,7 @@ CMD [ "node", "index.js" ]
 
 ## Use a non-root USER (🔒)
 
-If configured properly, containers provide some protection (via user namespaces) between root users inside a container, but setting to a non-root user provides another layer to our defense in depth security approach!
+If configured properly, containers provide some protection (via user namespaces) between a root user inside a container and the host system user, but setting to a non-root user provides another layer to our defense in depth security approach!
 
 The node base image already has a user named `node` we can use for this purpose.
 
