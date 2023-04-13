@@ -1,16 +1,18 @@
+<head>
+  {{ partial "plausible_head.html" . }}
+</head>
 <div class="flex align-center justify-between">
-    <label for="menu-control">
-      <img src="{{ "svg/menu.svg" | relURL }}" class="book-icon" alt="Menu" />
-    </label>
-  
-    <strong>{{ partial "docs/title" . }}</strong>
-  
-    {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
-    <label for="toc-control">
-      <img src="{{ "svg/toc.svg" | relURL }}" class="book-icon" alt="Table of Contents" />
-    </label>
-    {{ else }}
-    <div>-</div>
-    {{ end }}  
-  
-  </div>
+  <label for="menu-control">
+    <img src="{{ "svg/menu.svg" | relURL }}" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>{{ partial "docs/title" . }}</strong>
+
+  {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
+  <label for="toc-control">
+    <img src="{{ "svg/toc.svg" | relURL }}" class="book-icon" alt="Table of Contents" />
+  </label>
+  {{ else }}
+  <div>-</div>
+  {{ end }}
+</div>

@@ -4,7 +4,7 @@ googleAnalytics = "UA-24019779-3"
 baseURL = "https://devopsdirective.com/"
 languageCode = "en-us"
 title = "DevOps Directive"
-theme = "book"
+theme = ["book", "plausible-hugo"]
 
 Paginate = 6
 SectionPagesMenu = "main"
@@ -54,3 +54,9 @@ SectionPagesMenu = "main"
   # Index is built on fly, therefore it might slowdown your website.
   # Configuration for indexing can be adjusted in i18n folder per language.
   BookSearch = false
+
+[params.plausible]
+  enable = true  # Whether to enable plausible tracking
+  domain = "devopsdirective.com"  # Plausible "domain" name/id in your dashboard
+  selfhosted_domain = "plausible.devopsdirective.com"
+  gitstar = false
