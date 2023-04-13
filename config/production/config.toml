@@ -1,4 +1,4 @@
-googleAnalytics = "UA-24019779-3"
+# googleAnalytics = "UA-24019779-3"
 # disqusShortname = "devops-directive"
 
 baseURL = "https://devopsdirective.com/"
