@@ -9,6 +9,7 @@ categories: [
     Tutorial
 ]
 draft: false
+canonicalUrl: https://courses.devopsdirective.com/docker-beginner-to-pro/lessons/06-building-container-images/02-api-node-dockerfile
 ---
 
 **TL;DR:** Tutorials often show simplistic, naive Dockerfiles. We can do better.
