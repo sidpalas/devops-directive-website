@@ -26,7 +26,7 @@ Interested in taking your DevOps to the next level? Reach out to sid@devopsdirec
 ### **2. Tailored DevOps Revamp**
 
 #### Duration: 3-12 months
-#### Imnvestment: Starting at $30,000 (price to be determined by the scope of engagement)
+#### Investment: Starting at $30,000 (price to be determined by the scope of engagement)
 #### What it Includes:
 - **Customized Improvement Execution:** Based on the challenges identified during the DevOps Health Check (see above), we take action on initiatives for significant DevOps enhancements.
 - **DevOps Education:** Equip your team with the knowledge of DevOps methods specifically tailored to their workflows and challenges.
