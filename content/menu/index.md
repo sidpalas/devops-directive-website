@@ -10,7 +10,7 @@ headless: true
 - [- YouTube]({{< ref "/youtube" >}})
 - {{< link "https://courses.devopsdirective.com" "- Courses" >}}
 - [- Consulting]({{< ref "/consulting" >}})
-- [- Resources]({{< ref "/resources" >}})
+<!-- - [- Resources]({{< ref "/resources" >}}) -->
 
 --- 
 

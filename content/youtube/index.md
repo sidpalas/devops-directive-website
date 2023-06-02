@@ -12,6 +12,10 @@ bookComments: false
 
 ## Top Videos:
 
+### **2023-02-25:** [Complete Docker Course - From BEGINNER to PRO! (Learn Containers)](https://www.youtube.com/watch?v=RqTEHSBrYFw)
+
+{{< youtube RqTEHSBrYFw >}}
+
 ### **2022-02-14:** [Complete Terraform Course - From BEGINNER to PRO! (Learn Infrastructure as Code)](https://www.youtube.com/watch?v=7xngnjfIlK4)
 
 {{< youtube 7xngnjfIlK4 >}}
