@@ -13,6 +13,7 @@ Interested in taking your DevOps to the next level? Reach out to sid@devopsdirec
 
 ## Product Offerings:
 
+---
 ### **1. Comprehensive DevOps Health Check**
 
 #### Duration: 3 weeks
@@ -23,6 +24,7 @@ Interested in taking your DevOps to the next level? Reach out to sid@devopsdirec
 - **DORA Metrics Estimation:** Through interviewing team members, we estimate key performance metrics like lead time for changes, change failure rate, deployment frequency, and mean time to recovery.
 - **Performance Inhibitors Identification:** Uncover the largest hurdles hampering your team's performance and design targeted initiatives to mitigate them.
 
+---
 ### **2. Tailored DevOps Revamp**
 
 #### Duration: 3-12 months
