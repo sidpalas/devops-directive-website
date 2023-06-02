@@ -8,7 +8,7 @@ tags: [
 categories: [
   Deep Dive
 ]
-draft: true
+draft: false
 ---
 
 **TL;DR:** When deploying applications in containers, understanding the role and implications of the init process is critical. In this article, we'll delve into how our application runs as Process ID #1 in a container, and what this means for our application's signal handling and zombie process management.
