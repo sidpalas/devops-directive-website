@@ -4,7 +4,7 @@ date: 2023-11-15T20:18:00Z
 bookToc: false
 tags: [AWS]
 categories: [Case Study]
-draft: true
+draft: false
 ---
 
 **TL;DR:** I recently helped an organization migrate a set of applications deployed in Kubernetes (EKS) across AWS accounts using [Velero](https://velero.io/). This case study describes that process.
