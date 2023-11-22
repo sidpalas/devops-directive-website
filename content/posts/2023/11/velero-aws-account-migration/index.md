@@ -1,5 +1,5 @@
 ---
-title: "Velero Aws Account Migration [Case Study]"
+title: "Velero AWS Account Migration [Case Study]"
 date: 2023-11-15T20:18:00Z
 bookToc: false
 tags: [AWS]
@@ -9,7 +9,7 @@ draft: false
 
 **TL;DR:** I recently helped an organization migrate a set of applications deployed in Kubernetes (EKS) across AWS accounts using [Velero](https://velero.io/). This case study describes that process.
 
-{{< img-large "images/account-structure.png" "Please start with multiple AWS accounts so you don't have to hire me to help with this! 🙏" >}}
+{{< img-large "images/account-structure.png" "Please start with multiple AWS accounts so you don't have to hire someone like me to help with this! 🙏" >}}
 
 <!--more-->
 
@@ -40,7 +40,7 @@ These microservices can be categorized into the following groups:
 - **Job Producers:** Detecting or receiving events from data vendors about new data to be processed or initiating periodic analytics jobs. These create messages containing the necessary metadata and send them to the Message Bus
 - **Message Bus:** RabbitMQ cluster serving as a message bus for the system
 - **Job Consumers:** Worker deployments that consume messages from the Message bus and perform the corresponding processing task (storing the associated data in S3 and/or databases)
-- **Other:** Public facing web portal (nginx), various APIs, etc… These were generally stateless and the primary consideration with respect to the migration is ensuring their configuration (loaded from ConfigMaps/Secrets were updated appropriately when started in the new clusters)
+- **Other:** Public facing web portal (nginx), various APIs, etc… These services were generally stateless and the primary consideration with respect to the migration is ensuring their configuration (loaded from ConfigMaps/Secrets were updated appropriately when started in the new clusters)
 
 The applications were deployed into the cluster automatically using a pushed-based approach from GitLab CI/CD pipelines.
 
@@ -121,7 +121,7 @@ This caused certain CRDs our applications relied on to not be migrated. We ident
 
 The default behavior for Velero is to back up all resource types, including Pods. For most applications this behavior is fine, but for certain stateful applications, the ordering of pod creation matters. In our case, our RabbitMQ cluster came up split-brained.
 
-Because of how we opted to scale down/up the job producers we decided it was not necessary to snapshot and migrate the persistent volumes associated with RabbitMQ. Velero backed three pods and those pods were restored simultaneously in the new cluster. Each of them started, failed to find a leader amongst its peers, and declared itself the leader. Instead of having one cluster with three instances, we had three clusters with one instance each, behind Kubernetes Service which dutifully load-balanced requests across them.
+Because of how we opted to scale down/up the job producers we decided it was not necessary to snapshot and migrate the persistent volumes associated with RabbitMQ. Velero backed up three pods and those pods were restored simultaneously in the new cluster. Each of them started, failed to find a leader amongst its peers, and declared itself the leader. Instead of having one cluster with three instances, we had three clusters with one instance each, behind Kubernetes Service which dutifully load-balanced requests across them.
 
 Unfortunately, we did not catch this during the staging migration because staging had been running with a single RabbitMQ replica (keep your environments identical people!) but by manually modifying the Service selector and labels on the pods we were able to systematically shift all traffic to one instance at a time and allow active jobs to be processed, eventually removing the separate instances, and finally scaling back to the desired single cluster configuration.
 
