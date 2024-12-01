@@ -1,7 +1,7 @@
 baseURL = "https://devopsdirective.com/"
 languageCode = "en-us"
 title = "DevOps Directive"
-theme = ["book", "plausible-hugo"]
+theme = ["book"]
 
 Paginate = 6
 SectionPagesMenu = "main"
@@ -51,10 +51,3 @@ SectionPagesMenu = "main"
   # Index is built on fly, therefore it might slowdown your website.
   # Configuration for indexing can be adjusted in i18n folder per language.
   BookSearch = false
-
-[params.plausible]
-  debug = true # set to true to run tracking on in development
-  enable = true  # Whether to enable plausible tracking
-  domain = "development-devopsdirective.com"  # Plausible "domain" name/id in your dashboard
-  selfhosted_domain = "plausible.devopsdirective.com"
-  gitstar = false
